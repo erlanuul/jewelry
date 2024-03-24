@@ -1,26 +1,36 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import Home from "./pages/Home";
+import Layout from "./components/Layout";
+import Auth from "./pages/Auth";
+import {useSelector} from "react-redux";
+import MiddleWare from "./http/MiddleWare";
+import Staffs from "./pages/staffs/Staffs";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const user = useSelector((state: any) => state.userData.user)
+    return (
+        <BrowserRouter>
+            <Routes>
+                <Route path='/*' element={
+                    <MiddleWare>
+                        <Layout/>
+                    </MiddleWare>
+                }>
+                    <Route index path="home" element={<Home/>}/>
+                    <Route path="staffs/*">
+                        <Route index element={<Staffs/>}/>
+                    </Route>
+                </Route>
+
+                <Route path='login' element={
+                    <MiddleWare>
+                        <Auth/>
+                    </MiddleWare>
+                }/>
+            </Routes>
+        </BrowserRouter>
+    );
 }
 
 export default App;
