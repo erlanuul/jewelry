@@ -81,8 +81,7 @@ export default function Staffs() {
             {field: 'full_name', headerName: 'Имя сотрудника', flex: 1},
             {
                 field: 'position', headerName: 'Должность', flex: 1, renderCell: (params: any) =>
-                    params.row.position?.namegit init
-
+                    params.row.position?.name
             },
             {field: 'phone', headerName: 'Номер телефона', flex: 1},
             {field: 'address', headerName: 'Адрес', flex: 1},
@@ -90,40 +89,38 @@ export default function Staffs() {
             {field: 'salary', headerName: 'Оклад', flex: 1},
             {field: 'percentage_of_the_sale', headerName: 'Процент за продажу', flex: 1},
             {
-                field: 'actions', headerName: 'Действия', width: 120, renderCell: (params: any) => {
-                    return (
-                        <div className='w-full flex items-center gap-[20px]'>
-                            <IconButton color="secondary" onClick={() => {
-                                setModal({
-                                    ...modalInitialValues,
-                                    open: true,
-                                    action: 'edit',
-                                    values: {
-                                        ...modalInitialValues.values,
-                                        ...params.row,
-                                        position: params.row.position?.id,
-                                    }
-                                })
-                            }}>
-                                <EditIcon style={{color: "#B9B9B9"}}/>
-                            </IconButton>
-                            <IconButton color="secondary" onClick={() => {
-                                setModal({
-                                    ...modalInitialValues,
-                                    open: true,
-                                    action: 'delete',
-                                    values: {
-                                        ...modalInitialValues.values,
-                                        ...params.row,
-                                        position: params.row.position?.id,
-                                    }
-                                })
-                            }}>
-                                <DeleteIcon style={{color: "#B9B9B9"}}/>
-                            </IconButton>
-                        </div>
-                    )
-                }
+                field: 'actions', headerName: 'Действия', width: 120, renderCell: (params: any) => (
+                    <div className='w-full flex items-center gap-[20px] justify-center'>
+                        <IconButton color="secondary" onClick={() => {
+                            setModal({
+                                ...modalInitialValues,
+                                open: true,
+                                action: 'edit',
+                                values: {
+                                    ...modalInitialValues.values,
+                                    ...params.row,
+                                    position: params.row.position?.id,
+                                }
+                            })
+                        }}>
+                            <EditIcon style={{color: "#B9B9B9"}}/>
+                        </IconButton>
+                        <IconButton color="secondary" onClick={() => {
+                            setModal({
+                                ...modalInitialValues,
+                                open: true,
+                                action: 'delete',
+                                values: {
+                                    ...modalInitialValues.values,
+                                    ...params.row,
+                                    position: params.row.position?.id,
+                                }
+                            })
+                        }}>
+                            <DeleteIcon style={{color: "#B9B9B9"}}/>
+                        </IconButton>
+                    </div>
+                )
             },
         ],
     });
@@ -255,7 +252,7 @@ export default function Staffs() {
                         {modal.action === 'edit' && 'Редактирование сотрудника'}
                     </h1>
                     {modal.action !== 'delete' &&
-                        <div className='grid grid-cols-2 gap-[30px]'>
+                        <div className='w-full grid grid-cols-2 gap-[30px]'>
                             <TextField
                                 fullWidth
                                 label='ФИО'
@@ -274,7 +271,7 @@ export default function Staffs() {
                                     })
                                 }}
                             />
-                            <FormControl fullWidth>
+                            <FormControl fullWidth required>
                                 <InputLabel>Должность</InputLabel>
                                 <Select
                                     label="Должность"

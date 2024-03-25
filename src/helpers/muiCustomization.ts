@@ -3,16 +3,19 @@ import { createTheme, outlinedInputClasses } from "@mui/material";
 declare module '@mui/material/styles' {
     interface Palette {
         blue: Palette['primary'];
+        gray: Palette['primary'];
     }
 
     interface PaletteOptions {
         blue?: PaletteOptions['primary'];
+        gray?: PaletteOptions['primary'];
     }
 }
 
 declare module '@mui/material/Button' {
     interface ButtonPropsColorOverrides {
         blue: true;
+        gray: true;
     }
 }
 
@@ -23,6 +26,12 @@ export const theme = createTheme({
             light: 'rgba(87,110,208,0.88)',
             dark: '#5069ce',
             contrastText: '#FFF',
+        },
+        gray: {
+            main: '#6E6C6A',
+            light: '#CED0D2',
+            dark: '#6E6C6A',
+            contrastText: '#6E6C6A',
         },
     },
 
@@ -104,7 +113,7 @@ export const theme = createTheme({
                 },
             },
         },
-        MuiSelect: { // Customizations for Select
+        MuiSelect: {
             styleOverrides: {
                 select: {
                     padding: '12px 20px',

@@ -3,12 +3,12 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Home from "./pages/Home";
 import Layout from "./components/Layout";
 import Auth from "./pages/Auth";
-import {useSelector} from "react-redux";
 import MiddleWare from "./http/MiddleWare";
 import Staffs from "./pages/staffs/Staffs";
+import Clients from "./pages/clients/Clients";
+import ClientsView from "./pages/clients/ClientsView";
 
 function App() {
-    const user = useSelector((state: any) => state.userData.user)
     return (
         <BrowserRouter>
             <Routes>
@@ -20,6 +20,10 @@ function App() {
                     <Route index path="home" element={<Home/>}/>
                     <Route path="staffs/*">
                         <Route index element={<Staffs/>}/>
+                    </Route>
+                    <Route path="clients/*">
+                        <Route index element={<Clients/>}/>
+                        <Route path=':id' element={<ClientsView/>}/>
                     </Route>
                 </Route>
 

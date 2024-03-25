@@ -20,10 +20,13 @@ $axios.interceptors.request.use(
     async (config) => {
         if (access_token && refresh_token) {
             config.headers.Authorization = `JWT ${access_token}`;
-            if(config.url?.includes('/admin/country-additional-info/update/')){
+            if (
+                (config.url?.includes('/clients/') && config.method === 'post') ||
+                (config.url?.includes('/clients/') && config.method === 'patch') ||
+                (config.url?.includes('/clients/') && config.method === 'put')
+            ) {
                 config.headers["Content-Type"] = 'multipart/form-data'
-            }
-            else{
+            } else {
                 config.headers["Content-Type"] = 'application/json'
             }
         }
@@ -47,13 +50,13 @@ $axios.interceptors.response.use(
 );
 
 const refreshAccessToken = () => {
-    axios.post(`${API_URL}/token/refresh/`, JSON.stringify({ refresh: refresh_token }),
+    axios.post(`${API_URL}/token/refresh/`, JSON.stringify({refresh: refresh_token}),
         {
             headers: {
                 'Content-Type': 'application/json',
             },
         }
-    ).then((response)=>{
+    ).then((response) => {
         const currentTimeInSeconds = Math.floor(Date.now() / 1000);
         const accessDecode: any = jwtDecode(response.data.access);
         const accessExpirationInSeconds = accessDecode.exp;
@@ -64,7 +67,7 @@ const refreshAccessToken = () => {
             expires: accessDifferenceInDays,
         });
         window.location.reload()
-    }).catch(()=>{
+    }).catch(() => {
         dispatch(logout())
     })
 }

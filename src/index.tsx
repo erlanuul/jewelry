@@ -15,6 +15,8 @@ import {theme} from "./helpers/muiCustomization";
 import {Provider} from "react-redux";
 import {LocalizationProvider} from "@mui/x-date-pickers";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 let persistor = persistStore(store);
 export const {dispatch} = store
