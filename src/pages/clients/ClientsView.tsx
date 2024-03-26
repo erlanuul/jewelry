@@ -186,6 +186,7 @@ export default function ClientsView() {
                     disableRowSelectionOnClick
                     filterMode='server'
                     autoHeight
+                    rowHeight={80}
                     loading={tableList.loading}
                     slots={{
                         footer: () => (
@@ -245,6 +246,7 @@ export default function ClientsView() {
                     disableRowSelectionOnClick
                     filterMode='server'
                     autoHeight
+                    rowHeight={80}
                     loading={tableList.loading}
                     slots={{
                         footer: () => (

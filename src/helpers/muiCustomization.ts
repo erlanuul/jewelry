@@ -4,11 +4,13 @@ declare module '@mui/material/styles' {
     interface Palette {
         blue: Palette['primary'];
         gray: Palette['primary'];
+        black: Palette['primary'];
     }
 
     interface PaletteOptions {
         blue?: PaletteOptions['primary'];
         gray?: PaletteOptions['primary'];
+        black?: PaletteOptions['primary'];
     }
 }
 
@@ -16,6 +18,7 @@ declare module '@mui/material/Button' {
     interface ButtonPropsColorOverrides {
         blue: true;
         gray: true;
+        black: true;
     }
 }
 
@@ -32,6 +35,12 @@ export const theme = createTheme({
             light: '#CED0D2',
             dark: '#6E6C6A',
             contrastText: '#6E6C6A',
+        },
+        black: {
+            main: '#2A2826',
+            light: 'rgba(42,40,38,0.95)',
+            dark: '#1a1918',
+            contrastText: '#FFFFFF',
         },
     },
 

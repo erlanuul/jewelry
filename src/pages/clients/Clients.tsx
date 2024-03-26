@@ -22,6 +22,7 @@ import Slider from "react-slick";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import {useNavigate} from "react-router-dom";
+import VisibilityIcon from "@mui/icons-material/Visibility";
 
 const modalInitialValues = {
     values: {
@@ -118,7 +119,14 @@ export default function Clients() {
             {field: 'inn', headerName: 'ИНН', flex: 1},
             {
                 field: 'actions', headerName: 'Действия', width: 120, renderCell: (params: any) => (
-                    <div className='w-full flex items-center gap-[20px] justify-center'>
+                    <div className='w-full flex items-center justify-center'>
+                        <IconButton color="secondary" onClick={() => {
+                            navigate({
+                                pathname: `/clients/${params.row.id}`
+                            })
+                        }}>
+                            <VisibilityIcon style={{color: "#B9B9B9"}}/>
+                        </IconButton>
                         <IconButton color="secondary" onClick={() => {
                             setModal({
                                 ...modalInitialValues,
@@ -126,7 +134,7 @@ export default function Clients() {
                                 action: 'edit',
                                 requested: true,
                             });
-                            handleConvertClientImages(params).then((res)=>{
+                            handleConvertClientImages(params.row).then((res)=>{
                                 setModal({
                                     ...modalInitialValues,
                                     open: true,
@@ -218,8 +226,8 @@ export default function Clients() {
                 break;
         }
     };
-    const handleConvertClientImages = async (params: any) => {
-        const imagesFiles = await Promise.all(params.row.images.map(async (item: any) => {
+    const handleConvertClientImages = async (data: any) => {
+        const imagesFiles = await Promise.all(data.images.map(async (item: any) => {
             return {
                 image: await convertImageUrlToFile(item.image)
             };
@@ -276,20 +284,15 @@ export default function Clients() {
                 </Button>
             </div>
 
-            <div className='w-full mt-[20px] rounded-[10px]'>
+            <div className='w-full rounded-[10px]'>
                 <DataGrid
                     rows={table.rows}
                     columns={table.columns}
                     disableColumnFilter
                     disableRowSelectionOnClick
-                    onRowDoubleClick={(params: any)=>{
-                        navigate({
-                            pathname: `/clients/${params.row.id}`
-                        })
-                    }}
                     filterMode='server'
                     autoHeight
-                    getRowHeight={() => 'auto'}
+                    rowHeight={80}
                     loading={tableList.loading}
                     slots={{
                         footer: () => (

@@ -7,6 +7,11 @@ import MiddleWare from "./http/MiddleWare";
 import Staffs from "./pages/staffs/Staffs";
 import Clients from "./pages/clients/Clients";
 import ClientsView from "./pages/clients/ClientsView";
+import Products from "./pages/products/Products";
+import ProductsView from "./pages/products/ProductsView";
+import Salaries from "./pages/salaries/Salaries";
+import SalariesAdd from "./pages/salaries/SalariesAdd";
+import SalariesView from "./pages/salaries/SalariesView";
 
 function App() {
     return (
@@ -24,6 +29,15 @@ function App() {
                     <Route path="clients/*">
                         <Route index element={<Clients/>}/>
                         <Route path=':id' element={<ClientsView/>}/>
+                    </Route>
+                    <Route path="products/*">
+                        <Route index element={<Products/>}/>
+                        <Route path=':id' element={<ProductsView/>}/>
+                    </Route>
+                    <Route path="salaries/*">
+                        <Route index element={<Salaries/>}/>
+                        <Route path=':id' element={<SalariesView/>}/>
+                        <Route path='add' element={<SalariesAdd/>}/>
                     </Route>
                 </Route>
 

@@ -23,7 +23,10 @@ $axios.interceptors.request.use(
             if (
                 (config.url?.includes('/clients/') && config.method === 'post') ||
                 (config.url?.includes('/clients/') && config.method === 'patch') ||
-                (config.url?.includes('/clients/') && config.method === 'put')
+                (config.url?.includes('/clients/') && config.method === 'put') ||
+                (config.url?.includes('/products/') && config.method === 'post') ||
+                (config.url?.includes('/products/update/') && config.method === 'patch') ||
+                (config.url?.includes('/products/update/') && config.method === 'put')
             ) {
                 config.headers["Content-Type"] = 'multipart/form-data'
             } else {

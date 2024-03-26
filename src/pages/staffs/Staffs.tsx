@@ -90,7 +90,7 @@ export default function Staffs() {
             {field: 'percentage_of_the_sale', headerName: 'Процент за продажу', flex: 1},
             {
                 field: 'actions', headerName: 'Действия', width: 120, renderCell: (params: any) => (
-                    <div className='w-full flex items-center gap-[20px] justify-center'>
+                    <div className='w-full flex items-center justify-center'>
                         <IconButton color="secondary" onClick={() => {
                             setModal({
                                 ...modalInitialValues,
@@ -173,17 +173,11 @@ export default function Staffs() {
             setTable((prevState: any) => ({
                 ...prevState,
                 rows: data.results,
-                status: {
-                    ...prevState.status,
-                    loading: false,
-                    error: false,
-                },
                 filter: {
                     ...prevState.filter,
                     page: data.current_page,
                     total_pages: data.total_pages,
                 },
-                selectedRows: []
             }));
         }
     }, [tableList.loading, tableList.error, tableList.result?.data]);
@@ -209,29 +203,52 @@ export default function Staffs() {
                 </Button>
             </div>
 
-            <div className='w-full mt-[20px] rounded-[10px] shadow-md'>
+            <div className='w-full rounded-[10px] shadow-md'>
                 <DataGrid
                     rows={table.rows}
                     columns={table.columns}
                     disableColumnFilter
+                    disableRowSelectionOnClick
                     filterMode='server'
                     autoHeight
+                    rowHeight={80}
                     loading={tableList.loading}
                     slots={{
-                        pagination: () => (
-                            <Pagination
-                                count={table.filter.total_pages}
-                                page={table.filter.page}
-                                onChange={(event, value: number) => {
-                                    setTable({
-                                        ...table,
-                                        filter: {
-                                            ...table.filter,
-                                            page: value,
-                                        },
-                                    });
-                                }}
-                            />
+                        footer: () => (
+                            <div className='w-full flex justify-between items-center py-[20px] px-[20px]'>
+                                <Pagination
+                                    count={table.filter.total_pages}
+                                    page={table.filter.page}
+                                    onChange={(event, value: number) => {
+                                        setTable({
+                                            ...table,
+                                            filter: {
+                                                ...table.filter,
+                                                page: value,
+                                            },
+                                        });
+                                    }}
+                                />
+
+                                <div className='flex flex-col justify-start items-center gap-[5px]'>
+                                    <p className='text-[#2A2826] text-[10px] font-[500]'>Показать в таблице</p>
+                                    <input
+                                        type="number"
+                                        className='w-[60px] px-[10px] py-[4px] rounded-[4px] bg-transparent'
+                                        style={{border: '1px solid black'}}
+                                        value={table.filter.size}
+                                        onChange={(event)=>{
+                                            setTable({
+                                                ...table,
+                                                filter:{
+                                                    ...table.filter,
+                                                    size: event.target.value
+                                                }
+                                            })
+                                        }}
+                                    />
+                                </div>
+                            </div>
                         )
                     }}
                     initialState={{
