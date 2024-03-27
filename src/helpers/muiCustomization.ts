@@ -130,6 +130,15 @@ export const theme = createTheme({
                 },
             },
         },
+        MuiAutocomplete:{
+            styleOverrides: {
+                root: {
+                    "& .MuiOutlinedInput-root": {
+                        padding: '4.5px 20px',
+                    }
+                },
+            },
+        },
         MuiFormControl: {
             styleOverrides: {
                 root: {

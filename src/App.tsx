@@ -12,6 +12,15 @@ import ProductsView from "./pages/products/ProductsView";
 import Salaries from "./pages/salaries/Salaries";
 import SalariesAdd from "./pages/salaries/SalariesAdd";
 import SalariesView from "./pages/salaries/SalariesView";
+import BoxOffice from "./pages/boxOffice/BoxOffice";
+import IncomeSale from "./pages/boxOffice/income/IncomeSale";
+import IncomeDefer from "./pages/boxOffice/income/IncomeDefer";
+import IncomePayment from "./pages/boxOffice/income/IncomePayment";
+import IncomeInterchange from "./pages/boxOffice/income/IncomeInterchange";
+import ExpenseRansom from "./pages/boxOffice/expense/ExpenseRansom";
+import ExpensePrepayment from "./pages/boxOffice/expense/ExpensePrepayment";
+import ExpenseOther from "./pages/boxOffice/expense/ExpenseOther";
+import ExpenseSalary from "./pages/boxOffice/expense/ExpenseSalary";
 
 function App() {
     return (
@@ -38,6 +47,21 @@ function App() {
                         <Route index element={<Salaries/>}/>
                         <Route path=':id' element={<SalariesView/>}/>
                         <Route path='add' element={<SalariesAdd/>}/>
+                    </Route>
+                    <Route path="box_office/*">
+                        <Route index element={<BoxOffice/>}/>
+                        <Route path='income/*'>
+                            <Route index element={<IncomeSale/>}/>
+                            <Route path='defer' element={<IncomeDefer/>}/>
+                            <Route path='payment' element={<IncomePayment/>}/>
+                            <Route path='interchange' element={<IncomeInterchange/>}/>
+                        </Route>
+                        <Route path='expense/*'>
+                            <Route index element={<ExpenseRansom/>}/>
+                            <Route path='prepayment' element={<ExpensePrepayment/>}/>
+                            <Route path='other' element={<ExpenseOther/>}/>
+                            <Route path='salary' element={<ExpenseSalary/>}/>
+                        </Route>
                     </Route>
                 </Route>
 

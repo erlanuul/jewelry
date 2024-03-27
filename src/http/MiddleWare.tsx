@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 export const accessRules: any = {
     "/home": [
         {
-            position: "",
+            position: "Frontend - разработчик",
             privileges: {
                 add: true,
                 edit: true,
@@ -16,7 +16,7 @@ export const accessRules: any = {
     ],
     "/products": [
         {
-            position: "",
+            position: "Frontend - разработчик",
             privileges: {
                 add: true,
                 edit: true,
@@ -26,7 +26,7 @@ export const accessRules: any = {
     ],
     "/steels": [
         {
-            position: "",
+            position: "Frontend - разработчик",
             privileges: {
                 add: true,
                 edit: true,
@@ -36,7 +36,7 @@ export const accessRules: any = {
     ],
     "/staffs": [
         {
-            position: "",
+            position: "Frontend - разработчик",
             privileges: {
                 add: true,
                 edit: true,
@@ -46,7 +46,7 @@ export const accessRules: any = {
     ],
     "/sales_reports": [
         {
-            position: "",
+            position: "Frontend - разработчик",
             privileges: {
                 add: true,
                 edit: true,
@@ -56,7 +56,7 @@ export const accessRules: any = {
     ],
     "/clients": [
         {
-            position: "",
+            position: "Frontend - разработчик",
             privileges: {
                 add: true,
                 edit: true,
@@ -66,7 +66,7 @@ export const accessRules: any = {
     ],
     "/debtors": [
         {
-            position: "",
+            position: "Frontend - разработчик",
             privileges: {
                 add: true,
                 edit: true,
@@ -76,7 +76,7 @@ export const accessRules: any = {
     ],
     "/inventory_check": [
         {
-            position: "",
+            position: "Frontend - разработчик",
             privileges: {
                 add: true,
                 edit: true,
@@ -86,7 +86,7 @@ export const accessRules: any = {
     ],
     "/box_office": [
         {
-            position: "",
+            position: "Frontend - разработчик",
             privileges: {
                 add: true,
                 edit: true,
@@ -96,7 +96,7 @@ export const accessRules: any = {
     ],
     "/expenses": [
         {
-            position: "",
+            position: "Frontend - разработчик",
             privileges: {
                 add: true,
                 edit: true,
@@ -106,7 +106,7 @@ export const accessRules: any = {
     ],
     "/salaries": [
         {
-            position: "",
+            position: "Frontend - разработчик",
             privileges: {
                 add: true,
                 edit: true,
