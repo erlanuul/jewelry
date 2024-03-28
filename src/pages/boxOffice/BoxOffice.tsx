@@ -4,6 +4,7 @@ import AddIcon from '@mui/icons-material/Add';
 import {DataGrid} from "@mui/x-data-grid";
 import {useNavigate} from "react-router-dom";
 import {BoxOfficeService} from "../../services/BoxOfficeService";
+import moment from "moment/moment";
 
 const tableInitialValues = {
     rows: [],
@@ -24,7 +25,7 @@ export default function BoxOffice() {
         columns: [
             {field: 'id', headerName: '№ операции', flex: 1},
             {field: 'operation_type', headerName: 'Тип операции', flex: 1, renderCell: (params: any)=> params.row.operation_type?.name},
-            {field: 'created_at', headerName: 'Дата', flex: 1},
+            {field: 'created_at', headerName: 'Дата', flex: 1, renderCell: (params: any)=> moment(params.row.created_at).format('DD.MM.YY hh:mm')},
             {field: 'operation', headerName: 'Операция', flex: 1, renderCell: (params: any)=> params.row.operation?.name},
             {field: 'total_sum', headerName: 'Сумма', flex: 1},
             {field: 'payment_type', headerName: 'Оплата', flex: 1, renderCell: (params: any)=> params.row.operation?.name},
