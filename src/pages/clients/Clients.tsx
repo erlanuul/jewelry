@@ -236,6 +236,7 @@ export default function Clients() {
 
         return imagesFiles.concat(remainingNullObjects)
     }
+
     useEffect(() => {
         if (!tableList.loading && !tableList.error) {
             const data = tableList.result?.data;

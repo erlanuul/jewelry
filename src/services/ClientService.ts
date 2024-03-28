@@ -8,6 +8,11 @@ export const ClientService = {
             return await $axios.get('/clients/' + CreateSearchParams(searchParamsObj));
         }, [CreateSearchParams(searchParamsObj)])
     },
+    SearchClient(searchParamsObj: any) {
+        return useAsync(async () => {
+            return await $axios.get('/clients/search/' + CreateSearchParams(searchParamsObj));
+        }, [CreateSearchParams(searchParamsObj)])
+    },
     async GetClient(client_id: string) {
         return await $axios.get(`/clients/${client_id}/`)
     },

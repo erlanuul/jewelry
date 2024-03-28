@@ -8,10 +8,10 @@ export const StaffService = {
             return await $axios.get('/staff/' + CreateSearchParams(searchParamsObj));
         }, [CreateSearchParams(searchParamsObj)])
     },
-    GetManagersList() {
+    GetFilteredStaffList(searchParamsObj: any) {
         return useAsync(async () => {
-            return await $axios.get('/staff/managers/');
-        }, [])
+            return await $axios.get('/staff/filtered/' + CreateSearchParams(searchParamsObj));
+        }, [+ CreateSearchParams(searchParamsObj)])
     },
     async DeleteStaff(id: string) {
         return await $axios.delete(`/staff/${id}/`)

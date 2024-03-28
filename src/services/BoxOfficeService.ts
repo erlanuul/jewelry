@@ -3,9 +3,9 @@ import {$axios} from "../http";
 import {CreateSearchParams} from "../helpers/helpers";
 
 export const BoxOfficeService = {
-    GetBoxOfficeTransactionList(searchParamsObj: any) {
+    GetBoxOfficeList(searchParamsObj: any) {
         return useAsync(async () => {
-            return await $axios.get('/box-office/transaction/list/' + CreateSearchParams(searchParamsObj));
+            return await $axios.get('/box-office/list/' + CreateSearchParams(searchParamsObj));
         }, [CreateSearchParams(searchParamsObj)])
     },
     GetBoxOfficeOperationTypes() {
@@ -17,5 +17,10 @@ export const BoxOfficeService = {
         return useAsync(async () => {
             return await $axios.get('/box-office/operations/' + CreateSearchParams(searchParamsObj));
         }, [CreateSearchParams(searchParamsObj)])
+    },
+    GetBoxOfficePaymentTypes() {
+        return useAsync(async () => {
+            return await $axios.get('/box-office/payment-types/');
+        }, [])
     },
 }

@@ -33,7 +33,7 @@ export default function BoxOffice() {
         ],
     });
 
-    const tableList = BoxOfficeService.GetBoxOfficeTransactionList(table.filter)
+    const tableList = BoxOfficeService.GetBoxOfficeList(table.filter)
     const operationTypes = BoxOfficeService.GetBoxOfficeOperationTypes()
     const operations = BoxOfficeService.GetBoxOfficeOperations({
         operation_type__slug: table.filter.operation_type
