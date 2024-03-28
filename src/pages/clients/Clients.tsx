@@ -8,13 +8,14 @@ import {
     MenuItem,
     Modal,
     Select,
-    TextField
+    TextField,
+    Pagination
 } from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 import {ClientService} from "../../services/ClientService";
 import {checkModalResponse, convertImageUrlToFile, ImageImport, ImageImportButton} from "../../helpers/helpers";
 import {DataGrid} from "@mui/x-data-grid";
-import {LoadingButton, Pagination} from "@mui/lab";
+import {LoadingButton} from "@mui/lab";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from '@mui/icons-material/Edit';
 import InputMask from "react-input-mask";
@@ -75,7 +76,7 @@ const tableInitialValues = {
     rows: [],
     filter: {
         page: 1,
-        size: 20,
+        limit: 20,
         total_pages: 1,
     },
     selectedRows: [],
@@ -318,13 +319,13 @@ export default function Clients() {
                                         type="number"
                                         className='w-[60px] px-[10px] py-[4px] rounded-[4px] bg-transparent'
                                         style={{border: '1px solid black'}}
-                                        value={table.filter.size}
+                                        value={table.filter.limit}
                                         onChange={(event)=>{
                                             setTable({
                                                 ...table,
                                                 filter:{
                                                     ...table.filter,
-                                                    size: event.target.value
+                                                    limit: event.target.value
                                                 }
                                             })
                                         }}

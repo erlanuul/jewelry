@@ -23,4 +23,7 @@ export const BoxOfficeService = {
             return await $axios.get('/box-office/payment-types/');
         }, [])
     },
+    async CreateTransaction(transaction: any) {
+        return await $axios.post(`/box-office/${transaction.operation_type}/${transaction.operation}/`, transaction)
+    },
 }

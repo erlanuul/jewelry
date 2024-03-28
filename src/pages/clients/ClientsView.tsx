@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import {Modal} from "@mui/material";
+import {Modal, Pagination} from "@mui/material";
 import {ClientService} from "../../services/ClientService";
 import {DataGrid} from "@mui/x-data-grid";
-import {Pagination} from "@mui/lab";
 import Slider from "react-slick";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -58,12 +57,12 @@ const tableInitialValues = {
     rows1: [],
     filter: {
         page: 1,
-        size: 20,
+        limit: 20,
         total_pages: 1,
     },
     filter1: {
         page: 1,
-        size: 20,
+        limit: 20,
         total_pages: 1,
     },
 };
@@ -211,13 +210,13 @@ export default function ClientsView() {
                                         type="number"
                                         className='w-[60px] px-[10px] py-[4px] rounded-[4px] bg-transparent'
                                         style={{border: '1px solid black'}}
-                                        value={table.filter.size}
+                                        value={table.filter.limit}
                                         onChange={(event) => {
                                             setTable({
                                                 ...table,
                                                 filter: {
                                                     ...table.filter,
-                                                    size: event.target.value
+                                                    limit: event.target.value
                                                 }
                                             })
                                         }}
@@ -271,13 +270,13 @@ export default function ClientsView() {
                                         type="number"
                                         className='w-[60px] px-[10px] py-[4px] rounded-[4px] bg-transparent'
                                         style={{border: '1px solid black'}}
-                                        value={table.filter1.size}
+                                        value={table.filter1.limit}
                                         onChange={(event) => {
                                             setTable({
                                                 ...table,
                                                 filter1: {
                                                     ...table.filter1,
-                                                    size: event.target.value
+                                                    limit: event.target.value
                                                 }
                                             })
                                         }}

@@ -8,13 +8,14 @@ import {
     MenuItem,
     Modal,
     Select,
-    TextField
+    TextField,
+    Pagination
 } from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 import {ProductService} from "../../services/ProductService";
 import {checkModalResponse, convertImageUrlToFile, ImageImport, ImageImportButton} from "../../helpers/helpers";
 import {DataGrid} from "@mui/x-data-grid";
-import {LoadingButton, Pagination} from "@mui/lab";
+import {LoadingButton} from "@mui/lab";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from '@mui/icons-material/Edit';
 import Slider from "react-slick";

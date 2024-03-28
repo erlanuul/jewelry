@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import {Button, FormControl, InputLabel, MenuItem, Select, TextField} from "@mui/material";
+import {Button, FormControl, InputLabel, MenuItem, Select, TextField, Pagination} from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 import {DataGrid} from "@mui/x-data-grid";
-import {Pagination} from "@mui/lab";
 import {useNavigate} from "react-router-dom";
 import {BoxOfficeService} from "../../services/BoxOfficeService";
 
@@ -10,7 +9,7 @@ const tableInitialValues = {
     rows: [],
     filter: {
         page: 1,
-        size: 20,
+        limit: 20,
         total_pages: 1,
         operation_type: '',
         operation: '',
@@ -182,13 +181,13 @@ export default function BoxOffice() {
                                         type="number"
                                         className='w-[60px] px-[10px] py-[4px] rounded-[4px] bg-transparent'
                                         style={{border: '1px solid black'}}
-                                        value={table.filter.size}
+                                        value={table.filter.limit}
                                         onChange={(event) => {
                                             setTable({
                                                 ...table,
                                                 filter: {
                                                     ...table.filter,
-                                                    size: event.target.value
+                                                    limit: event.target.value
                                                 }
                                             })
                                         }}

@@ -13,8 +13,8 @@ export const ProductService = {
             return await $axios.get(`/products/${product_id}/`);
         }, [product_id])
     },
-    async GetProduct(product_id: string) {
-        return await $axios.get(`/products/${product_id}/`)
+    async SearchProduct(searchParamsObj: any) {
+        return await $axios.get(`/products/search/` + CreateSearchParams(searchParamsObj))
     },
     async DeleteProduct(product_id: string) {
         return await $axios.delete(`/products/${product_id}/`)
