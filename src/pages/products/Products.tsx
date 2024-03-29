@@ -7,9 +7,8 @@ import {
     InputLabel,
     MenuItem,
     Modal,
-    Select,
-    TextField,
-    Pagination
+    Pagination,
+    Select, TextField
 } from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 import {ProductService} from "../../services/ProductService";
@@ -24,6 +23,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import {useNavigate} from "react-router-dom";
 import {CategoryService} from "../../services/CategoryService";
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import {CustomFormControl, CustomTextField, CustomSelect} from "../../helpers/muiCustomization";
 
 const modalInitialValues = {
     values: {
@@ -309,6 +309,7 @@ export default function Products() {
                     <FormControl sx={{minWidth: '120px'}}>
                         <InputLabel>Категория</InputLabel>
                         <Select
+                            sx={{borderRadius: 100}}
                             label="Категория"
                             placeholder='Категория'
                             required
@@ -333,6 +334,7 @@ export default function Products() {
                     <FormControl sx={{minWidth: '120px'}}>
                         <InputLabel>Наличие</InputLabel>
                         <Select
+                            sx={{borderRadius: 100}}
                             label="Наличие"
                             placeholder='Наличие'
                             required
@@ -354,7 +356,7 @@ export default function Products() {
                 </div>
 
                 <TextField
-                    sx={{minWidth: '120px'}}
+                    sx={{minWidth: '120px', borderRadius: 100}}
                     placeholder='Поиск'
                     required
                     value={table.filter.search}
@@ -453,7 +455,7 @@ export default function Products() {
                         {modal.action !== 'delete' &&
                             <div className='w-full flex flex-col justify-start items-center gap-[30px]'>
                                 <div className='w-full grid grid-cols-2 gap-[30px]'>
-                                    <TextField
+                                    <CustomTextField
                                         fullWidth
                                         label='Наименование'
                                         placeholder='Наименование'
@@ -471,7 +473,7 @@ export default function Products() {
                                             })
                                         }}
                                     />
-                                    <TextField
+                                    <CustomTextField
                                         fullWidth
                                         label='Себестоимость'
                                         placeholder='Себестоимость'
@@ -490,9 +492,9 @@ export default function Products() {
                                             })
                                         }}
                                     />
-                                    <FormControl fullWidth required>
+                                    <CustomFormControl fullWidth required>
                                         <InputLabel>Категория</InputLabel>
-                                        <Select
+                                        <CustomSelect
                                             label="Категория"
                                             placeholder='Категория'
                                             required
@@ -513,12 +515,12 @@ export default function Products() {
                                                     <MenuItem key={index} value={item.id}>{item.name}</MenuItem>
                                                 ))
                                             }
-                                        </Select>
+                                        </CustomSelect>
                                         {modal.validation.message.category !== '' &&
                                             <FormHelperText>{modal.validation.message.category}</FormHelperText>
                                         }
-                                    </FormControl>
-                                    <TextField
+                                    </CustomFormControl>
+                                    <CustomTextField
                                         fullWidth
                                         label='Размер'
                                         placeholder='Размер'
@@ -537,7 +539,7 @@ export default function Products() {
                                             })
                                         }}
                                     />
-                                    <TextField
+                                    <CustomTextField
                                         fullWidth
                                         label='Вес'
                                         placeholder='Вес'
@@ -556,7 +558,7 @@ export default function Products() {
                                             })
                                         }}
                                     />
-                                    <TextField
+                                    <CustomTextField
                                         fullWidth
                                         label='Проба'
                                         placeholder='Проба'
@@ -575,9 +577,9 @@ export default function Products() {
                                             })
                                         }}
                                     />
-                                    <FormControl fullWidth required>
+                                    <CustomFormControl fullWidth required>
                                         <InputLabel>Б/У</InputLabel>
-                                        <Select
+                                        <CustomSelect
                                             label="Б/У"
                                             placeholder='Б/У'
                                             required
@@ -595,11 +597,11 @@ export default function Products() {
                                         >
                                             <MenuItem value={'false'}>Нет</MenuItem>
                                             <MenuItem value={'true'}>Да</MenuItem>
-                                        </Select>
+                                        </CustomSelect>
                                         {modal.validation.message.used !== '' &&
                                             <FormHelperText>{modal.validation.message.used}</FormHelperText>
                                         }
-                                    </FormControl>
+                                    </CustomFormControl>
                                 </div>
                                 <div className="w-full grid grid-cols-4 gap-[10px]">
                                     {modal.values.images.map((item: any, index: number) => (

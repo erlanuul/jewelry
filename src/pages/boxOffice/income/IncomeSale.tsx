@@ -1,17 +1,7 @@
 import React, {FormEvent, useState} from 'react';
 import {BoxOfficeService} from "../../../services/BoxOfficeService";
 import {useNavigate} from "react-router-dom";
-import {
-    Autocomplete,
-    Button,
-    FormControl,
-    FormHelperText,
-    IconButton,
-    InputLabel,
-    MenuItem,
-    Select,
-    TextField
-} from "@mui/material";
+import {Autocomplete, Button, FormHelperText, IconButton, InputLabel, MenuItem} from "@mui/material";
 import {StaffService} from "../../../services/StaffService";
 import {ClientService} from "../../../services/ClientService";
 import {checkModalResponse} from "../../../helpers/helpers";
@@ -21,6 +11,11 @@ import {ProductService} from "../../../services/ProductService";
 import DeleteIcon from '@mui/icons-material/Delete';
 import ClientCard from "../../../components/ClientCard";
 import ClientAddModalButton from "../../../components/ClientAddModalButton";
+import {
+    CustomFormControl,
+    CustomSelect,
+    CustomTextField
+} from "../../../helpers/muiCustomization";
 
 const formInitialValues = {
     values: {
@@ -188,16 +183,16 @@ export default function IncomeSale() {
                                         }
                                     }}
                                     renderInput={(params) => (
-                                        <TextField
+                                        <CustomTextField
                                             {...params}
                                             required
                                             label="Клиент"
                                         />
                                     )}
                                 />
-                                <FormControl sx={{minWidth: 250}} required>
+                                <CustomFormControl sx={{minWidth: 250}} required>
                                     <InputLabel>Менеджер</InputLabel>
-                                    <Select
+                                    <CustomSelect
                                         label="Менеджер"
                                         placeholder='Менеджер'
                                         required
@@ -221,11 +216,11 @@ export default function IncomeSale() {
                                                     <MenuItem key={item.id} value={item.id}>{item.full_name}</MenuItem>
                                                 ))
                                         }
-                                    </Select>
+                                    </CustomSelect>
                                     {form.validation.message.manager !== '' &&
                                         <FormHelperText>{form.validation.message.manager}</FormHelperText>
                                     }
-                                </FormControl>
+                                </CustomFormControl>
                             </div>
 
                             <ClientAddModalButton/>
@@ -234,7 +229,7 @@ export default function IncomeSale() {
                         <div className="w-full flex flex-col justify-start items-start gap-[20px] mb-[30px]">
                             {form.values.products.map((items: any, index: number)=> (
                                 <div key={index} className='w-full flex justify-start items-start gap-[20px]'>
-                                    <TextField
+                                    <CustomTextField
                                         sx={{minWidth: 250}}
                                         fullWidth
                                         label='Код товара'
@@ -243,7 +238,7 @@ export default function IncomeSale() {
                                         value={items.barcode}
                                         onChange={(event) => handleSearchProduct(event.target.value, index)}
                                     />
-                                    <TextField
+                                    <CustomTextField
                                         sx={{minWidth: 250}}
                                         fullWidth
                                         label='Товар'
@@ -252,7 +247,7 @@ export default function IncomeSale() {
                                         disabled
                                         value={items.product_title}
                                     />
-                                    <TextField
+                                    <CustomTextField
                                         sx={{minWidth: 250}}
                                         fullWidth
                                         label='Сумма'
@@ -297,9 +292,9 @@ export default function IncomeSale() {
                         </div>
 
                         <div className='w-full flex justify-between items-end'>
-                            <FormControl sx={{minWidth: 250}} required>
+                            <CustomFormControl sx={{minWidth: 250}} required>
                                 <InputLabel>Способ оплаты</InputLabel>
-                                <Select
+                                <CustomSelect
                                     label="Способ оплаты"
                                     placeholder='Способ оплаты'
                                     required
@@ -323,11 +318,11 @@ export default function IncomeSale() {
                                                 <MenuItem key={item.id} value={item.id}>{item.name}</MenuItem>
                                             ))
                                     }
-                                </Select>
+                                </CustomSelect>
                                 {form.validation.message.payment_type !== '' &&
                                     <FormHelperText>{form.validation.message.payment_type}</FormHelperText>
                                 }
-                            </FormControl>
+                            </CustomFormControl>
 
                             <Button
                                 startIcon={<AddIcon/>}

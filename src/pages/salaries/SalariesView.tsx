@@ -1,11 +1,7 @@
 import React from 'react';
 import {useNavigate, useParams} from "react-router-dom";
 import {SalaryService} from "../../services/SalaryService";
-import {Button, Skeleton} from "@mui/material";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
-import Slider from "react-slick";
-import LabelIcon from "@mui/icons-material/Label";
+import {Skeleton} from "@mui/material";
 import moment from "moment/moment";
 
 

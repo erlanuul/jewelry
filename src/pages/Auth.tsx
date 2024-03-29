@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import {Avatar, IconButton, InputAdornment, TextField} from '@mui/material';
+import {Avatar, IconButton, InputAdornment} from '@mui/material';
 import {setCookie} from 'typescript-cookie'
 import {jwtDecode} from "jwt-decode";
 import {AuthService} from "../services/AuthService";
@@ -11,6 +11,7 @@ import {useDispatch} from "react-redux";
 import {LoadingButton} from "@mui/lab";
 import InputMask from 'react-input-mask';
 import {login} from "../store/slices/userSlice";
+import {CustomTextField} from "../helpers/muiCustomization";
 
 const formInitialState = {
     values:{
@@ -110,7 +111,7 @@ export default function Auth() {
                                 });
                             }}
                         >
-                            <TextField
+                            <CustomTextField
                                 label="Ваш номер"
                                 placeholder='Ваш номер'
                                 variant="outlined"
@@ -122,7 +123,7 @@ export default function Auth() {
                             />
                         </InputMask>
 
-                        <TextField
+                        <CustomTextField
                             label="Пароль"
                             placeholder='Пароль'
                             variant="outlined"

@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import {Button, FormControl, InputLabel, MenuItem, Select, TextField, Pagination} from "@mui/material";
+import {Button, InputLabel, MenuItem, Pagination} from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 import {DataGrid} from "@mui/x-data-grid";
 import {useNavigate} from "react-router-dom";
 import {BoxOfficeService} from "../../services/BoxOfficeService";
 import moment from "moment/moment";
+import {CustomFormControl, CustomTextField, CustomSelect} from "../../helpers/muiCustomization";
 
 const tableInitialValues = {
     rows: [],
@@ -82,9 +83,9 @@ export default function BoxOffice() {
 
             <div className='w-full flex justify-between items-center mb-[20px]'>
                 <div className='w-full flex items-center gap-[20px]'>
-                    <FormControl sx={{minWidth: '120px'}}>
+                    <CustomFormControl sx={{minWidth: '120px'}}>
                         <InputLabel>Тип операции</InputLabel>
-                        <Select
+                        <CustomSelect
                             label="Тип операции"
                             placeholder='Тип операции'
                             required
@@ -104,11 +105,11 @@ export default function BoxOffice() {
                                     <MenuItem key={index} value={item.slug}>{item.name}</MenuItem>
                                 ))
                             }
-                        </Select>
-                    </FormControl>
-                    <FormControl sx={{minWidth: '120px'}}>
+                        </CustomSelect>
+                    </CustomFormControl>
+                    <CustomFormControl sx={{minWidth: '120px'}}>
                         <InputLabel>Операции</InputLabel>
-                        <Select
+                        <CustomSelect
                             label="Операции"
                             placeholder='Операции'
                             required
@@ -128,11 +129,11 @@ export default function BoxOffice() {
                                     <MenuItem key={index} value={item.slug}>{item.name}</MenuItem>
                                 ))
                             }
-                        </Select>
-                    </FormControl>
+                        </CustomSelect>
+                    </CustomFormControl>
                 </div>
 
-                <TextField
+                <CustomTextField
                     sx={{minWidth: '120px'}}
                     placeholder='Поиск'
                     required

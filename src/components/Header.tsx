@@ -1,11 +1,7 @@
 import React from 'react';
 import {useLocation, useNavigate} from 'react-router-dom'
-import NotificationsIcon from '@mui/icons-material/Notifications';
 import {Divider, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Toolbar,} from "@mui/material";
 import MuiDrawer from '@mui/material/Drawer'
-import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
-import CachedIcon from '@mui/icons-material/Cached';
-import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
 import {useSelector} from "react-redux";
 import {accessRules} from "../http/MiddleWare";
 import {CSSObject, styled, Theme} from '@mui/material/styles';

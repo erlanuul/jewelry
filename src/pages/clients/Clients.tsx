@@ -1,16 +1,5 @@
 import React, {FormEvent, useEffect, useState} from 'react';
-import {
-    Button,
-    FormControl,
-    FormHelperText,
-    IconButton,
-    InputLabel,
-    MenuItem,
-    Modal,
-    Select,
-    TextField,
-    Pagination
-} from "@mui/material";
+import {Button, FormHelperText, IconButton, InputLabel, MenuItem, Modal, Pagination} from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 import {ClientService} from "../../services/ClientService";
 import {checkModalResponse, convertImageUrlToFile, ImageImport, ImageImportButton} from "../../helpers/helpers";
@@ -24,6 +13,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import {useNavigate} from "react-router-dom";
 import VisibilityIcon from "@mui/icons-material/Visibility";
+import {CustomFormControl, CustomTextField, CustomSelect} from "../../helpers/muiCustomization";
 
 const modalInitialValues = {
     values: {
@@ -369,7 +359,7 @@ export default function Clients() {
                             {modal.action !== 'delete' &&
                                 <div className='w-full flex flex-col justify-start items-center gap-[30px]'>
                                     <div className='w-full grid grid-cols-2 gap-[30px]'>
-                                    <TextField
+                                    <CustomTextField
                                         fullWidth
                                         label='ФИО'
                                         placeholder='ФИО'
@@ -400,7 +390,7 @@ export default function Clients() {
                                             });
                                         }}
                                     >
-                                        <TextField
+                                        <CustomTextField
                                             label="Номер телефона"
                                             placeholder='Номер телефона'
                                             variant="outlined"
@@ -411,7 +401,7 @@ export default function Clients() {
                                             required
                                         />
                                     </InputMask>
-                                    <TextField
+                                    <CustomTextField
                                         fullWidth
                                         label='Адрес'
                                         placeholder='Адрес'
@@ -430,9 +420,9 @@ export default function Clients() {
                                             })
                                         }}
                                     />
-                                    <FormControl fullWidth required>
+                                    <CustomFormControl fullWidth required>
                                         <InputLabel>Платежеспособность</InputLabel>
-                                        <Select
+                                        <CustomSelect
                                             label="Платежеспособность"
                                             placeholder='Платежеспособность'
                                             required
@@ -450,12 +440,12 @@ export default function Clients() {
                                         >
                                             <MenuItem value={'false'}>Нет</MenuItem>
                                             <MenuItem value={'true'}>Да</MenuItem>
-                                        </Select>
+                                        </CustomSelect>
                                         {modal.validation.message.solvency !== '' &&
                                             <FormHelperText>{modal.validation.message.solvency}</FormHelperText>
                                         }
-                                    </FormControl>
-                                    <TextField
+                                    </CustomFormControl>
+                                    <CustomTextField
                                         fullWidth
                                         label='ИНН'
                                         placeholder='ИНН'
@@ -474,7 +464,7 @@ export default function Clients() {
                                             })
                                         }}
                                     />
-                                    <TextField
+                                    <CustomTextField
                                         fullWidth
                                         label='Примечание'
                                         placeholder='Примечание'

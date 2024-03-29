@@ -1,15 +1,5 @@
 import React, {FormEvent, useState} from 'react';
-import {
-    Button,
-    FormControl,
-    FormHelperText,
-    InputLabel,
-    MenuItem,
-    Modal,
-    Select,
-    Skeleton,
-    TextField
-} from "@mui/material";
+import {Button, FormHelperText, InputLabel, MenuItem, Modal, Skeleton,} from "@mui/material";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import {useNavigate, useParams} from "react-router-dom";
@@ -21,6 +11,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import LabelIcon from '@mui/icons-material/Label';
 import Slider from "react-slick";
+import {CustomFormControl, CustomTextField, CustomSelect} from "../../helpers/muiCustomization";
 
 const modalInitialValues = {
     values: {
@@ -343,7 +334,7 @@ export default function ProductsView() {
                     {modal.action !== 'delete' &&
                         <div className='w-full flex flex-col justify-start items-center gap-[30px]'>
                             <div className='w-full grid grid-cols-2 gap-[30px]'>
-                                <TextField
+                                <CustomTextField
                                     fullWidth
                                     label='Наименование'
                                     placeholder='Наименование'
@@ -361,7 +352,7 @@ export default function ProductsView() {
                                         })
                                     }}
                                 />
-                                <TextField
+                                <CustomTextField
                                     fullWidth
                                     label='Себестоимость'
                                     placeholder='Себестоимость'
@@ -380,9 +371,9 @@ export default function ProductsView() {
                                         })
                                     }}
                                 />
-                                <FormControl fullWidth required>
+                                <CustomFormControl fullWidth required>
                                     <InputLabel>Категория</InputLabel>
-                                    <Select
+                                    <CustomSelect
                                         label="Категория"
                                         placeholder='Категория'
                                         required
@@ -403,12 +394,12 @@ export default function ProductsView() {
                                                 <MenuItem key={index} value={item.id}>{item.name}</MenuItem>
                                             ))
                                         }
-                                    </Select>
+                                    </CustomSelect>
                                     {modal.validation.message.category !== '' &&
                                         <FormHelperText>{modal.validation.message.category}</FormHelperText>
                                     }
-                                </FormControl>
-                                <TextField
+                                </CustomFormControl>
+                                <CustomTextField
                                     fullWidth
                                     label='Размер'
                                     placeholder='Размер'
@@ -427,7 +418,7 @@ export default function ProductsView() {
                                         })
                                     }}
                                 />
-                                <TextField
+                                <CustomTextField
                                     fullWidth
                                     label='Вес'
                                     placeholder='Вес'
@@ -446,7 +437,7 @@ export default function ProductsView() {
                                         })
                                     }}
                                 />
-                                <TextField
+                                <CustomTextField
                                     fullWidth
                                     label='Проба'
                                     placeholder='Проба'
@@ -465,9 +456,9 @@ export default function ProductsView() {
                                         })
                                     }}
                                 />
-                                <FormControl fullWidth required>
+                                <CustomFormControl fullWidth required>
                                     <InputLabel>Б/У</InputLabel>
-                                    <Select
+                                    <CustomSelect
                                         label="Б/У"
                                         placeholder='Б/У'
                                         required
@@ -485,11 +476,11 @@ export default function ProductsView() {
                                     >
                                         <MenuItem value={'false'}>Нет</MenuItem>
                                         <MenuItem value={'true'}>Да</MenuItem>
-                                    </Select>
+                                    </CustomSelect>
                                     {modal.validation.message.used !== '' &&
                                         <FormHelperText>{modal.validation.message.used}</FormHelperText>
                                     }
-                                </FormControl>
+                                </CustomFormControl>
                             </div>
                             <div className="w-full grid grid-cols-4 gap-[10px]">
                                 {modal.values.images.map((item: any, index: number) => (

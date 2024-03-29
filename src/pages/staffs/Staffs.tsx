@@ -1,16 +1,13 @@
 import React, {FormEvent, useEffect, useState} from 'react';
 import {
     Button,
-    FormControl,
     FormHelperText,
     IconButton,
     InputAdornment,
     InputLabel,
     MenuItem,
     Modal,
-    Select,
-    TextField,
-    Pagination
+    Pagination,
 } from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 import {StaffService} from "../../services/StaffService";
@@ -23,6 +20,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Visibility from "@mui/icons-material/Visibility";
 import InputMask from "react-input-mask";
+import {CustomFormControl, CustomTextField, CustomSelect} from "../../helpers/muiCustomization";
 
 const modalInitialValues = {
     values: {
@@ -271,7 +269,7 @@ export default function Staffs() {
                     </h1>
                     {modal.action !== 'delete' &&
                         <div className='w-full grid grid-cols-2 gap-[30px]'>
-                            <TextField
+                            <CustomTextField
                                 fullWidth
                                 label='ФИО'
                                 placeholder='ФИО'
@@ -289,9 +287,9 @@ export default function Staffs() {
                                     })
                                 }}
                             />
-                            <FormControl fullWidth required>
+                            <CustomFormControl fullWidth required>
                                 <InputLabel>Должность</InputLabel>
-                                <Select
+                                <CustomSelect
                                     label="Должность"
                                     placeholder='Должность'
                                     required
@@ -315,11 +313,11 @@ export default function Staffs() {
                                                 <MenuItem key={item.id} value={item.id}>{item.name}</MenuItem>
                                             ))
                                     }
-                                </Select>
+                                </CustomSelect>
                                 {modal.validation.message.position !== '' &&
                                     <FormHelperText>{modal.validation.message.position}</FormHelperText>
                                 }
-                            </FormControl>
+                            </CustomFormControl>
                             <InputMask
                                 mask="9(999)-999-999"
                                 value={modal.values.phone}
@@ -333,7 +331,7 @@ export default function Staffs() {
                                     });
                                 }}
                             >
-                                <TextField
+                                <CustomTextField
                                     label="Номер телефона"
                                     placeholder='Номер телефона'
                                     variant="outlined"
@@ -344,7 +342,7 @@ export default function Staffs() {
                                     required
                                 />
                             </InputMask>
-                            <TextField
+                            <CustomTextField
                                 fullWidth
                                 label='Адрес'
                                 placeholder='Адрес'
@@ -363,7 +361,7 @@ export default function Staffs() {
                                     })
                                 }}
                             />
-                            <TextField
+                            <CustomTextField
                                 fullWidth
                                 label='Оклад'
                                 placeholder='Оклад'
@@ -382,7 +380,7 @@ export default function Staffs() {
                                     })
                                 }}
                             />
-                            <TextField
+                            <CustomTextField
                                 fullWidth
                                 label='Процент за продажу'
                                 placeholder='Процент за продажу'
@@ -401,7 +399,7 @@ export default function Staffs() {
                                     })
                                 }}
                             />
-                            <TextField
+                            <CustomTextField
                                 fullWidth
                                 label="Пароль"
                                 placeholder="Пароль"
@@ -437,7 +435,7 @@ export default function Staffs() {
                                     ),
                                 }}
                             />
-                            <TextField
+                            <CustomTextField
                                 fullWidth
                                 label="Подтвердите пароль"
                                 placeholder="Подтвердите пароль"

@@ -1,10 +1,11 @@
 import React, {FormEvent, useState} from 'react';
 import {ClientService} from "../services/ClientService";
 import {checkModalResponse, ImageImport, ImageImportButton} from "../helpers/helpers";
-import {Button, FormControl, FormHelperText, InputLabel, MenuItem, Modal, Select, TextField} from "@mui/material";
+import {Button, FormHelperText, InputLabel, MenuItem, Modal, Select} from "@mui/material";
 import InputMask from "react-input-mask";
 import {LoadingButton} from "@mui/lab";
 import AddIcon from "@mui/icons-material/Add";
+import {CustomFormControl, CustomTextField} from "../helpers/muiCustomization";
 
 
 const clientModalInitialValues = {
@@ -107,7 +108,7 @@ export default function ClientAddModalButton() {
                     </h1>
                     <div className='w-full flex flex-col justify-start items-center gap-[30px]'>
                         <div className='w-full grid grid-cols-2 gap-[30px]'>
-                            <TextField
+                            <CustomTextField
                                 fullWidth
                                 label='ФИО'
                                 placeholder='ФИО'
@@ -138,7 +139,7 @@ export default function ClientAddModalButton() {
                                     });
                                 }}
                             >
-                                <TextField
+                                <CustomTextField
                                     label="Номер телефона"
                                     placeholder='Номер телефона'
                                     variant="outlined"
@@ -149,7 +150,7 @@ export default function ClientAddModalButton() {
                                     required
                                 />
                             </InputMask>
-                            <TextField
+                            <CustomTextField
                                 fullWidth
                                 label='Адрес'
                                 placeholder='Адрес'
@@ -168,7 +169,7 @@ export default function ClientAddModalButton() {
                                     })
                                 }}
                             />
-                            <FormControl fullWidth required>
+                            <CustomFormControl fullWidth required>
                                 <InputLabel>Платежеспособность</InputLabel>
                                 <Select
                                     label="Платежеспособность"
@@ -192,8 +193,8 @@ export default function ClientAddModalButton() {
                                 {clientModal.validation.message.solvency !== '' &&
                                     <FormHelperText>{clientModal.validation.message.solvency}</FormHelperText>
                                 }
-                            </FormControl>
-                            <TextField
+                            </CustomFormControl>
+                            <CustomTextField
                                 fullWidth
                                 label='ИНН'
                                 placeholder='ИНН'
@@ -212,7 +213,7 @@ export default function ClientAddModalButton() {
                                     })
                                 }}
                             />
-                            <TextField
+                            <CustomTextField
                                 fullWidth
                                 label='Примечание'
                                 placeholder='Примечание'
