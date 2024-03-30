@@ -1,7 +1,16 @@
 import React, {FormEvent, useState} from 'react';
 import {BoxOfficeService} from "../../../services/BoxOfficeService";
 import {useNavigate} from "react-router-dom";
-import {Autocomplete, Button, FormHelperText, IconButton, InputLabel, MenuItem} from "@mui/material";
+import {
+    Autocomplete,
+    Button,
+    FormControl,
+    FormHelperText,
+    IconButton,
+    InputLabel,
+    MenuItem,
+    Select
+} from "@mui/material";
 import {StaffService} from "../../../services/StaffService";
 import {ClientService} from "../../../services/ClientService";
 import {checkModalResponse} from "../../../helpers/helpers";
@@ -13,7 +22,7 @@ import ClientCard from "../../../components/ClientCard";
 import ClientAddModalButton from "../../../components/ClientAddModalButton";
 import {DatePicker} from "@mui/x-date-pickers";
 import moment from "moment";
-import {CustomFormControl, CustomSelect, CustomTextField} from "../../../helpers/muiCustomization";
+import {CustomDatePicker, CustomFormControl, CustomTextField} from "../../../helpers/muiCustomization";
 
 const formInitialValues = {
     values: {
@@ -197,7 +206,7 @@ export default function IncomeDefer() {
                                 />
                                 <CustomFormControl sx={{minWidth: 250}} required>
                                     <InputLabel>Менеджер</InputLabel>
-                                    <CustomSelect
+                                    <Select
                                         label="Менеджер"
                                         placeholder='Менеджер'
                                         required
@@ -221,12 +230,12 @@ export default function IncomeDefer() {
                                                     <MenuItem key={item.id} value={item.id}>{item.full_name}</MenuItem>
                                                 ))
                                         }
-                                    </CustomSelect>
+                                    </Select>
                                     {form.validation.message.manager !== '' &&
                                         <FormHelperText>{form.validation.message.manager}</FormHelperText>
                                     }
                                 </CustomFormControl>
-                                <DatePicker
+                                <CustomDatePicker
                                     sx={{minWidth: 250}}
                                     label="Дата окончания"
                                     value={form.values.end_date}
@@ -337,12 +346,13 @@ export default function IncomeDefer() {
                             ))}
                         </div>
 
-                        <div className='w-full flex justify-between items-end'>
-                            <CustomFormControl sx={{minWidth: 250}} required>
+                        <div className='w-full flex justify-between items-center'>
+                            <FormControl sx={{minWidth: 250}} variant='outlined' size='small' required>
                                 <InputLabel>Способ оплаты</InputLabel>
-                                <CustomSelect
+                                <Select
                                     label="Способ оплаты"
                                     placeholder='Способ оплаты'
+                                    sx={{borderRadius: 100}}
                                     required
                                     value={form.values.payment_type}
                                     error={form.validation.error.payment_type}
@@ -364,11 +374,11 @@ export default function IncomeDefer() {
                                                 <MenuItem key={item.id} value={item.id}>{item.name}</MenuItem>
                                             ))
                                     }
-                                </CustomSelect>
+                                </Select>
                                 {form.validation.message.payment_type !== '' &&
                                     <FormHelperText>{form.validation.message.payment_type}</FormHelperText>
                                 }
-                            </CustomFormControl>
+                            </FormControl>
 
                             <Button
                                 startIcon={<AddIcon/>}

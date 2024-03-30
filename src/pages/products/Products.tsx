@@ -23,7 +23,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import {useNavigate} from "react-router-dom";
 import {CategoryService} from "../../services/CategoryService";
 import VisibilityIcon from '@mui/icons-material/Visibility';
-import {CustomFormControl, CustomTextField, CustomSelect} from "../../helpers/muiCustomization";
+import {CustomFormControl, CustomTextField} from "../../helpers/muiCustomization";
 
 const modalInitialValues = {
     values: {
@@ -305,7 +305,7 @@ export default function Products() {
             </div>
 
             <div className='w-full flex justify-between items-center mb-[20px]'>
-                <div className='w-full flex items-center gap-[20px]'>
+                <div className='flex items-center gap-[20px]'>
                     <FormControl sx={{minWidth: '120px'}}>
                         <InputLabel>Категория</InputLabel>
                         <Select
@@ -354,9 +354,13 @@ export default function Products() {
                         </Select>
                     </FormControl>
                 </div>
-
                 <TextField
-                    sx={{minWidth: '120px', borderRadius: 100}}
+                    InputProps={{
+                        sx: {
+                            minWidth: '250px',
+                            borderRadius: '100px',
+                        },
+                    }}
                     placeholder='Поиск'
                     required
                     value={table.filter.search}
@@ -494,7 +498,7 @@ export default function Products() {
                                     />
                                     <CustomFormControl fullWidth required>
                                         <InputLabel>Категория</InputLabel>
-                                        <CustomSelect
+                                        <Select
                                             label="Категория"
                                             placeholder='Категория'
                                             required
@@ -515,7 +519,7 @@ export default function Products() {
                                                     <MenuItem key={index} value={item.id}>{item.name}</MenuItem>
                                                 ))
                                             }
-                                        </CustomSelect>
+                                        </Select>
                                         {modal.validation.message.category !== '' &&
                                             <FormHelperText>{modal.validation.message.category}</FormHelperText>
                                         }
@@ -579,7 +583,7 @@ export default function Products() {
                                     />
                                     <CustomFormControl fullWidth required>
                                         <InputLabel>Б/У</InputLabel>
-                                        <CustomSelect
+                                        <Select
                                             label="Б/У"
                                             placeholder='Б/У'
                                             required
@@ -597,7 +601,7 @@ export default function Products() {
                                         >
                                             <MenuItem value={'false'}>Нет</MenuItem>
                                             <MenuItem value={'true'}>Да</MenuItem>
-                                        </CustomSelect>
+                                        </Select>
                                         {modal.validation.message.used !== '' &&
                                             <FormHelperText>{modal.validation.message.used}</FormHelperText>
                                         }

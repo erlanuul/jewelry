@@ -1,11 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import {Button, InputLabel, MenuItem, Pagination} from "@mui/material";
+import {Button, FormControl, InputLabel, MenuItem, Pagination, Select, TextField} from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 import {DataGrid} from "@mui/x-data-grid";
 import {useNavigate} from "react-router-dom";
 import {BoxOfficeService} from "../../services/BoxOfficeService";
 import moment from "moment/moment";
-import {CustomFormControl, CustomTextField, CustomSelect} from "../../helpers/muiCustomization";
 
 const tableInitialValues = {
     rows: [],
@@ -83,9 +82,10 @@ export default function BoxOffice() {
 
             <div className='w-full flex justify-between items-center mb-[20px]'>
                 <div className='w-full flex items-center gap-[20px]'>
-                    <CustomFormControl sx={{minWidth: '120px'}}>
+                    <FormControl sx={{minWidth: '120px'}}>
                         <InputLabel>Тип операции</InputLabel>
-                        <CustomSelect
+                        <Select
+                            sx={{borderRadius: 100}}
                             label="Тип операции"
                             placeholder='Тип операции'
                             required
@@ -102,14 +102,16 @@ export default function BoxOffice() {
                         >
                             {!operationTypes.loading && !operationTypes.error &&
                                 operationTypes.result?.data.map((item: any, index: number) => (
-                                    <MenuItem key={index} value={item.slug}>{item.name}</MenuItem>
+                                    <MenuItem key={index} value={item.id}>{item.name}</MenuItem>
                                 ))
                             }
-                        </CustomSelect>
-                    </CustomFormControl>
-                    <CustomFormControl sx={{minWidth: '120px'}}>
+                        </Select>
+                    </FormControl>
+
+                    <FormControl sx={{minWidth: '120px'}}>
                         <InputLabel>Операции</InputLabel>
-                        <CustomSelect
+                        <Select
+                            sx={{borderRadius: 100}}
                             label="Операции"
                             placeholder='Операции'
                             required
@@ -126,15 +128,20 @@ export default function BoxOffice() {
                         >
                             {!operations.loading && !operations.error &&
                                 operations.result?.data.map((item: any, index: number) => (
-                                    <MenuItem key={index} value={item.slug}>{item.name}</MenuItem>
+                                    <MenuItem key={index} value={item.id}>{item.name}</MenuItem>
                                 ))
                             }
-                        </CustomSelect>
-                    </CustomFormControl>
+                        </Select>
+                    </FormControl>
                 </div>
 
-                <CustomTextField
-                    sx={{minWidth: '120px'}}
+                <TextField
+                    InputProps={{
+                        sx: {
+                            minWidth: '250px',
+                            borderRadius: '100px',
+                        },
+                    }}
                     placeholder='Поиск'
                     required
                     value={table.filter.search}

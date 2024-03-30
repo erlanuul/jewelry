@@ -1,5 +1,5 @@
 import React, {FormEvent, useState} from 'react';
-import {Button, FormHelperText, InputLabel, MenuItem, Modal, Skeleton,} from "@mui/material";
+import {Button, FormHelperText, InputLabel, MenuItem, Modal, Skeleton, Select} from "@mui/material";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import {useNavigate, useParams} from "react-router-dom";
@@ -11,7 +11,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import LabelIcon from '@mui/icons-material/Label';
 import Slider from "react-slick";
-import {CustomFormControl, CustomTextField, CustomSelect} from "../../helpers/muiCustomization";
+import {CustomFormControl, CustomTextField} from "../../helpers/muiCustomization";
 
 const modalInitialValues = {
     values: {
@@ -373,7 +373,7 @@ export default function ProductsView() {
                                 />
                                 <CustomFormControl fullWidth required>
                                     <InputLabel>Категория</InputLabel>
-                                    <CustomSelect
+                                    <Select
                                         label="Категория"
                                         placeholder='Категория'
                                         required
@@ -394,7 +394,7 @@ export default function ProductsView() {
                                                 <MenuItem key={index} value={item.id}>{item.name}</MenuItem>
                                             ))
                                         }
-                                    </CustomSelect>
+                                    </Select>
                                     {modal.validation.message.category !== '' &&
                                         <FormHelperText>{modal.validation.message.category}</FormHelperText>
                                     }
@@ -458,7 +458,7 @@ export default function ProductsView() {
                                 />
                                 <CustomFormControl fullWidth required>
                                     <InputLabel>Б/У</InputLabel>
-                                    <CustomSelect
+                                    <Select
                                         label="Б/У"
                                         placeholder='Б/У'
                                         required
@@ -476,7 +476,7 @@ export default function ProductsView() {
                                     >
                                         <MenuItem value={'false'}>Нет</MenuItem>
                                         <MenuItem value={'true'}>Да</MenuItem>
-                                    </CustomSelect>
+                                    </Select>
                                     {modal.validation.message.used !== '' &&
                                         <FormHelperText>{modal.validation.message.used}</FormHelperText>
                                     }

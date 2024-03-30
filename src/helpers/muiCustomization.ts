@@ -1,4 +1,5 @@
 import {createTheme, FormControl, outlinedInputClasses, Select, styled, TextField} from "@mui/material";
+import {DatePicker} from "@mui/x-date-pickers";
 
 declare module '@mui/material/styles' {
     interface Palette {
@@ -51,15 +52,6 @@ export const theme = createTheme({
                     textTransform: 'none',
                     borderRadius: 100,
                     height: 47
-                },
-            },
-        },
-        MuiAutocomplete:{
-            styleOverrides: {
-                root: {
-                    "& .MuiOutlinedInput-root": {
-                        padding: '4.5px 20px',
-                    }
                 },
             },
         },
@@ -148,6 +140,43 @@ export const CustomFormControl = styled(FormControl)({
     },
 });
 
-export const CustomSelect = styled(Select)({
-    // borderRadius: 100,
+export const CustomDatePicker = styled(DatePicker)({
+    // Root styles
+    '--TextField-brandBorderColor': '#CED0D2',
+    '--TextField-brandBorderHoverColor': '#6E6C6A',
+    '--TextField-brandBorderFocusedColor': '#6E6C6A',
+    '--TextField-inputBackground': '#F6F6F6',
+    marginTop: 30,
+
+    // Label styles
+    '& label': {
+        position: 'absolute',
+        top: -20,
+        left: 0,
+        transform: 'translateY(-50%)',
+        zIndex: 1,
+        pointerEvents: 'none',
+        color: '#6E6C6A',
+    },
+    '& label.Mui-focused': {
+        color: 'var(--TextField-brandBorderFocusedColor)',
+    },
+
+    // Fieldset styles
+    '& fieldset': {
+        borderColor: 'var(--TextField-brandBorderColor)',
+        top: 0,
+    },
+    '& fieldset legend': {
+        display: 'none',
+    },
+
+    '& .MuiInputBase-root': {
+        borderRadius: 100,
+        background: '#F6F6F6',
+    },
+
+    [`&.Mui-focused .${outlinedInputClasses.notchedOutline}`]: {
+        borderColor: 'var(--TextField-brandBorderFocusedColor)',
+    },
 });

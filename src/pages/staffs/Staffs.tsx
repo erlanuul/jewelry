@@ -8,6 +8,7 @@ import {
     MenuItem,
     Modal,
     Pagination,
+    Select
 } from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 import {StaffService} from "../../services/StaffService";
@@ -20,7 +21,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Visibility from "@mui/icons-material/Visibility";
 import InputMask from "react-input-mask";
-import {CustomFormControl, CustomTextField, CustomSelect} from "../../helpers/muiCustomization";
+import {CustomFormControl, CustomTextField} from "../../helpers/muiCustomization";
 
 const modalInitialValues = {
     values: {
@@ -289,7 +290,7 @@ export default function Staffs() {
                             />
                             <CustomFormControl fullWidth required>
                                 <InputLabel>Должность</InputLabel>
-                                <CustomSelect
+                                <Select
                                     label="Должность"
                                     placeholder='Должность'
                                     required
@@ -313,7 +314,7 @@ export default function Staffs() {
                                                 <MenuItem key={item.id} value={item.id}>{item.name}</MenuItem>
                                             ))
                                     }
-                                </CustomSelect>
+                                </Select>
                                 {modal.validation.message.position !== '' &&
                                     <FormHelperText>{modal.validation.message.position}</FormHelperText>
                                 }

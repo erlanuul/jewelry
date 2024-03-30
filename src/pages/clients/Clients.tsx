@@ -1,5 +1,5 @@
 import React, {FormEvent, useEffect, useState} from 'react';
-import {Button, FormHelperText, IconButton, InputLabel, MenuItem, Modal, Pagination} from "@mui/material";
+import {Button, FormHelperText, IconButton, InputLabel, MenuItem, Modal, Pagination, Select} from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 import {ClientService} from "../../services/ClientService";
 import {checkModalResponse, convertImageUrlToFile, ImageImport, ImageImportButton} from "../../helpers/helpers";
@@ -13,7 +13,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import {useNavigate} from "react-router-dom";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import {CustomFormControl, CustomTextField, CustomSelect} from "../../helpers/muiCustomization";
+import {CustomFormControl, CustomTextField} from "../../helpers/muiCustomization";
 
 const modalInitialValues = {
     values: {
@@ -422,7 +422,7 @@ export default function Clients() {
                                     />
                                     <CustomFormControl fullWidth required>
                                         <InputLabel>Платежеспособность</InputLabel>
-                                        <CustomSelect
+                                        <Select
                                             label="Платежеспособность"
                                             placeholder='Платежеспособность'
                                             required
@@ -440,7 +440,7 @@ export default function Clients() {
                                         >
                                             <MenuItem value={'false'}>Нет</MenuItem>
                                             <MenuItem value={'true'}>Да</MenuItem>
-                                        </CustomSelect>
+                                        </Select>
                                         {modal.validation.message.solvency !== '' &&
                                             <FormHelperText>{modal.validation.message.solvency}</FormHelperText>
                                         }
