@@ -180,3 +180,9 @@ export const CustomDatePicker = styled(DatePicker)({
         borderColor: 'var(--TextField-brandBorderFocusedColor)',
     },
 });
+
+export const CustomRoundedDatePicker = styled(DatePicker)({
+    '& .MuiInputBase-root': {
+        borderRadius: 100,
+    },
+});

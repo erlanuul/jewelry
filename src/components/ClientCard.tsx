@@ -15,7 +15,7 @@ export default function ClientCard({clientInfo}: any) {
     };
     return (
         <>
-            <div className='w-full p-[20px] bg-white rounded-[10px] shadow-md grid grid-cols-2 gap-[20px]'>
+            <div className='w-[324px] shrink-0 p-[20px] bg-white rounded-[10px] shadow-md grid grid-cols-2 gap-[20px]'>
                 {clientInfo.images.length > 0
                     ?
                     <div className='rounded-[5px] w-[131px] h-[131px] bg-cover bg-center'

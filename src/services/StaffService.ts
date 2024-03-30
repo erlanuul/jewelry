@@ -11,7 +11,7 @@ export const StaffService = {
     GetFilteredStaffList(searchParamsObj: any) {
         return useAsync(async () => {
             return await $axios.get('/staff/filtered/' + CreateSearchParams(searchParamsObj));
-        }, [+ CreateSearchParams(searchParamsObj)])
+        }, [CreateSearchParams(searchParamsObj)])
     },
     async DeleteStaff(id: string) {
         return await $axios.delete(`/staff/${id}/`)

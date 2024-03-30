@@ -64,7 +64,7 @@ export const accessRules: any = {
             },
         },
     ],
-    "/debtors": [
+    "/defers": [
         {
             position: "Frontend - разработчик",
             privileges: {

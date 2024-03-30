@@ -1,5 +1,5 @@
 import React, {FormEvent, useState} from 'react';
-import {Button} from "@mui/material";
+import {Button, TextField} from "@mui/material";
 import {checkModalResponse} from "../../helpers/helpers";
 import {DataGrid} from "@mui/x-data-grid";
 import {LoadingButton} from "@mui/lab";
@@ -7,6 +7,7 @@ import {useNavigate} from "react-router-dom";
 import {SalaryService} from "../../services/SalaryService";
 import {DatePicker} from "@mui/x-date-pickers";
 import moment from "moment/moment";
+import {CustomRoundedDatePicker} from "../../helpers/muiCustomization";
 
 const formInitialValues = {
     values: {
@@ -108,7 +109,7 @@ export default function SalariesAdd() {
             </div>
 
             <form onSubmit={handleGetReport} className='w-full flex items-end gap-[20px] mb-[20px]'>
-                <DatePicker
+                <CustomRoundedDatePicker
                     label="Дата от"
                     value={form.values.date_start}
                     onChange={(newValue) => {
@@ -122,11 +123,11 @@ export default function SalariesAdd() {
                     }}
                     slotProps={{
                         textField: {
-                            required: true,
+                            required: true
                         },
                     }}
                 />
-                <DatePicker
+                <CustomRoundedDatePicker
                     label="Дата до"
                     value={form.values.date_end}
                     onChange={(newValue) => {

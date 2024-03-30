@@ -27,7 +27,7 @@ export default function SalariesView() {
                     <Skeleton variant="rectangular" width={'100%'} height={500}/>
                 </>
                 : salary.error
-                    ? 'error'
+                    ? salary.error.message
                     :
                     <>
                         <div className='w-full flex flex-col justify-start items-center p-[30px] bg-[white] shadow-md'>

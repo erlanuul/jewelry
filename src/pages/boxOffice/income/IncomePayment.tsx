@@ -1,12 +1,10 @@
-import React, {FormEvent, useState} from 'react';
+import React, {FormEvent, useEffect, useState} from 'react';
 import {BoxOfficeService} from "../../../services/BoxOfficeService";
 import {useNavigate} from "react-router-dom";
 import {Autocomplete, FormControl, FormHelperText, InputLabel, MenuItem, Select} from "@mui/material";
-import {StaffService} from "../../../services/StaffService";
 import {ClientService} from "../../../services/ClientService";
 import {checkModalResponse} from "../../../helpers/helpers";
 import {LoadingButton} from "@mui/lab";
-import {ProductService} from "../../../services/ProductService";
 import ClientCard from "../../../components/ClientCard";
 import ClientAddModalButton from "../../../components/ClientAddModalButton";
 import {CustomTextField} from "../../../helpers/muiCustomization";
@@ -18,16 +16,8 @@ const formInitialValues = {
         client: '',
         client_full_name: '',
         client_info: null,
-        manager: '',
         payment_type: '',
-        products: [
-            {
-                barcode: '',
-                product: '',
-                product_title: '',
-                price: '0',
-            }
-        ],
+        products: [],
     },
     validation: {
         error: {
@@ -53,9 +43,9 @@ export default function IncomePayment() {
     const [form, setForm] = useState<any>(formInitialValues)
 
     const operations = BoxOfficeService.GetBoxOfficeOperations({operation_type__slug: form.values.operation_type})
-    const managersList = StaffService.GetFilteredStaffList({position__slug: 'manager'})
     const clientsList = ClientService.SearchClient({search: form.values.client_full_name})
     const paymentTypes = BoxOfficeService.GetBoxOfficePaymentTypes()
+    const productsList = BoxOfficeService.GetBoxOfficePaymentProducts(form.values, {cash__client: form.values.client})
 
     const handleFormSubmit = (event: FormEvent) => {
         event.preventDefault()
@@ -69,46 +59,22 @@ export default function IncomePayment() {
             checkModalResponse(err.response.data, setForm, form);
         })
     }
-    const handleSearchProduct = (barcode: any, index: number) => {
-        const productsArr = form.values.products
-        productsArr[index].barcode = barcode
 
-        setForm({
-            ...form,
-            values: {
-                ...form.values,
-                products: productsArr
-            }
-        })
-        ProductService.SearchProduct({barcode: barcode}).then((res: any)=>{
-            if(Object.entries(res.data).length === 0){
-                const productsArr = form.values.products
-                productsArr[index].product_title = ''
-                productsArr[index].product = ''
+    useEffect(() => {
+        if(!productsList.loading && !productsList.error){
+            setForm({
+                ...form,
+                values:{
+                    ...form.values,
+                    products: [...productsList.result?.data].map((item: any)=>({
+                        ...item,
+                        amount: '0'
+                    }))
+                }
+            })
+        }
+    }, [productsList.loading, productsList.error]);
 
-                setForm({
-                    ...form,
-                    values: {
-                        ...form.values,
-                        products: productsArr
-                    }
-                })
-            }else{
-                const productsArr = form.values.products
-                productsArr[index].barcode = barcode
-                productsArr[index].product_title = res.data.title
-                productsArr[index].product = res.data.id
-
-                setForm({
-                    ...form,
-                    values: {
-                        ...form.values,
-                        products: productsArr
-                    }
-                })
-            }
-        })
-    }
 
     return (
         <>
@@ -117,16 +83,17 @@ export default function IncomePayment() {
             </div>
 
             <div className='w-full flex justify-between items-start gap-[20px]'>
-                <form onSubmit={handleFormSubmit} className='flex flex-col justify-start items-center'>
-                    <div className='w-full p-[20px] bg-white rounded-[10px] shadow-md flex flex-col justify-start items-start mb-[40px]'>
+                <form onSubmit={handleFormSubmit} className='w-full flex flex-col justify-start items-center'>
+                    <div
+                        className='w-full p-[20px] bg-white rounded-[10px] shadow-md flex flex-col justify-start items-start mb-[40px]'>
                         <div className='rounded-[100px] bg-[#F4F5F7] flex items-center mb-[40px]'>
                             {!operations.loading && !operations.error && operations.result?.data.map((item: any, index: number) => (
                                 <div
                                     key={index}
                                     className={`px-[20px] py-[8px] rounded-[100px] text-[12px] font-[500] cursor-pointer hover:bg-[#576ED0] hover:text-white ${item.slug === form.values.operation ? 'text-white bg-[#576ED0]' : ' text-[#292929]'}`}
-                                    onClick={()=>{
+                                    onClick={() => {
                                         navigate({
-                                            pathname: `/box_office/${form.values.operation_type}${item.slug === 'sale' ? '' : `/${item.slug}` }`
+                                            pathname: `/box_office/${form.values.operation_type}${item.slug === 'sale' ? '' : `/${item.slug}`}`
                                         })
                                     }}
                                 >
@@ -136,17 +103,17 @@ export default function IncomePayment() {
                         </div>
 
                         <div className='w-full flex flex-col justify-start items-start gap-[20px] mb-[60px]'>
-                            <div className="w-full flex justify-start items-start gap-[20px]">
+                            <div className="w-full grid gap-[20px]">
                                 <Autocomplete
                                     clearOnEscape
-                                    sx={{ width: 250 }}
+                                    sx={{width: 250}}
                                     isOptionEqualToValue={(option: any, value) => option.full_name === value.full_name}
-                                    getOptionLabel={(option:any) => option.full_name}
+                                    getOptionLabel={(option: any) => option.full_name}
                                     options={!clientsList.loading && !clientsList.error ? [...clientsList.result?.data] : []}
                                     onChange={(event, value) => {
                                         setForm({
                                             ...form,
-                                            values:{
+                                            values: {
                                                 ...form.values,
                                                 client: value !== null ? value.id : '',
                                                 client_full_name: value !== null ? value.full_name : '',
@@ -165,8 +132,7 @@ export default function IncomePayment() {
                                                     client_info: null,
                                                 }
                                             });
-                                        }
-                                        else {
+                                        } else {
                                             setForm({
                                                 ...form,
                                                 values: {
@@ -188,6 +154,56 @@ export default function IncomePayment() {
 
                             <ClientAddModalButton/>
                         </div>
+
+                        {form.values.products.length > 0 &&
+                            <div className="w-full flex flex-col justify-start items-start gap-[20px] mb-[30px]">
+                                <div className='w-full grid grid-cols-5 gap-[20px] pb-[10px] mb-[10px]'
+                                     style={{borderBottom: '1px solid #576ED0'}}
+                                >
+                                    <p className='text-[#6E6C6A] text-[12px] font-[500]'>Бар код:</p>
+                                    <p className='text-[#6E6C6A] text-[12px] font-[500]'>Наименование:</p>
+                                    <p className='text-[#6E6C6A] text-[12px] font-[500]'>Сумма:</p>
+                                    <p className='text-[#6E6C6A] text-[12px] font-[500]'>Остаток:</p>
+                                    <p className='text-[#6E6C6A] text-[12px] font-[500]'>Сумма*</p>
+                                </div>
+                                {form.values.products.map((item: any, index: number) => (
+                                    <div key={index} className='w-full grid grid-cols-5 gap-[20px]'>
+                                        <div className='flex justify-start items-center'>
+                                            <p className='text-[#2A2826] text-[14px] font-[500]'>{item.product.barcode}</p>
+                                        </div>
+                                        <div className='flex justify-start items-center'>
+                                            <p className='text-[#2A2826] text-[14px] font-[500]'>{item.product.title}</p>
+                                        </div>
+                                        <div className='flex justify-start items-center'>
+                                            <p className='text-[#2A2826] text-[14px] font-[500]'>{item.price}</p>
+                                        </div>
+                                        <div className='flex justify-start items-center'>
+                                            <p className='text-[#2A2826] text-[14px] font-[500]'>{item.remains}</p>
+                                        </div>
+
+
+                                        <input
+                                            type="number"
+                                            required
+                                            className='rounded-[100px] bg-[#F6F6F6] h-[36px] px-[20px]'
+                                            value={item.amount}
+                                            onChange={(event) => {
+                                                const products = form.values.products
+                                                products[index].amount = event.target.value
+
+                                                setForm({
+                                                    ...form,
+                                                    values: {
+                                                        ...form.values,
+                                                        products: products
+                                                    }
+                                                })
+                                            }}
+                                        />
+                                    </div>
+                                ))}
+                            </div>
+                        }
 
 
                         <div className='w-full flex justify-between items-center'>

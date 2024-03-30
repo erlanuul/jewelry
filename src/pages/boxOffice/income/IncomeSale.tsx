@@ -131,7 +131,7 @@ export default function IncomeSale() {
             </div>
 
             <div className='w-full flex justify-between items-start gap-[20px]'>
-                <form onSubmit={handleFormSubmit} className='flex flex-col justify-start items-center'>
+                <form onSubmit={handleFormSubmit} className='w-full flex flex-col justify-start items-center'>
                     <div className='w-full p-[20px] bg-white rounded-[10px] shadow-md flex flex-col justify-start items-start mb-[40px]'>
                         <div className='rounded-[100px] bg-[#F4F5F7] flex items-center mb-[40px]'>
                             {!operations.loading && !operations.error && operations.result?.data.map((item: any, index: number) => (
@@ -150,10 +150,9 @@ export default function IncomeSale() {
                         </div>
 
                         <div className='w-full flex flex-col justify-start items-start gap-[20px] mb-[60px]'>
-                            <div className="w-full flex justify-start items-start gap-[20px]">
+                            <div className="w-full grid grid-cols-2 gap-[20px]">
                                 <Autocomplete
                                     clearOnEscape
-                                    sx={{ width: 250 }}
                                     isOptionEqualToValue={(option: any, value) => option.full_name === value.full_name}
                                     getOptionLabel={(option:any) => option.full_name}
                                     options={!clientsList.loading && !clientsList.error ? [...clientsList.result?.data] : []}
@@ -198,7 +197,7 @@ export default function IncomeSale() {
                                         />
                                     )}
                                 />
-                                <CustomFormControl sx={{minWidth: 250}} required>
+                                <CustomFormControl required>
                                     <InputLabel>Менеджер</InputLabel>
                                     <Select
                                         label="Менеджер"
@@ -236,9 +235,8 @@ export default function IncomeSale() {
 
                         <div className="w-full flex flex-col justify-start items-start gap-[20px] mb-[30px]">
                             {form.values.products.map((items: any, index: number)=> (
-                                <div key={index} className='w-full flex justify-start items-start gap-[20px]'>
+                                <div key={index} className='w-full grid grid-cols-3 gap-[20px]'>
                                     <CustomTextField
-                                        sx={{minWidth: 250}}
                                         fullWidth
                                         label='Код товара'
                                         placeholder='Код товара'
@@ -247,7 +245,6 @@ export default function IncomeSale() {
                                         onChange={(event) => handleSearchProduct(event.target.value, index)}
                                     />
                                     <CustomTextField
-                                        sx={{minWidth: 250}}
                                         fullWidth
                                         label='Товар'
                                         placeholder='Товар'
@@ -255,46 +252,48 @@ export default function IncomeSale() {
                                         disabled
                                         value={items.product_title}
                                     />
-                                    <CustomTextField
-                                        sx={{minWidth: 250}}
-                                        fullWidth
-                                        label='Сумма'
-                                        placeholder='Сумма'
-                                        required
-                                        disabled={items.product_title === ''}
-                                        value={items.price}
-                                        onChange={(event) => {
-                                            const productsArr = form.values.products
-                                            productsArr[index].price = event.target.value
-                                            setForm({
-                                                ...form,
-                                                values: {
-                                                    ...form.values,
-                                                    products: productsArr
-                                                }
-                                            })
-                                        }}
-                                    />
-
-                                    {form.values.products.length > 1 &&
-                                        <IconButton
-                                            size='large'
-                                            onClick={()=>{
+                                    <div className='w-full flex items-end gap-[20px]'>
+                                        <CustomTextField
+                                            fullWidth
+                                            label='Сумма'
+                                            placeholder='Сумма'
+                                            required
+                                            disabled={items.product_title === ''}
+                                            value={items.price}
+                                            onChange={(event) => {
                                                 const productsArr = form.values.products
-                                                productsArr.splice(index, 1)
-
+                                                productsArr[index].price = event.target.value
                                                 setForm({
                                                     ...form,
-                                                    values:{
+                                                    values: {
                                                         ...form.values,
                                                         products: productsArr
                                                     }
                                                 })
                                             }}
-                                        >
-                                            <DeleteIcon/>
-                                        </IconButton>
-                                    }
+                                        />
+                                        {form.values.products.length > 1 &&
+                                            <IconButton
+                                                size='large'
+                                                sx={{padding: '16px'}}
+                                                onClick={()=>{
+                                                    const productsArr = form.values.products
+                                                    productsArr.splice(index, 1)
+
+                                                    setForm({
+                                                        ...form,
+                                                        values:{
+                                                            ...form.values,
+                                                            products: productsArr
+                                                        }
+                                                    })
+                                                }}
+                                            >
+                                                <DeleteIcon/>
+                                            </IconButton>
+                                        }
+                                    </div>
+
                                 </div>
                             ))}
                         </div>

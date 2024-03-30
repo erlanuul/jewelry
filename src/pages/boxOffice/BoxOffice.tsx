@@ -80,6 +80,17 @@ export default function BoxOffice() {
                 </div>
             </div>
 
+            <div className='flex justify-start items-center gap-[20px] mb-[50px] pb-[10px]' style={{borderBottom: '2px solid #CED0D2'}}>
+                <div className='flex flex-col justify-start items-start gap-[10px]'>
+                    <p className='text-[#2A2826] text-[14px] font-[500]'>Наличные</p>
+                    <p className="text-[#2A2826] text-[20px] font-[600]">100 500 сом</p>
+                </div>
+                <div className='flex flex-col justify-start items-start gap-[10px]'>
+                    <p className='text-[#2A2826] text-[14px] font-[500]'>Безналичные</p>
+                    <p className="text-[#2A2826] text-[20px] font-[600]">100 500 сом</p>
+                </div>
+            </div>
+
             <div className='w-full flex justify-between items-center mb-[20px]'>
                 <div className='w-full flex items-center gap-[20px]'>
                     <FormControl sx={{minWidth: '120px'}}>

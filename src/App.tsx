@@ -21,6 +21,11 @@ import ExpenseRansom from "./pages/boxOffice/expense/ExpenseRansom";
 import ExpensePrepayment from "./pages/boxOffice/expense/ExpensePrepayment";
 import ExpenseOther from "./pages/boxOffice/expense/ExpenseOther";
 import ExpenseSalary from "./pages/boxOffice/expense/ExpenseSalary";
+import SalesReport from "./pages/sales/SalesReport";
+import SalesReportView from "./pages/sales/SalesReportView";
+import Defers from "./pages/defers/Defers";
+import DeferView from "./pages/defers/DeferView";
+import Inventory from "./pages/inventory/Inventory";
 
 function App() {
     return (
@@ -62,6 +67,17 @@ function App() {
                             <Route path='other' element={<ExpenseOther/>}/>
                             <Route path='salary' element={<ExpenseSalary/>}/>
                         </Route>
+                    </Route>
+                    <Route path='sales_reports/*'>
+                        <Route index element={<SalesReport/>}/>
+                        <Route path=':id' element={<SalesReportView/>}/>
+                    </Route>
+                    <Route path="defers/*">
+                        <Route index element={<Defers/>}/>
+                        <Route path=':id' element={<DeferView/>}/>
+                    </Route>
+                    <Route path="inventory_check/*">
+                        <Route index element={<Inventory/>}/>
                     </Route>
                 </Route>
 

@@ -134,8 +134,7 @@ export default function ClientsView() {
             <div className='w-full flex justify-between items-center mb-[57px]'>
                 <h1 className="text-[#2A2826] text-[42px] font-[800]">Просмотр информации клиента</h1>
             </div>
-            <div
-                className='w-full px-[30px] py-[20px] bg-white rounded-[10px] flex justify-start items-start gap-[30px] mb-[30px]'>
+            <div className='w-full px-[30px] py-[20px] bg-white rounded-[10px] flex justify-start items-start gap-[30px] mb-[30px]'>
                 <div className='w-[150px] h-[150px] bg-center bg-cover rounded-[10px] cursor-pointer'
                      style={{backgroundImage: `url(${modal.values.images.length > 0 ? modal.values.images[0].image : ''})`}}
                      onClick={() => {
@@ -170,7 +169,7 @@ export default function ClientsView() {
             <div
                 className=" px-[30px] py-[20px] bg-white rounded-[10px] flex justify-start items-start gap-[30px] mb-[60px]">
                 <div className='flex flex-col justify-center items-start gap-[10px]'>
-                    <p className='text-[#6E6C6A] text-[12px] font-[500]'>ФИО:</p>
+                    <p className='text-[#6E6C6A] text-[12px] font-[500]'>Примечание:</p>
                     <p className='text-[#2A2826] text-[16px] font-[500]'>{modal.values.note}</p>
                 </div>
             </div>

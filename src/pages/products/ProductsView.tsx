@@ -177,7 +177,7 @@ export default function ProductsView() {
                     </div>
                 </>
                 : product.error
-                    ? 'error'
+                    ? product.error.message
                     :
                     <>
                         <div className='w-full flex justify-between items-center mb-[57px]'>
