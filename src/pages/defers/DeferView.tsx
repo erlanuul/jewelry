@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Button, IconButton, Modal, Pagination, Skeleton} from "@mui/material";
+import {Button, IconButton, Modal, Skeleton} from "@mui/material";
 import {DataGrid} from "@mui/x-data-grid";
 import Slider from "react-slick";
 import 'slick-carousel/slick/slick.css';
@@ -11,35 +11,6 @@ import moment from "moment/moment";
 import RestoreIcon from '@mui/icons-material/Restore';
 
 const modalInitialValues = {
-    values: {
-        client: {
-            id: '',
-            full_name: '',
-            phone: '',
-            address: '',
-            solvency: '',
-            inn: '',
-            note: '',
-            images: [
-                {
-                    image: null,
-                },
-                {
-                    image: null
-                },
-                {
-                    image: null
-                },
-                {
-                    image: null
-                },
-            ]
-        }
-    },
-    validation: {
-        error: {},
-        message: {},
-    },
     open: false,
 }
 
@@ -228,7 +199,7 @@ export default function DeferView() {
                                     </h1>
                                     <div className='w-full rounded-[10px] mb-[90px]'>
                                         <DataGrid
-                                            rows={[...defer.result?.data.products]}
+                                            rows={[...defer.result?.data.payments.results]}
                                             columns={[
                                                 {field: 'id', headerName: 'ID', flex: 1},
                                                 {
@@ -239,39 +210,16 @@ export default function DeferView() {
                                                 },
                                                 {
                                                     field: 'created_at',
-                                                    headerName: 'Дата покупки',
+                                                    headerName: 'Дата выплаты',
                                                     flex: 1,
                                                     renderCell: (params: any) => moment(defer.result?.data.created_at).format('DD.MM.YY')
                                                 },
                                                 {
-                                                    field: 'end_date',
-                                                    headerName: 'Дата окончания',
+                                                    field: 'amount',
+                                                    headerName: 'Сумма',
                                                     flex: 1,
-                                                    renderCell: (params: any) => moment(defer.result?.data.end_date).format('DD.MM.YY')
                                                 },
-                                                {field: 'price', headerName: 'Сумма', flex: 1},
-                                                {
-                                                    field: 'remains',
-                                                    headerName: 'Остаток',
-                                                    flex: 1,
-                                                    renderCell: (params: any) => params.row.product?.remains
-                                                },
-                                                {
-                                                    field: 'actions',
-                                                    headerName: 'Действия',
-                                                    width: 120,
-                                                    renderCell: (params: any) => (
-                                                        <div className='w-full flex items-center justify-center'>
-                                                            <IconButton color="secondary" onClick={() => {
-                                                                navigate({
-                                                                    pathname: `/products/${params.row.product?.id}`
-                                                                })
-                                                            }}>
-                                                                <VisibilityIcon style={{color: "#B9B9B9"}}/>
-                                                            </IconButton>
-                                                        </div>
-                                                    )
-                                                },
+                                                {field: 'payment_type', headerName: 'Тип оплаты', flex: 1},
                                             ]}
                                             disableColumnFilter
                                             disableRowSelectionOnClick
@@ -294,10 +242,10 @@ export default function DeferView() {
                                                         <div
                                                             className='flex flex-col justify-start items-end gap-[5px]'>
                                                             <p className='text-[#2A2826] text-[14px] font-[500]'>
-                                                                Общая сумма долга
+                                                                Общая  сумма выплат
                                                             </p>
                                                             <p className='text-[#2A2826] text-[30px] font-[800]'>
-                                                                {defer.result?.data.total_remains} сом
+                                                                {defer.result?.data.payments.total_amount} сом
                                                             </p>
                                                         </div>
                                                     </div>
