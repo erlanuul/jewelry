@@ -92,7 +92,7 @@ export default function BoxOffice() {
             </div>
 
             <div className='w-full flex justify-between items-center mb-[20px]'>
-                <div className='w-full flex items-center gap-[20px]'>
+                <div className=' flex items-center gap-[20px]'>
                     <FormControl sx={{minWidth: '120px'}}>
                         <InputLabel>Тип операции</InputLabel>
                         <Select

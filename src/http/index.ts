@@ -26,7 +26,8 @@ $axios.interceptors.request.use(
                 (config.url?.includes('/clients/') && config.method === 'put') ||
                 (config.url?.includes('/products/') && config.method === 'post') ||
                 (config.url?.includes('/products/update/') && config.method === 'patch') ||
-                (config.url?.includes('/products/update/') && config.method === 'put')
+                (config.url?.includes('/products/update/') && config.method === 'put') ||
+                (config.url?.includes('/box-office/expense/ransom/') && config.method === 'post')
             ) {
                 config.headers["Content-Type"] = 'multipart/form-data'
             } else {

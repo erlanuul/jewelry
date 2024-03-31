@@ -13,6 +13,11 @@ export const SalaryService = {
             return await $axios.get(`/salary/${salary_id}/`);
         }, [salary_id])
     },
+    GetSalaryWithoutPagination(searchParamsObj: any) {
+        return useAsync(async () => {
+            return await $axios.get(`/salary/without-pagination/` + CreateSearchParams(searchParamsObj));
+        }, [CreateSearchParams(searchParamsObj)])
+    },
     async GetSalaryReportList(searchParamsObj: any) {
         return await $axios.get('/salary/get-report/' + CreateSearchParams(searchParamsObj))
     },

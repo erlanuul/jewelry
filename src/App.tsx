@@ -26,6 +26,7 @@ import SalesReportView from "./pages/sales/SalesReportView";
 import Defers from "./pages/defers/Defers";
 import DeferView from "./pages/defers/DeferView";
 import Inventory from "./pages/inventory/Inventory";
+import Steels from "./pages/steels/Steels";
 
 function App() {
     return (
@@ -78,6 +79,9 @@ function App() {
                     </Route>
                     <Route path="inventory_check/*">
                         <Route index element={<Inventory/>}/>
+                    </Route>
+                    <Route path="steels/*">
+                        <Route index element={<Steels/>}/>
                     </Route>
                 </Route>
 

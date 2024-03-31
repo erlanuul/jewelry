@@ -28,7 +28,7 @@ export const BoxOfficeService = {
             return await $axios.get(`/box-office/${transaction.operation_type}/${transaction.operation}/products/` + CreateSearchParams(searchParamsObj));
         }, [CreateSearchParams(searchParamsObj)])
     },
-    async CreateTransaction(transaction: any) {
-        return await $axios.post(`/box-office/${transaction.operation_type}/${transaction.operation}/`, transaction)
+    async CreateTransaction(transaction: any, form_data?: any) {
+        return await $axios.post(`/box-office/${transaction.operation_type}/${transaction.operation}/`, transaction.operation === 'ransom' ? form_data : transaction)
     },
 }
