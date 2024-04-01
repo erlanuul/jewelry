@@ -24,7 +24,7 @@ export const accessRules: any = {
             },
         },
     ],
-    "/steels": [
+    "/metals": [
         {
             position: "Frontend - разработчик",
             privileges: {
