@@ -31,4 +31,7 @@ export const BoxOfficeService = {
     async CreateTransaction(transaction: any, form_data?: any) {
         return await $axios.post(`/box-office/${transaction.operation_type}/${transaction.operation}/`, transaction.operation === 'ransom' ? form_data : transaction)
     },
+    async CreateWithDrawal(values: any) {
+        return await $axios.post(`/box-office/withdrawal/create/`, values)
+    },
 }

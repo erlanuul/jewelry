@@ -5,6 +5,7 @@ import {DataGrid} from "@mui/x-data-grid";
 import {useNavigate} from "react-router-dom";
 import {BoxOfficeService} from "../../services/BoxOfficeService";
 import moment from "moment/moment";
+import {AnalyticsService} from "../../services/AnalyticsService";
 
 const tableInitialValues = {
     rows: [],
@@ -28,7 +29,7 @@ export default function BoxOffice() {
             {field: 'created_at', headerName: 'Дата', flex: 1, renderCell: (params: any)=> moment(params.row.created_at).format('DD.MM.YY hh:mm')},
             {field: 'operation', headerName: 'Операция', flex: 1, renderCell: (params: any)=> params.row.operation?.name},
             {field: 'total_sum', headerName: 'Сумма', flex: 1},
-            {field: 'payment_type', headerName: 'Оплата', flex: 1, renderCell: (params: any)=> params.row.operation?.name},
+            {field: 'payment_type', headerName: 'Оплата', flex: 1, renderCell: (params: any)=> params.row.payment_type?.name},
             {field: 'note', headerName: 'Примечание', flex: 1},
         ],
     });
@@ -38,6 +39,7 @@ export default function BoxOffice() {
     const operations = BoxOfficeService.GetBoxOfficeOperations({
         operation_type__slug: table.filter.operation_type
     })
+    const analyticsFinance = AnalyticsService.GetAnalyticsFinance()
 
     useEffect(() => {
         if (!tableList.loading && !tableList.error) {
@@ -79,17 +81,19 @@ export default function BoxOffice() {
                     }
                 </div>
             </div>
-
-            <div className='flex justify-start items-center gap-[20px] mb-[50px] pb-[10px]' style={{borderBottom: '2px solid #CED0D2'}}>
-                <div className='flex flex-col justify-start items-start gap-[10px]'>
-                    <p className='text-[#2A2826] text-[14px] font-[500]'>Наличные</p>
-                    <p className="text-[#2A2826] text-[20px] font-[600]">100 500 сом</p>
+            {!analyticsFinance.loading && !analyticsFinance.error &&
+                <div className='flex justify-start items-center gap-[20px] mb-[50px] pb-[10px]'
+                     style={{borderBottom: '2px solid #CED0D2'}}>
+                    <div className='flex flex-col justify-start items-start gap-[10px]'>
+                        <p className='text-[#2A2826] text-[14px] font-[500]'>Наличные</p>
+                        <p className="text-[#2A2826] text-[20px] font-[600]">{analyticsFinance.result?.data.total_cash} сом</p>
+                    </div>
+                    <div className='flex flex-col justify-start items-start gap-[10px]'>
+                        <p className='text-[#2A2826] text-[14px] font-[500]'>Безналичные</p>
+                        <p className="text-[#2A2826] text-[20px] font-[600]">{analyticsFinance.result?.data.total_cashless} сом</p>
+                    </div>
                 </div>
-                <div className='flex flex-col justify-start items-start gap-[10px]'>
-                    <p className='text-[#2A2826] text-[14px] font-[500]'>Безналичные</p>
-                    <p className="text-[#2A2826] text-[20px] font-[600]">100 500 сом</p>
-                </div>
-            </div>
+            }
 
             <div className='w-full flex justify-between items-center mb-[20px]'>
                 <div className=' flex items-center gap-[20px]'>
