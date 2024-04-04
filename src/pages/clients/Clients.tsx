@@ -13,7 +13,12 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import {useNavigate} from "react-router-dom";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import {CustomFormControl, CustomTextField} from "../../helpers/muiCustomization";
+import {
+    CustomFormControl,
+    CustomRoundedButton,
+    CustomRoundedLoadingButton,
+    CustomTextField
+} from "../../helpers/muiCustomization";
 
 const modalInitialValues = {
     values: {
@@ -259,7 +264,7 @@ export default function Clients() {
             <div className='w-full flex justify-between items-center mb-[57px]'>
                 <h1 className="text-[#2A2826] text-[42px] font-[800]">Клиенты</h1>
 
-                <Button
+                <CustomRoundedButton
                     color='blue'
                     variant='contained'
                     type='submit'
@@ -273,7 +278,7 @@ export default function Clients() {
                     }}
                 >
                     Добавить клиента
-                </Button>
+                </CustomRoundedButton>
             </div>
 
             <div className='w-full rounded-[10px]'>
@@ -556,14 +561,14 @@ export default function Clients() {
                         }
 
                         <div className='w-full grid grid-cols-2 gap-[30px]'>
-                            <Button
+                            <CustomRoundedButton
                                 fullWidth
                                 variant='outlined'
                                 onClick={() => setModal(modalInitialValues)}
                             >
                                 Отменить
-                            </Button>
-                            <LoadingButton
+                            </CustomRoundedButton>
+                            <CustomRoundedLoadingButton
                                 fullWidth
                                 variant='contained'
                                 loading={modal.requested}
@@ -571,7 +576,7 @@ export default function Clients() {
                                 type='submit'
                             >
                                 Готово
-                            </LoadingButton>
+                            </CustomRoundedLoadingButton>
                         </div>
                     </form>
                     }

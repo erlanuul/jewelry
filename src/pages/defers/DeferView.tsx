@@ -9,6 +9,7 @@ import {DeferService} from "../../services/DeferService";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import moment from "moment/moment";
 import RestoreIcon from '@mui/icons-material/Restore';
+import {CustomRoundedButton} from "../../helpers/muiCustomization";
 
 const modalInitialValues = {
     open: false,
@@ -94,7 +95,7 @@ export default function DeferView() {
                         <div className='w-full flex justify-between items-center mb-[30px]'>
                             <h1 className="text-[#2A2826] text-[24px] font-[700]">Товары</h1>
 
-                            <Button
+                            <CustomRoundedButton
                                 color='blue'
                                 variant='contained'
                                 startIcon={<RestoreIcon/>}
@@ -107,7 +108,7 @@ export default function DeferView() {
                                 }}
                             >
                                 История выплат
-                            </Button>
+                            </CustomRoundedButton>
                         </div>
 
                         <div className='w-full rounded-[10px] mb-[90px]'>

@@ -11,7 +11,12 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import LabelIcon from '@mui/icons-material/Label';
 import Slider from "react-slick";
-import {CustomFormControl, CustomTextField} from "../../helpers/muiCustomization";
+import {
+    CustomFormControl,
+    CustomRoundedButton,
+    CustomRoundedLoadingButton,
+    CustomTextField
+} from "../../helpers/muiCustomization";
 
 const modalInitialValues = {
     values: {
@@ -184,7 +189,7 @@ export default function ProductsView() {
                             <h1 className="text-[#2A2826] text-[42px] font-[800]">Просмотр товара</h1>
 
                             <div className='flex items-center gap-[10px]'>
-                                <Button
+                                <CustomRoundedButton
                                     color='blue'
                                     variant='contained'
                                     type='button'
@@ -212,8 +217,8 @@ export default function ProductsView() {
                                     }}
                                 >
                                     Редактировать
-                                </Button>
-                                <Button
+                                </CustomRoundedButton>
+                                <CustomRoundedButton
                                     color='error'
                                     variant='contained'
                                     type='button'
@@ -232,7 +237,7 @@ export default function ProductsView() {
                                     }}
                                 >
                                     Удалить
-                                </Button>
+                                </CustomRoundedButton>
                             </div>
                         </div>
 
@@ -306,7 +311,7 @@ export default function ProductsView() {
                                         <div>{product.result?.data.used ? 'Да' : 'Нет'}</div>
                                     </div>
                                 </div>
-                                <Button
+                                <CustomRoundedButton
                                     color='blue'
                                     variant='contained'
                                     type='button'
@@ -316,7 +321,7 @@ export default function ProductsView() {
                                     }}
                                 >
                                     Распечатать наклейку
-                                </Button>
+                                </CustomRoundedButton>
                             </div>
                         </div>
                     </>
@@ -555,14 +560,14 @@ export default function ProductsView() {
                     }
 
                     <div className='w-full grid grid-cols-2 gap-[30px]'>
-                        <Button
+                        <CustomRoundedButton
                             fullWidth
                             variant='outlined'
                             onClick={() => setModal(modalInitialValues)}
                         >
                             Отменить
-                        </Button>
-                        <LoadingButton
+                        </CustomRoundedButton>
+                        <CustomRoundedLoadingButton
                             fullWidth
                             variant='contained'
                             loading={modal.requested}
@@ -570,7 +575,7 @@ export default function ProductsView() {
                             type='submit'
                         >
                             Готово
-                        </LoadingButton>
+                        </CustomRoundedLoadingButton>
                     </div>
                 </form>
             </Modal>

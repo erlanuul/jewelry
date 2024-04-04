@@ -7,7 +7,7 @@ import {checkModalResponse} from "../../../helpers/helpers";
 import {LoadingButton} from "@mui/lab";
 import ClientCard from "../../../components/ClientCard";
 import ClientAddModalButton from "../../../components/ClientAddModalButton";
-import {CustomTextField} from "../../../helpers/muiCustomization";
+import {CustomRoundedLoadingButton, CustomTextField} from "../../../helpers/muiCustomization";
 
 const formInitialValues = {
     values: {
@@ -242,7 +242,7 @@ export default function IncomePayment() {
                         </div>
                     </div>
 
-                    <LoadingButton
+                    <CustomRoundedLoadingButton
                         color='blue'
                         variant='contained'
                         type='submit'
@@ -251,7 +251,7 @@ export default function IncomePayment() {
                         disabled={form.requested}
                     >
                         Подтвердить
-                    </LoadingButton>
+                    </CustomRoundedLoadingButton>
                 </form>
 
                 {form.values.client_info !== null && <ClientCard clientInfo={form.values.client_info}/>}

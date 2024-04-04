@@ -5,7 +5,12 @@ import {Button, FormHelperText, InputLabel, MenuItem, Modal, Select} from "@mui/
 import InputMask from "react-input-mask";
 import {LoadingButton} from "@mui/lab";
 import AddIcon from "@mui/icons-material/Add";
-import {CustomFormControl, CustomTextField} from "../helpers/muiCustomization";
+import {
+    CustomFormControl,
+    CustomRoundedButton,
+    CustomRoundedLoadingButton,
+    CustomTextField
+} from "../helpers/muiCustomization";
 
 
 const clientModalInitialValues = {
@@ -88,7 +93,7 @@ export default function ClientAddModalButton() {
     };
     return (
         <>
-            <Button
+            <CustomRoundedButton
                 color='blue'
                 variant='contained'
                 startIcon={<AddIcon/>}
@@ -100,7 +105,7 @@ export default function ClientAddModalButton() {
                 }}
             >
                 Добавить клиента
-            </Button>
+            </CustomRoundedButton>
             <Modal open={clientModal.open} onClose={() => setClientModal(clientModalInitialValues)}>
                 <form onSubmit={handleClientFormSubmit} className='mainModal'>
                     <h1 className='text-[#2A2826] text-[24px] font-[700]'>
@@ -304,14 +309,14 @@ export default function ClientAddModalButton() {
                     </div>
 
                     <div className='w-full grid grid-cols-2 gap-[30px]'>
-                        <Button
+                        <CustomRoundedButton
                             fullWidth
                             variant='outlined'
                             onClick={() => setClientModal(clientModalInitialValues)}
                         >
                             Отменить
-                        </Button>
-                        <LoadingButton
+                        </CustomRoundedButton>
+                        <CustomRoundedLoadingButton
                             fullWidth
                             variant='contained'
                             loading={clientModal.requested}
@@ -319,7 +324,7 @@ export default function ClientAddModalButton() {
                             type='submit'
                         >
                             Готово
-                        </LoadingButton>
+                        </CustomRoundedLoadingButton>
                     </div>
                 </form>
             </Modal>

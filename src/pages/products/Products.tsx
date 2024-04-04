@@ -23,7 +23,12 @@ import 'slick-carousel/slick/slick-theme.css';
 import {useNavigate} from "react-router-dom";
 import {CategoryService} from "../../services/CategoryService";
 import VisibilityIcon from '@mui/icons-material/Visibility';
-import {CustomFormControl, CustomTextField} from "../../helpers/muiCustomization";
+import {
+    CustomFormControl,
+    CustomRoundedButton,
+    CustomRoundedLoadingButton,
+    CustomTextField
+} from "../../helpers/muiCustomization";
 
 const modalInitialValues = {
     values: {
@@ -284,11 +289,12 @@ export default function Products() {
     };
     return (
         <>
-            <div className='w-full flex justify-between items-center mb-[57px]'>
+            <div className='w-full flex justify-between items-end mb-[57px]'>
                 <h1 className="text-[#2A2826] text-[42px] font-[800]">Товары</h1>
 
-                <Button
+                <CustomRoundedButton
                     color='blue'
+                    size='large'
                     variant='contained'
                     type='submit'
                     startIcon={<AddIcon/>}
@@ -301,7 +307,7 @@ export default function Products() {
                     }}
                 >
                     Добавить товар
-                </Button>
+                </CustomRoundedButton>
             </div>
 
             <div className='w-full flex justify-between items-center mb-[20px]'>
@@ -680,14 +686,14 @@ export default function Products() {
                         }
 
                         <div className='w-full grid grid-cols-2 gap-[30px]'>
-                            <Button
+                            <CustomRoundedButton
                                 fullWidth
                                 variant='outlined'
                                 onClick={() => setModal(modalInitialValues)}
                             >
                                 Отменить
-                            </Button>
-                            <LoadingButton
+                            </CustomRoundedButton>
+                            <CustomRoundedLoadingButton
                                 fullWidth
                                 variant='contained'
                                 loading={modal.requested}
@@ -695,7 +701,7 @@ export default function Products() {
                                 type='submit'
                             >
                                 Готово
-                            </LoadingButton>
+                            </CustomRoundedLoadingButton>
                         </div>
                     </form>
                 }

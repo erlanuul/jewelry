@@ -21,7 +21,12 @@ import EditIcon from '@mui/icons-material/Edit';
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Visibility from "@mui/icons-material/Visibility";
 import InputMask from "react-input-mask";
-import {CustomFormControl, CustomTextField} from "../../helpers/muiCustomization";
+import {
+    CustomFormControl,
+    CustomRoundedButton,
+    CustomRoundedLoadingButton,
+    CustomTextField
+} from "../../helpers/muiCustomization";
 
 const modalInitialValues = {
     values: {
@@ -186,7 +191,7 @@ export default function Staffs() {
             <div className='w-full flex justify-between items-center mb-[57px]'>
                 <h1 className="text-[#2A2826] text-[42px] font-[800]">Сотрудники</h1>
 
-                <Button
+                <CustomRoundedButton
                     color='blue'
                     variant='contained'
                     type='submit'
@@ -200,7 +205,7 @@ export default function Staffs() {
                     }}
                 >
                     Добавить сотрудника
-                </Button>
+                </CustomRoundedButton>
             </div>
 
             <div className='w-full rounded-[10px] shadow-md'>
@@ -476,14 +481,14 @@ export default function Staffs() {
                     }
 
                     <div className='w-full grid grid-cols-2 gap-[30px]'>
-                        <Button
+                        <CustomRoundedButton
                             fullWidth
                             variant='outlined'
                             onClick={() => setModal(modalInitialValues)}
                         >
                             Отменить
-                        </Button>
-                        <LoadingButton
+                        </CustomRoundedButton>
+                        <CustomRoundedLoadingButton
                             fullWidth
                             variant='contained'
                             loading={modal.requested}
@@ -491,7 +496,7 @@ export default function Staffs() {
                             type='submit'
                         >
                             Готово
-                        </LoadingButton>
+                        </CustomRoundedLoadingButton>
                     </div>
                 </form>
             </Modal>

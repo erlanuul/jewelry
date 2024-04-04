@@ -11,7 +11,7 @@ import {useDispatch} from "react-redux";
 import {LoadingButton} from "@mui/lab";
 import InputMask from 'react-input-mask';
 import {login} from "../store/slices/userSlice";
-import {CustomTextField} from "../helpers/muiCustomization";
+import {CustomRoundedLoadingButton, CustomTextField} from "../helpers/muiCustomization";
 
 const formInitialState = {
     values:{
@@ -161,7 +161,7 @@ export default function Auth() {
                         />
                     </div>
                 </div>
-                <LoadingButton
+                <CustomRoundedLoadingButton
                     fullWidth
                     color='blue'
                     variant='contained'
@@ -170,7 +170,7 @@ export default function Auth() {
                     disabled={form.requested}
                 >
                     Войти
-                </LoadingButton>
+                </CustomRoundedLoadingButton>
             </form>
         </div>
     );

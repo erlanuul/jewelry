@@ -6,6 +6,7 @@ import {DataGrid} from "@mui/x-data-grid";
 import {LoadingButton} from "@mui/lab";
 import {InventoryService} from "../../services/InventoryService";
 import moment from "moment/moment";
+import {CustomRoundedLoadingButton} from "../../helpers/muiCustomization";
 
 const modalInitialValues = {
     values: {
@@ -238,7 +239,7 @@ export default function Inventory() {
                         >
                             Отменить
                         </Button>
-                        <LoadingButton
+                        <CustomRoundedLoadingButton
                             sx={{minWidth: '200px'}}
                             variant='contained'
                             loading={modal.requested}
@@ -246,7 +247,7 @@ export default function Inventory() {
                             type='submit'
                         >
                             Готово
-                        </LoadingButton>
+                        </CustomRoundedLoadingButton>
                     </div>
                 </form>
             </Modal>

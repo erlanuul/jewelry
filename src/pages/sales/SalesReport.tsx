@@ -7,9 +7,11 @@ import {SalesService} from "../../services/SalesService";
 import moment from "moment/moment";
 import SimCardDownloadIcon from '@mui/icons-material/SimCardDownload';
 import {LoadingButton} from "@mui/lab";
-import {CustomRoundedDatePicker} from "../../helpers/muiCustomization";
+import {CustomRoundedButton, CustomRoundedDatePicker, CustomRoundedLoadingButton} from "../../helpers/muiCustomization";
 import {checkModalResponse} from "../../helpers/helpers";
 import DownloadIcon from '@mui/icons-material/Download';
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import PopupState, {bindPopover, bindTrigger} from "material-ui-popup-state";
 
 const modalInitialValues = {
     values: {
@@ -45,10 +47,10 @@ export default function SalesReport() {
         columns: [
             {field: 'id', headerName: 'Номер продажи', flex: 1},
             {field: 'manager', headerName: 'Менеджер', flex: 1, renderCell: (params: any)=>
-                    params.row.manager.full_name
+                    params.row.manager?.full_name
             },
             {field: 'client', headerName: 'Клиент', flex: 1, renderCell: (params: any)=>
-                    params.row.client.full_name
+                    params.row.client?.full_name
             },
             {field: 'created_at', headerName: 'Дата', flex: 1, renderCell: (params: any)=>
                     moment(params.row.created_at).format('DD.MM.YY hh:mm')
@@ -134,83 +136,87 @@ export default function SalesReport() {
             <div className='w-full flex justify-between items-center mb-[57px]'>
                 <h1 className="text-[#2A2826] text-[42px] font-[800]">Отчет по продажам</h1>
 
-               <div>
-                   <Button
-                       aria-describedby={id}
-                       color='blue'
-                       variant='contained'
-                       startIcon={<SimCardDownloadIcon/>}
-                       onClick={handleClick}
-                   >
-                       Получить отчет
-                   </Button>
-                   <Popover
-                       id={id}
-                       open={open}
-                       anchorEl={anchorEl}
-                       onClose={handleClose}
-                       anchorOrigin={{
-                           vertical: 'bottom',
-                           horizontal: 'right',
-                       }}
-                   >
-                       <form onSubmit={handleFormSubmit} className='flex items-center gap-[20px] p-[20px] bg-white'>
-                           <div className='flex items-center gap-[14px]'>
-                               <p className='text-[#2A2826] text-[14px] font-[500]'>От</p>
-                               <CustomRoundedDatePicker
-                                   value={modal.values.date_from}
-                                   onChange={(newValue) => {
-                                       setModal({
-                                           ...modal,
-                                           values: {
-                                               ...modal.values,
-                                               date_from: newValue
-                                           }
-                                       })
-                                   }}
-                                   slotProps={{
-                                       textField: {
-                                           required: true,
-                                           size: 'small'
-                                       },
-                                   }}
-                               />
-                           </div>
-                           <div className='flex items-center gap-[14px]'>
-                               <p className='text-[#2A2826] text-[14px] font-[500]'>до</p>
-                               <CustomRoundedDatePicker
-                                   value={modal.values.date_to}
-                                   onChange={(newValue) => {
-                                       setModal({
-                                           ...modal,
-                                           values: {
-                                               ...modal.values,
-                                               date_to: newValue
-                                           }
-                                       })
-                                   }}
-                                   slotProps={{
-                                       textField: {
-                                           required: true,
-                                           size: 'small'
-                                       },
-                                   }}
-                               />
-                           </div>
+                <PopupState variant="popover" popupId="demo-popup-popover">
+                    {(popupState) => (
+                        <div>
+                            <CustomRoundedButton {...bindTrigger(popupState)}
+                                    color='blue'
+                                    variant='contained'
+                                    startIcon={<SimCardDownloadIcon/>}
+                            >
+                                Получить отчет
+                            </CustomRoundedButton>
+                            <Popover
+                                {...bindPopover(popupState)}
+                                anchorOrigin={{
+                                    vertical: 'bottom',
+                                    horizontal: 'left',
+                                }}
+                                transformOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'left',
+                                }}
+                            >
+                                <form onSubmit={handleFormSubmit}
+                                      className='flex items-center gap-[20px] p-[20px] bg-white'>
+                                    <div className='flex items-center gap-[14px]'>
+                                        <p className='text-[#2A2826] text-[14px] font-[500]'>От</p>
+                                        <CustomRoundedDatePicker
+                                            value={modal.values.date_from}
+                                            onChange={(newValue) => {
+                                                setModal({
+                                                    ...modal,
+                                                    values: {
+                                                        ...modal.values,
+                                                        date_from: newValue
+                                                    }
+                                                })
+                                            }}
+                                            slotProps={{
+                                                textField: {
+                                                    required: true,
+                                                    size: 'small'
+                                                },
+                                            }}
+                                        />
+                                    </div>
+                                    <div className='flex items-center gap-[14px]'>
+                                        <p className='text-[#2A2826] text-[14px] font-[500]'>до</p>
+                                        <CustomRoundedDatePicker
+                                            value={modal.values.date_to}
+                                            onChange={(newValue) => {
+                                                setModal({
+                                                    ...modal,
+                                                    values: {
+                                                        ...modal.values,
+                                                        date_to: newValue
+                                                    }
+                                                })
+                                            }}
+                                            slotProps={{
+                                                textField: {
+                                                    required: true,
+                                                    size: 'small'
+                                                },
+                                            }}
+                                        />
+                                    </div>
 
-                           <LoadingButton
-                               sx={{minWidth: '120px'}}
-                               variant='contained'
-                               size='small'
-                               type='submit'
-                               loading={modal.requested}
-                               disabled={modal.requested}
-                           >
-                               Готово
-                           </LoadingButton>
-                       </form>
-                   </Popover>
-               </div>
+                                    <CustomRoundedLoadingButton
+                                        sx={{minWidth: '120px'}}
+                                        variant='contained'
+                                        size='small'
+                                        type='submit'
+                                        loading={modal.requested}
+                                        disabled={modal.requested}
+                                    >
+                                        Готово
+                                    </CustomRoundedLoadingButton>
+                                </form>
+                            </Popover>
+                        </div>
+                    )}
+                </PopupState>
             </div>
 
             <div className='w-full rounded-[10px] shadow-md'>
@@ -247,7 +253,7 @@ export default function SalesReport() {
                                         className='w-[60px] px-[10px] py-[4px] rounded-[4px] bg-transparent'
                                         style={{border: '1px solid black'}}
                                         value={table.filter.limit}
-                                        onChange={(event)=>{
+                                        onChange={(event) => {
                                             setTable({
                                                 ...table,
                                                 filter:{
@@ -316,7 +322,7 @@ export default function SalesReport() {
                     </div>
 
                     <div className='w-full flex justify-center items-center'>
-                        <Button
+                        <CustomRoundedButton
                             sx={{minWidth: '200px'}}
                             startIcon={<DownloadIcon/>}
                             variant='contained'
@@ -325,7 +331,7 @@ export default function SalesReport() {
                             }}
                         >
                             Скачать
-                        </Button>
+                        </CustomRoundedButton>
                     </div>
                 </div>
             </Modal>

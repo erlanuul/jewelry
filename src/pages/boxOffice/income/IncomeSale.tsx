@@ -21,7 +21,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import ClientCard from "../../../components/ClientCard";
 import ClientAddModalButton from "../../../components/ClientAddModalButton";
 import {
-    CustomFormControl,
+    CustomFormControl, CustomRoundedLoadingButton,
     CustomTextField
 } from "../../../helpers/muiCustomization";
 
@@ -364,7 +364,7 @@ export default function IncomeSale() {
                         </p>
                     </div>
 
-                    <LoadingButton
+                    <CustomRoundedLoadingButton
                         color='blue'
                         variant='contained'
                         type='submit'
@@ -373,7 +373,7 @@ export default function IncomeSale() {
                         disabled={form.requested}
                     >
                         Подтвердить
-                    </LoadingButton>
+                    </CustomRoundedLoadingButton>
                 </form>
 
                 {form.values.client_info !== null && <ClientCard clientInfo={form.values.client_info}/>}

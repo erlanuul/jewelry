@@ -1,5 +1,6 @@
-import {createTheme, FormControl, outlinedInputClasses, Select, styled, TextField} from "@mui/material";
+import {Button, createTheme, FormControl, outlinedInputClasses, styled, TextField} from "@mui/material";
 import {DatePicker} from "@mui/x-date-pickers";
+import {LoadingButton} from "@mui/lab";
 
 declare module '@mui/material/styles' {
     interface Palette {
@@ -50,8 +51,6 @@ export const theme = createTheme({
             styleOverrides: {
                 root: {
                     textTransform: 'none',
-                    borderRadius: 100,
-                    height: 47
                 },
             },
         },
@@ -185,4 +184,13 @@ export const CustomRoundedDatePicker = styled(DatePicker)({
     '& .MuiInputBase-root': {
         borderRadius: 100,
     },
+});
+
+export const CustomRoundedButton = styled(Button)({
+    textTransform: 'none',
+    borderRadius: 100,
+});
+export const CustomRoundedLoadingButton = styled(LoadingButton)({
+    textTransform: 'none',
+    borderRadius: 100,
 });

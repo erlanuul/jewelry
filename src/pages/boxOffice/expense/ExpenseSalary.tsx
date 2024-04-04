@@ -5,7 +5,7 @@ import {Button, FormControl, FormHelperText, InputLabel, MenuItem, Select} from 
 import {StaffService} from "../../../services/StaffService";
 import {checkModalResponse} from "../../../helpers/helpers";
 import {LoadingButton} from "@mui/lab";
-import {CustomFormControl, CustomTextField} from "../../../helpers/muiCustomization";
+import {CustomFormControl, CustomRoundedLoadingButton, CustomTextField} from "../../../helpers/muiCustomization";
 import {SalaryService} from "../../../services/SalaryService";
 import AddIcon from "@mui/icons-material/Add";
 
@@ -240,7 +240,7 @@ export default function ExpenseSalary() {
                     </div>
                 </div>
 
-                <LoadingButton
+                <CustomRoundedLoadingButton
                     color='blue'
                     variant='contained'
                     type='submit'
@@ -249,7 +249,7 @@ export default function ExpenseSalary() {
                     disabled={form.requested}
                 >
                     Подтвердить
-                </LoadingButton>
+                </CustomRoundedLoadingButton>
             </form>
         </>
     );

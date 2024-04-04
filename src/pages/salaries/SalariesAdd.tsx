@@ -7,7 +7,7 @@ import {useNavigate} from "react-router-dom";
 import {SalaryService} from "../../services/SalaryService";
 import {DatePicker} from "@mui/x-date-pickers";
 import moment from "moment/moment";
-import {CustomRoundedDatePicker} from "../../helpers/muiCustomization";
+import {CustomRoundedButton, CustomRoundedDatePicker, CustomRoundedLoadingButton} from "../../helpers/muiCustomization";
 
 const formInitialValues = {
     values: {
@@ -145,7 +145,7 @@ export default function SalariesAdd() {
                         },
                     }}
                 />
-                <LoadingButton
+                <CustomRoundedLoadingButton
                     sx={{minWidth: '220px'}}
                     variant='contained'
                     color='black'
@@ -154,7 +154,7 @@ export default function SalariesAdd() {
                     type='submit'
                 >
                     Подтвердить
-                </LoadingButton>
+                </CustomRoundedLoadingButton>
             </form>
 
             <div className='w-full rounded-[10px] shadow-md mb-[30px]'>
@@ -172,14 +172,14 @@ export default function SalariesAdd() {
             </div>
 
             <div className='w-full flex justify-center items-center gap-[30px]'>
-                <Button
+                <CustomRoundedButton
                     sx={{minWidth: '220px'}}
                     variant='outlined'
                     onClick={() => navigate(-1)}
                 >
                     Отменить
-                </Button>
-                <LoadingButton
+                </CustomRoundedButton>
+                <CustomRoundedLoadingButton
                     sx={{minWidth: '220px'}}
                     variant='contained'
                     loading={form.requested}
@@ -188,7 +188,7 @@ export default function SalariesAdd() {
                     onClick={()=>handleSaveReport()}
                 >
                     Сохранить
-                </LoadingButton>
+                </CustomRoundedLoadingButton>
             </div>
         </>
     );

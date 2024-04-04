@@ -21,7 +21,12 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import ClientCard from "../../../components/ClientCard";
 import ClientAddModalButton from "../../../components/ClientAddModalButton";
 import moment from "moment";
-import {CustomDatePicker, CustomFormControl, CustomTextField} from "../../../helpers/muiCustomization";
+import {
+    CustomDatePicker,
+    CustomFormControl,
+    CustomRoundedLoadingButton,
+    CustomTextField
+} from "../../../helpers/muiCustomization";
 
 const formInitialValues = {
     values: {
@@ -408,7 +413,7 @@ export default function IncomeDefer() {
                         </p>
                     </div>
 
-                    <LoadingButton
+                    <CustomRoundedLoadingButton
                         color='blue'
                         variant='contained'
                         type='submit'
@@ -417,7 +422,7 @@ export default function IncomeDefer() {
                         disabled={form.requested}
                     >
                         Подтвердить
-                    </LoadingButton>
+                    </CustomRoundedLoadingButton>
                 </form>
 
                 {form.values.client_info !== null && <ClientCard clientInfo={form.values.client_info}/>}

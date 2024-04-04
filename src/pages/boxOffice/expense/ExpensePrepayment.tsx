@@ -5,7 +5,7 @@ import {FormControl, FormHelperText, InputLabel, MenuItem, Select} from "@mui/ma
 import {StaffService} from "../../../services/StaffService";
 import {checkModalResponse} from "../../../helpers/helpers";
 import {LoadingButton} from "@mui/lab";
-import {CustomFormControl, CustomTextField} from "../../../helpers/muiCustomization";
+import {CustomFormControl, CustomRoundedLoadingButton, CustomTextField} from "../../../helpers/muiCustomization";
 
 const formInitialValues = {
     values: {
@@ -200,7 +200,7 @@ export default function ExpensePrepayment() {
                     </div>
                 </div>
 
-                <LoadingButton
+                <CustomRoundedLoadingButton
                     color='blue'
                     variant='contained'
                     type='submit'
@@ -209,7 +209,7 @@ export default function ExpensePrepayment() {
                     disabled={form.requested}
                 >
                     Подтвердить
-                </LoadingButton>
+                </CustomRoundedLoadingButton>
             </form>
         </>
     );

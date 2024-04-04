@@ -6,6 +6,7 @@ import {useNavigate} from "react-router-dom";
 import {BoxOfficeService} from "../../services/BoxOfficeService";
 import moment from "moment/moment";
 import {AnalyticsService} from "../../services/AnalyticsService";
+import {CustomRoundedButton} from "../../helpers/muiCustomization";
 
 const tableInitialValues = {
     rows: [],
@@ -63,7 +64,7 @@ export default function BoxOffice() {
                 <div className='flex items-center gap-[20px]'>
                     {!operationTypes.loading && !operationTypes.error &&
                         operationTypes.result?.data.map((item: any, index: number) => (
-                            <Button
+                            <CustomRoundedButton
                                 key={index}
                                 color='blue'
                                 variant='contained'
@@ -76,7 +77,7 @@ export default function BoxOffice() {
                                 }}
                             >
                                 {item.name}
-                            </Button>
+                            </CustomRoundedButton>
                         ))
                     }
                 </div>

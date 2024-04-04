@@ -8,6 +8,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import {useNavigate} from "react-router-dom";
 import {SalaryService} from "../../services/SalaryService";
+import {CustomRoundedButton, CustomRoundedLoadingButton} from "../../helpers/muiCustomization";
 
 const modalInitialValues = {
     values: {
@@ -112,7 +113,7 @@ export default function Salaries() {
             <div className='w-full flex justify-between items-center mb-[57px]'>
                 <h1 className="text-[#2A2826] text-[42px] font-[800]">Зарплатная ведомость</h1>
 
-                <Button
+                <CustomRoundedButton
                     color='blue'
                     variant='contained'
                     type='submit'
@@ -124,7 +125,7 @@ export default function Salaries() {
                     }}
                 >
                     Добавить зарплатную ведомость
-                </Button>
+                </CustomRoundedButton>
             </div>
 
             <div className='w-full rounded-[10px] shadow-md'>
@@ -192,7 +193,7 @@ export default function Salaries() {
                         >
                             Отменить
                         </Button>
-                        <LoadingButton
+                        <CustomRoundedLoadingButton
                             fullWidth
                             variant='contained'
                             loading={modal.requested}
@@ -200,7 +201,7 @@ export default function Salaries() {
                             type='submit'
                         >
                             Готово
-                        </LoadingButton>
+                        </CustomRoundedLoadingButton>
                     </div>
                 </form>
             </Modal>
