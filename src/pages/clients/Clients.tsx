@@ -1,10 +1,9 @@
 import React, {FormEvent, useEffect, useState} from 'react';
-import {Button, FormHelperText, IconButton, InputLabel, MenuItem, Modal, Pagination, Select} from "@mui/material";
+import {FormHelperText, IconButton, InputLabel, MenuItem, Modal, Pagination, Select} from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 import {ClientService} from "../../services/ClientService";
 import {checkModalResponse, convertImageUrlToFile, ImageImport, ImageImportButton} from "../../helpers/helpers";
 import {DataGrid} from "@mui/x-data-grid";
-import {LoadingButton} from "@mui/lab";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from '@mui/icons-material/Edit';
 import InputMask from "react-input-mask";
@@ -265,7 +264,6 @@ export default function Clients() {
                 <h1 className="text-[#2A2826] text-[42px] font-[800]">Клиенты</h1>
 
                 <CustomRoundedButton
-                    color='blue'
                     variant='contained'
                     type='submit'
                     startIcon={<AddIcon/>}

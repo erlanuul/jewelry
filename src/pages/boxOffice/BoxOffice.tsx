@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Button, FormControl, InputLabel, MenuItem, Pagination, Select, TextField} from "@mui/material";
+import {FormControl, InputLabel, MenuItem, Pagination, Select, TextField} from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 import {DataGrid} from "@mui/x-data-grid";
 import {useNavigate} from "react-router-dom";
@@ -66,7 +66,6 @@ export default function BoxOffice() {
                         operationTypes.result?.data.map((item: any, index: number) => (
                             <CustomRoundedButton
                                 key={index}
-                                color='blue'
                                 variant='contained'
                                 type='submit'
                                 startIcon={<AddIcon/>}
@@ -98,7 +97,7 @@ export default function BoxOffice() {
 
             <div className='w-full flex justify-between items-center mb-[20px]'>
                 <div className=' flex items-center gap-[20px]'>
-                    <FormControl sx={{minWidth: '120px'}}>
+                    <FormControl size='small' sx={{minWidth: '150px'}}>
                         <InputLabel>Тип операции</InputLabel>
                         <Select
                             sx={{borderRadius: 100}}
@@ -124,7 +123,7 @@ export default function BoxOffice() {
                         </Select>
                     </FormControl>
 
-                    <FormControl sx={{minWidth: '120px'}}>
+                    <FormControl size='small' sx={{minWidth: '120px'}}>
                         <InputLabel>Операции</InputLabel>
                         <Select
                             sx={{borderRadius: 100}}
@@ -158,6 +157,7 @@ export default function BoxOffice() {
                             borderRadius: '100px',
                         },
                     }}
+                    size='small'
                     placeholder='Поиск'
                     required
                     value={table.filter.search}

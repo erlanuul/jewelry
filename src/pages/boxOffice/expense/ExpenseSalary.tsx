@@ -1,13 +1,12 @@
 import React, {FormEvent, useState} from 'react';
 import {BoxOfficeService} from "../../../services/BoxOfficeService";
 import {useNavigate} from "react-router-dom";
-import {Button, FormControl, FormHelperText, InputLabel, MenuItem, Select} from "@mui/material";
+import {FormControl, FormHelperText, InputLabel, MenuItem, Select} from "@mui/material";
 import {StaffService} from "../../../services/StaffService";
 import {checkModalResponse} from "../../../helpers/helpers";
-import {LoadingButton} from "@mui/lab";
 import {CustomFormControl, CustomRoundedLoadingButton, CustomTextField} from "../../../helpers/muiCustomization";
 import {SalaryService} from "../../../services/SalaryService";
-import AddIcon from "@mui/icons-material/Add";
+import BoxOfficeFilterButtons from "../../../components/BoxOfficeFilterButtons";
 
 const formInitialValues = {
     values: {
@@ -75,21 +74,12 @@ export default function ExpenseSalary() {
                 <div
                     className='w-full p-[20px] bg-white rounded-[10px] shadow-md flex flex-col justify-start items-start mb-[40px]'>
 
-                    <div className='rounded-[100px] bg-[#F4F5F7] flex items-center mb-[40px]'>
-                        {!operations.loading && !operations.error && operations.result?.data.map((item: any, index: number) => (
-                            <div
-                                key={index}
-                                className={`px-[20px] py-[8px] rounded-[100px] text-[12px] font-[500] cursor-pointer hover:bg-[#576ED0] hover:text-white ${item.slug === form.values.operation ? 'text-white bg-[#576ED0]' : ' text-[#292929]'}`}
-                                onClick={() => {
-                                    navigate({
-                                        pathname: `/box_office/${form.values.operation_type}${item.slug === 'ransom' ? '' : `/${item.slug}`}`
-                                    })
-                                }}
-                            >
-                                {item.name}
-                            </div>
-                        ))}
-                    </div>
+                    <BoxOfficeFilterButtons
+                        operationsArr={operations}
+                        operationType={form.values.operation_type}
+                        operation={form.values.operation}
+                        initialPage={'ransom'}
+                    />
 
                     <div className='w-full flex flex-col justify-start items-start gap-[20px]'>
                         <div className="w-full grid grid-cols-2 gap-[30px] mb-[60px]">
@@ -241,7 +231,6 @@ export default function ExpenseSalary() {
                 </div>
 
                 <CustomRoundedLoadingButton
-                    color='blue'
                     variant='contained'
                     type='submit'
                     sx={{minWidth: 250}}

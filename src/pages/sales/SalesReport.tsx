@@ -1,16 +1,14 @@
 import React, {FormEvent, useEffect, useState} from 'react';
-import {Button, IconButton, Modal, Pagination, Popover} from "@mui/material";
+import {IconButton, Modal, Pagination, Popover} from "@mui/material";
 import {DataGrid} from "@mui/x-data-grid";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import {useNavigate} from "react-router-dom";
 import {SalesService} from "../../services/SalesService";
 import moment from "moment/moment";
 import SimCardDownloadIcon from '@mui/icons-material/SimCardDownload';
-import {LoadingButton} from "@mui/lab";
 import {CustomRoundedButton, CustomRoundedDatePicker, CustomRoundedLoadingButton} from "../../helpers/muiCustomization";
 import {checkModalResponse} from "../../helpers/helpers";
 import DownloadIcon from '@mui/icons-material/Download';
-import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import PopupState, {bindPopover, bindTrigger} from "material-ui-popup-state";
 
 const modalInitialValues = {
@@ -117,20 +115,6 @@ export default function SalesReport() {
         }
     }, [tableList.loading, tableList.error, tableList.result?.data]);
 
-
-
-    const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
-
-    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-        setAnchorEl(event.currentTarget);
-    };
-
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
-
-    const open = Boolean(anchorEl);
-    const id = open ? 'simple-popover' : undefined;
     return (
         <>
             <div className='w-full flex justify-between items-center mb-[57px]'>
@@ -140,7 +124,6 @@ export default function SalesReport() {
                     {(popupState) => (
                         <div>
                             <CustomRoundedButton {...bindTrigger(popupState)}
-                                    color='blue'
                                     variant='contained'
                                     startIcon={<SimCardDownloadIcon/>}
                             >
@@ -205,7 +188,6 @@ export default function SalesReport() {
                                     <CustomRoundedLoadingButton
                                         sx={{minWidth: '120px'}}
                                         variant='contained'
-                                        size='small'
                                         type='submit'
                                         loading={modal.requested}
                                         disabled={modal.requested}

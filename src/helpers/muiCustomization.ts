@@ -4,13 +4,11 @@ import {LoadingButton} from "@mui/lab";
 
 declare module '@mui/material/styles' {
     interface Palette {
-        blue: Palette['primary'];
         gray: Palette['primary'];
         black: Palette['primary'];
     }
 
     interface PaletteOptions {
-        blue?: PaletteOptions['primary'];
         gray?: PaletteOptions['primary'];
         black?: PaletteOptions['primary'];
     }
@@ -18,7 +16,6 @@ declare module '@mui/material/styles' {
 
 declare module '@mui/material/Button' {
     interface ButtonPropsColorOverrides {
-        blue: true;
         gray: true;
         black: true;
     }
@@ -26,12 +23,6 @@ declare module '@mui/material/Button' {
 
 export const theme = createTheme({
     palette: {
-        blue: {
-            main: '#576ED0',
-            light: 'rgba(87,110,208,0.88)',
-            dark: '#5069ce',
-            contrastText: '#FFF',
-        },
         gray: {
             main: '#6E6C6A',
             light: '#CED0D2',

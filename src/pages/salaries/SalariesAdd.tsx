@@ -1,11 +1,8 @@
 import React, {FormEvent, useState} from 'react';
-import {Button, TextField} from "@mui/material";
 import {checkModalResponse} from "../../helpers/helpers";
 import {DataGrid} from "@mui/x-data-grid";
-import {LoadingButton} from "@mui/lab";
 import {useNavigate} from "react-router-dom";
 import {SalaryService} from "../../services/SalaryService";
-import {DatePicker} from "@mui/x-date-pickers";
 import moment from "moment/moment";
 import {CustomRoundedButton, CustomRoundedDatePicker, CustomRoundedLoadingButton} from "../../helpers/muiCustomization";
 
@@ -123,7 +120,8 @@ export default function SalariesAdd() {
                     }}
                     slotProps={{
                         textField: {
-                            required: true
+                            required: true,
+                            size:'small'
                         },
                     }}
                 />
@@ -142,13 +140,13 @@ export default function SalariesAdd() {
                     slotProps={{
                         textField: {
                             required: true,
+                            size:'small'
                         },
                     }}
                 />
                 <CustomRoundedLoadingButton
                     sx={{minWidth: '220px'}}
                     variant='contained'
-                    color='black'
                     loading={form.requested}
                     disabled={form.requested}
                     type='submit'

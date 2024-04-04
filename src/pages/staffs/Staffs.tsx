@@ -1,6 +1,5 @@
 import React, {FormEvent, useEffect, useState} from 'react';
 import {
-    Button,
     FormHelperText,
     IconButton,
     InputAdornment,
@@ -14,7 +13,6 @@ import AddIcon from '@mui/icons-material/Add';
 import {StaffService} from "../../services/StaffService";
 import {checkModalResponse} from "../../helpers/helpers";
 import {DataGrid} from "@mui/x-data-grid";
-import {LoadingButton} from "@mui/lab";
 import {PositionsService} from "../../services/PositionsService";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from '@mui/icons-material/Edit';
@@ -192,7 +190,6 @@ export default function Staffs() {
                 <h1 className="text-[#2A2826] text-[42px] font-[800]">Сотрудники</h1>
 
                 <CustomRoundedButton
-                    color='blue'
                     variant='contained'
                     type='submit'
                     startIcon={<AddIcon/>}
@@ -242,10 +239,10 @@ export default function Staffs() {
                                         className='w-[60px] px-[10px] py-[4px] rounded-[4px] bg-transparent'
                                         style={{border: '1px solid black'}}
                                         value={table.filter.limit}
-                                        onChange={(event)=>{
+                                        onChange={(event) => {
                                             setTable({
                                                 ...table,
-                                                filter:{
+                                                filter: {
                                                     ...table.filter,
                                                     limit: event.target.value
                                                 }

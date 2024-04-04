@@ -1,6 +1,5 @@
 import React, {FormEvent, useEffect, useState} from 'react';
 import {
-    Button,
     FormControl,
     FormHelperText,
     IconButton,
@@ -8,13 +7,13 @@ import {
     MenuItem,
     Modal,
     Pagination,
-    Select, TextField
+    Select,
+    TextField
 } from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 import {ProductService} from "../../services/ProductService";
 import {checkModalResponse, convertImageUrlToFile, ImageImport, ImageImportButton} from "../../helpers/helpers";
 import {DataGrid} from "@mui/x-data-grid";
-import {LoadingButton} from "@mui/lab";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from '@mui/icons-material/Edit';
 import Slider from "react-slick";
@@ -293,7 +292,6 @@ export default function Products() {
                 <h1 className="text-[#2A2826] text-[42px] font-[800]">Товары</h1>
 
                 <CustomRoundedButton
-                    color='blue'
                     size='large'
                     variant='contained'
                     type='submit'
@@ -312,7 +310,7 @@ export default function Products() {
 
             <div className='w-full flex justify-between items-center mb-[20px]'>
                 <div className='flex items-center gap-[20px]'>
-                    <FormControl sx={{minWidth: '120px'}}>
+                    <FormControl size='small' sx={{minWidth: '120px'}}>
                         <InputLabel>Категория</InputLabel>
                         <Select
                             sx={{borderRadius: 100}}
@@ -337,7 +335,7 @@ export default function Products() {
                             }
                         </Select>
                     </FormControl>
-                    <FormControl sx={{minWidth: '120px'}}>
+                    <FormControl size='small' sx={{minWidth: '120px'}}>
                         <InputLabel>Наличие</InputLabel>
                         <Select
                             sx={{borderRadius: 100}}
@@ -367,6 +365,7 @@ export default function Products() {
                             borderRadius: '100px',
                         },
                     }}
+                    size='small'
                     placeholder='Поиск'
                     required
                     value={table.filter.search}

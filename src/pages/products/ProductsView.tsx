@@ -1,11 +1,10 @@
 import React, {FormEvent, useState} from 'react';
-import {Button, FormHelperText, InputLabel, MenuItem, Modal, Skeleton, Select} from "@mui/material";
+import {FormHelperText, InputLabel, MenuItem, Modal, Select, Skeleton} from "@mui/material";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import {useNavigate, useParams} from "react-router-dom";
 import {ProductService} from "../../services/ProductService";
 import {checkModalResponse, convertImageUrlToFile, ImageImport, ImageImportButton} from "../../helpers/helpers";
-import {LoadingButton} from "@mui/lab";
 import {CategoryService} from "../../services/CategoryService";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -190,7 +189,6 @@ export default function ProductsView() {
 
                             <div className='flex items-center gap-[10px]'>
                                 <CustomRoundedButton
-                                    color='blue'
                                     variant='contained'
                                     type='button'
                                     startIcon={<EditIcon/>}
@@ -312,7 +310,6 @@ export default function ProductsView() {
                                     </div>
                                 </div>
                                 <CustomRoundedButton
-                                    color='blue'
                                     variant='contained'
                                     type='button'
                                     startIcon={<LabelIcon/>}

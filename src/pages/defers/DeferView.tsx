@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Button, IconButton, Modal, Skeleton} from "@mui/material";
+import {IconButton, Modal, Skeleton} from "@mui/material";
 import {DataGrid} from "@mui/x-data-grid";
 import Slider from "react-slick";
 import 'slick-carousel/slick/slick.css';
@@ -96,7 +96,6 @@ export default function DeferView() {
                             <h1 className="text-[#2A2826] text-[24px] font-[700]">Товары</h1>
 
                             <CustomRoundedButton
-                                color='blue'
                                 variant='contained'
                                 startIcon={<RestoreIcon/>}
                                 onClick={() => {

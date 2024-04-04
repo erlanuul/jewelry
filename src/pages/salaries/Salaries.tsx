@@ -1,9 +1,8 @@
 import React, {FormEvent, useEffect, useState} from 'react';
-import {Button, IconButton, Modal, Pagination} from "@mui/material";
+import {IconButton, Modal, Pagination} from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 import {checkModalResponse} from "../../helpers/helpers";
 import {DataGrid} from "@mui/x-data-grid";
-import {LoadingButton} from "@mui/lab";
 import DeleteIcon from "@mui/icons-material/Delete";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import {useNavigate} from "react-router-dom";
@@ -114,7 +113,6 @@ export default function Salaries() {
                 <h1 className="text-[#2A2826] text-[42px] font-[800]">Зарплатная ведомость</h1>
 
                 <CustomRoundedButton
-                    color='blue'
                     variant='contained'
                     type='submit'
                     startIcon={<AddIcon/>}
@@ -186,13 +184,13 @@ export default function Salaries() {
                     </h1>
 
                     <div className='w-full grid grid-cols-2 gap-[30px]'>
-                        <Button
+                        <CustomRoundedButton
                             fullWidth
                             variant='outlined'
                             onClick={() => setModal(modalInitialValues)}
                         >
                             Отменить
-                        </Button>
+                        </CustomRoundedButton>
                         <CustomRoundedLoadingButton
                             fullWidth
                             variant='contained'

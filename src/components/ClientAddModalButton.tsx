@@ -1,9 +1,8 @@
 import React, {FormEvent, useState} from 'react';
 import {ClientService} from "../services/ClientService";
 import {checkModalResponse, ImageImport, ImageImportButton} from "../helpers/helpers";
-import {Button, FormHelperText, InputLabel, MenuItem, Modal, Select} from "@mui/material";
+import {FormHelperText, InputLabel, MenuItem, Modal, Select} from "@mui/material";
 import InputMask from "react-input-mask";
-import {LoadingButton} from "@mui/lab";
 import AddIcon from "@mui/icons-material/Add";
 import {
     CustomFormControl,
@@ -94,7 +93,6 @@ export default function ClientAddModalButton() {
     return (
         <>
             <CustomRoundedButton
-                color='blue'
                 variant='contained'
                 startIcon={<AddIcon/>}
                 onClick={() => {

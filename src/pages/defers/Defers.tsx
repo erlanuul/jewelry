@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import {IconButton, Pagination} from "@mui/material";
-import {ClientService} from "../../services/ClientService";
 import {DataGrid} from "@mui/x-data-grid";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';

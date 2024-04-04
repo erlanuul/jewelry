@@ -1,12 +1,11 @@
 import React, {FormEvent, useEffect, useState} from 'react';
-import {Button, Modal, Pagination} from "@mui/material";
+import {Modal, Pagination} from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 import {checkModalResponse} from "../../helpers/helpers";
 import {DataGrid} from "@mui/x-data-grid";
-import {LoadingButton} from "@mui/lab";
 import {InventoryService} from "../../services/InventoryService";
 import moment from "moment/moment";
-import {CustomRoundedLoadingButton} from "../../helpers/muiCustomization";
+import {CustomRoundedButton, CustomRoundedLoadingButton} from "../../helpers/muiCustomization";
 
 const modalInitialValues = {
     values: {
@@ -103,8 +102,7 @@ export default function Inventory() {
             <div className='w-full flex justify-between items-center mb-[57px]'>
                 <h1 className="text-[#2A2826] text-[42px] font-[800]">Инвентаризация</h1>
 
-                <Button
-                    color='blue'
+                <CustomRoundedButton
                     variant='contained'
                     type='submit'
                     startIcon={<AddIcon/>}
@@ -116,7 +114,7 @@ export default function Inventory() {
                     }}
                 >
                     Добавить инвентаризацию
-                </Button>
+                </CustomRoundedButton>
             </div>
 
             <div className='w-full rounded-[10px] shadow-md'>
@@ -229,7 +227,7 @@ export default function Inventory() {
                         </div>
                     </div>
                     <div className='w-full flex justify-center items-center gap-[30px]'>
-                        <Button
+                        <CustomRoundedButton
                             sx={{minWidth: '200px'}}
                             variant='outlined'
                             onClick={() => {
@@ -238,7 +236,7 @@ export default function Inventory() {
                             }}
                         >
                             Отменить
-                        </Button>
+                        </CustomRoundedButton>
                         <CustomRoundedLoadingButton
                             sx={{minWidth: '200px'}}
                             variant='contained'

@@ -15,15 +15,12 @@ import {StaffService} from "../../../services/StaffService";
 import {ClientService} from "../../../services/ClientService";
 import {checkModalResponse} from "../../../helpers/helpers";
 import AddIcon from "@mui/icons-material/Add";
-import {LoadingButton} from "@mui/lab";
 import {ProductService} from "../../../services/ProductService";
 import DeleteIcon from '@mui/icons-material/Delete';
 import ClientCard from "../../../components/ClientCard";
 import ClientAddModalButton from "../../../components/ClientAddModalButton";
-import {
-    CustomFormControl, CustomRoundedLoadingButton,
-    CustomTextField
-} from "../../../helpers/muiCustomization";
+import {CustomFormControl, CustomRoundedLoadingButton, CustomTextField} from "../../../helpers/muiCustomization";
+import BoxOfficeFilterButtons from "../../../components/BoxOfficeFilterButtons";
 
 const formInitialValues = {
     values: {
@@ -133,21 +130,13 @@ export default function IncomeSale() {
             <div className='w-full flex justify-between items-start gap-[20px]'>
                 <form onSubmit={handleFormSubmit} className='w-full flex flex-col justify-start items-center'>
                     <div className='w-full p-[20px] bg-white rounded-[10px] shadow-md flex flex-col justify-start items-start mb-[40px]'>
-                        <div className='rounded-[100px] bg-[#F4F5F7] flex items-center mb-[40px]'>
-                            {!operations.loading && !operations.error && operations.result?.data.map((item: any, index: number) => (
-                                <div
-                                    key={index}
-                                    className={`px-[20px] py-[8px] rounded-[100px] text-[12px] font-[500] cursor-pointer hover:bg-[#576ED0] hover:text-white ${item.slug === form.values.operation ? 'text-white bg-[#576ED0]' : ' text-[#292929]'}`}
-                                    onClick={()=>{
-                                        navigate({
-                                            pathname: `/box_office/${form.values.operation_type}${item.slug === 'sale' ? '' : `/${item.slug}` }`
-                                        })
-                                    }}
-                                >
-                                    {item.name}
-                                </div>
-                            ))}
-                        </div>
+
+                        <BoxOfficeFilterButtons
+                            operationsArr={operations}
+                            operationType={form.values.operation_type}
+                            operation={form.values.operation}
+                            initialPage={'sale'}
+                        />
 
                         <div className='w-full flex flex-col justify-start items-start gap-[20px] mb-[60px]'>
                             <div className="w-full grid grid-cols-2 gap-[20px]">
@@ -365,7 +354,6 @@ export default function IncomeSale() {
                     </div>
 
                     <CustomRoundedLoadingButton
-                        color='blue'
                         variant='contained'
                         type='submit'
                         sx={{minWidth: 250}}

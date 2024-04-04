@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {BoxOfficeService} from "../../../services/BoxOfficeService";
 import {useNavigate} from "react-router-dom";
+import BoxOfficeFilterButtons from "../../../components/BoxOfficeFilterButtons";
 
 const formInitialValues = {
     values:{
@@ -34,21 +35,13 @@ export default function IncomeInterchange() {
             <div className='w-full flex justify-between items-start gap-[20px]'>
                 <div className='flex flex-col justify-start items-center'>
                     <div className='w-full p-[30px] bg-white rounded-[10px] flex flex-col justify-start items-start'>
-                        <div className='rounded-[100px] bg-[#F4F5F7] flex items-center'>
-                            {!operations.loading && !operations.error && operations.result?.data.map((item: any, index: number) => (
-                                <div
-                                    key={index}
-                                    className={`px-[20px] py-[8px] rounded-[100px] text-[12px] font-[500] cursor-pointer hover:bg-[#576ED0] hover:text-white ${item.slug === form.values.operation ? 'text-white bg-[#576ED0]' : ' text-[#292929]'}`}
-                                    onClick={() => {
-                                        navigate({
-                                            pathname: `/box_office/${form.values.operation_type}${item.slug === 'sale' ? '' : `/${item.slug}` }`
-                                        })
-                                    }}
-                                >
-                                    {item.name}
-                                </div>
-                            ))}
-                        </div>
+
+                        <BoxOfficeFilterButtons
+                            operationsArr={operations}
+                            operationType={form.values.operation_type}
+                            operation={form.values.operation}
+                            initialPage={'sale'}
+                        />
                     </div>
                 </div>
             </div>

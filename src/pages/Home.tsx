@@ -1,6 +1,6 @@
 import React, {FormEvent, useState} from 'react';
 import {AnalyticsService} from "../services/AnalyticsService";
-import {Button, ListItemText, MenuItem, MenuList, Modal, Popover, Skeleton} from "@mui/material";
+import {Button, Modal, Popover, Skeleton} from "@mui/material";
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import CreditCardIcon from '@mui/icons-material/CreditCard';
 import {
@@ -141,9 +141,9 @@ export default function Home() {
                     ? analyticsFinance.error.message
                     :
                     <div className="w-full flex justify-start items-start gap-[20px] mb-[80px]">
-                        {[...analyticsFinance.result?.data.finance].filter((item: any) => !item.cashless).map((index: number) => (
+                        {[...analyticsFinance.result?.data.finance].filter((item: any) => !item.cashless).map((item: any, index: number) => (
                             <div
-                                className="p-[14px] rounded-[10px] bg-white min-h-[238px] flex flex-col justify-between items-center shadow-md"
+                                className="p-[14px] rounded-[10px] bg-white min-h-[221px] flex flex-col justify-between items-start shadow-md"
                                 key={index}>
                                 <div className="w-full flex justify-between items-center gap-[20px] pb-[10px]"
                                      style={{borderBottom: '1px solid #576ED0'}}
@@ -158,6 +158,18 @@ export default function Home() {
                                     variant='contained'
                                     size='small'
                                     startIcon={<AccountBalanceWalletIcon/>}
+                                    onClick={() => {
+                                        setModal({
+                                            ...modalInitialValues,
+                                            open: true,
+                                            values: {
+                                                ...modalInitialValues.values,
+                                                finance_id: item.id,
+                                                name: item.name,
+                                                total_sum: item.total_sum,
+                                            }
+                                        })
+                                    }}
                                 >
                                     Снять
                                 </CustomRoundedButton>
@@ -173,8 +185,7 @@ export default function Home() {
                             </div>
                             <div className="w-full grid grid-cols-3 gap-[70px]">
                                 {[...analyticsFinance.result?.data.finance].filter((item: any) => item.cashless).map((item: any, index: number) => (
-                                    <div className=" flex flex-col justify-between items-start gap-[16px]"
-                                         key={index}>
+                                    <div className=" flex flex-col justify-between items-start gap-[16px]" key={index}>
                                         <div className="w-full flex flex-col justify-start items-start gap-[10px]">
                                             <p className="text-[#2A2826] text-[16px] font-[600]">{item.name} (сом)</p>
                                             <p className="text-[#3E3C3A text-[24px] font-[700]">{item.total_sum}</p>
@@ -776,7 +787,14 @@ export default function Home() {
                         </div>
                     </div>
 
-                    <div className='w-1/2'>
+                    <div className='w-full flex items-center gap-[20px]'>
+                        <CustomRoundedButton
+                            fullWidth
+                            variant='outlined'
+                            onClick={()=>setModal(modalInitialValues)}
+                        >
+                            Отменить
+                        </CustomRoundedButton>
                         <CustomRoundedLoadingButton
                             fullWidth
                             variant='contained'

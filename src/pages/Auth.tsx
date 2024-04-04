@@ -163,7 +163,6 @@ export default function Auth() {
                 </div>
                 <CustomRoundedLoadingButton
                     fullWidth
-                    color='blue'
                     variant='contained'
                     type='submit'
                     loading={form.requested}
