@@ -161,6 +161,7 @@ export default function SalesReport() {
                                                     size: 'small'
                                                 },
                                             }}
+                                            sx={{width: 170}}
                                         />
                                     </div>
                                     <div className='flex items-center gap-[14px]'>
@@ -182,6 +183,7 @@ export default function SalesReport() {
                                                     size: 'small'
                                                 },
                                             }}
+                                            sx={{width: 170}}
                                         />
                                     </div>
 

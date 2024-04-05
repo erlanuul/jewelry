@@ -7,7 +7,8 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import {useNavigate} from "react-router-dom";
 import {SalaryService} from "../../services/SalaryService";
-import {CustomRoundedButton, CustomRoundedLoadingButton} from "../../helpers/muiCustomization";
+import {CustomRoundedButton, CustomRoundedDatePicker, CustomRoundedLoadingButton} from "../../helpers/muiCustomization";
+import moment from "moment";
 
 const modalInitialValues = {
     values: {
@@ -30,6 +31,8 @@ const tableInitialValues = {
         page: 1,
         limit: 20,
         total_pages: 1,
+        date_from: null,
+        date_to: null,
     },
 };
 
@@ -72,7 +75,11 @@ export default function Salaries() {
     });
     const [modal, setModal] = useState<any>(modalInitialValues)
 
-    const tableList = SalaryService.GetSalaryList(table.filter)
+    const tableList = SalaryService.GetSalaryList({
+        ...table.filter,
+        ...table.filter.date_from !== null ? {date_from: moment(table.filter.date_from.$d).format('YYYY-MM-DD')} : {},
+        ...table.filter.date_to !== null ? {date_to: moment(table.filter.date_to.$d).format('YYYY-MM-DD')} : {},
+    })
 
     const handleFormSubmit = (event: FormEvent) => {
         event.preventDefault();
@@ -126,6 +133,41 @@ export default function Salaries() {
                 </CustomRoundedButton>
             </div>
 
+            <div className='w-full flex justify-between items-center mb-[20px]'>
+                <div className='flex items-center gap-[20px]'>
+                    <CustomRoundedDatePicker
+                        label="Дата от"
+                        value={table.filter.date_from}
+                        onChange={(newValue) => {
+                            setTable({
+                                ...table,
+                                filter: {
+                                    ...table.filter,
+                                    date_from: newValue
+                                }
+                            })
+                        }}
+                        slotProps={{textField: {size: 'small'}}}
+                        sx={{width: 170}}
+                    />
+                    <CustomRoundedDatePicker
+                        label="Дата до"
+                        value={table.filter.date_to}
+                        onChange={(newValue) => {
+                            setTable({
+                                ...table,
+                                filter: {
+                                    ...table.filter,
+                                    date_to: newValue
+                                }
+                            })
+                        }}
+                        slotProps={{textField: {size: 'small'}}}
+                        sx={{width: 170}}
+                    />
+                </div>
+            </div>
+
             <div className='w-full rounded-[10px] shadow-md'>
                 <DataGrid
                     rows={table.rows}
@@ -160,10 +202,10 @@ export default function Salaries() {
                                         className='w-[60px] px-[10px] py-[4px] rounded-[4px] bg-transparent'
                                         style={{border: '1px solid black'}}
                                         value={table.filter.limit}
-                                        onChange={(event)=>{
+                                        onChange={(event) => {
                                             setTable({
                                                 ...table,
-                                                filter:{
+                                                filter: {
                                                     ...table.filter,
                                                     limit: event.target.value
                                                 }

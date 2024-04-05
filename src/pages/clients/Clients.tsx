@@ -356,7 +356,7 @@ export default function Clients() {
                         <form onSubmit={handleFormSubmit} className='mainModal'>
                             <h1 className='text-[#2A2826] text-[24px] font-[700]'>
                                 {modal.action === 'add' && 'Добавление клиента'}
-                                {modal.action === 'delete' && 'Удалить клиента?'}
+                                {modal.action === 'delete' && `Удалить клиента ${modal.values.full_name}?`}
                                 {modal.action === 'edit' && 'Редактирование клиента'}
                             </h1>
                             {modal.action !== 'delete' &&

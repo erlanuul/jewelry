@@ -166,3 +166,23 @@ code {
   background-size: cover;
 }
 
+
+
+.graph{
+  position: relative;
+  border-bottom: 1px solid #CED0D2;
+  border-left: 1px solid #CED0D2;
+}
+.graph:before{
+  content: '>';
+  position: absolute;
+  left: -8.5px;
+  top: -12px;
+  transform: rotate(-90deg);
+}
+.graph:after{
+  content: '>';
+  position: absolute;
+  right: -4px;
+  bottom: -10px;
+}

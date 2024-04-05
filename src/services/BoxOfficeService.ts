@@ -28,6 +28,11 @@ export const BoxOfficeService = {
             return await $axios.get(`/box-office/${transaction.operation_type}/${transaction.operation}/products/` + CreateSearchParams(searchParamsObj));
         }, [CreateSearchParams(searchParamsObj)])
     },
+    GetBoxOfficeInterchange(id: any) {
+        return useAsync(async () => {
+            return await $axios.get(`/box-office/income/interchange/${id}/`);
+        }, [])
+    },
     async CreateTransaction(transaction: any, form_data?: any) {
         return await $axios.post(`/box-office/${transaction.operation_type}/${transaction.operation}/`, transaction.operation === 'ransom' ? form_data : transaction)
     },

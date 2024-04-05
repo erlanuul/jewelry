@@ -328,6 +328,7 @@ export default function Products() {
                                 })
                             }}
                         >
+                            <MenuItem value={''}><em><b>none</b></em></MenuItem>
                             {!categoriesList.loading && !categoriesList.error &&
                                 categoriesList.result?.data.map((item: any, index: number) => (
                                     <MenuItem key={index} value={item.id}>{item.name}</MenuItem>
@@ -353,6 +354,7 @@ export default function Products() {
                                 })
                             }}
                         >
+                            <MenuItem value={''}><em><b>none</b></em></MenuItem>
                             <MenuItem value={'false'}>Отсутствует</MenuItem>
                             <MenuItem value={'true'}>В наличии</MenuItem>
                         </Select>

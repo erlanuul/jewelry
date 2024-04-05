@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {IconButton, Pagination} from "@mui/material";
+import {IconButton, Pagination, TextField} from "@mui/material";
 import {DataGrid} from "@mui/x-data-grid";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -7,6 +7,7 @@ import {useNavigate} from "react-router-dom";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import {DeferService} from "../../services/DeferService";
 import moment from "moment/moment";
+import {CustomRoundedDatePicker} from "../../helpers/muiCustomization";
 
 const tableInitialValues = {
     rows: [],
@@ -14,6 +15,9 @@ const tableInitialValues = {
         page: 1,
         limit: 20,
         total_pages: 1,
+        date_from: null,
+        date_to: null,
+        search: '',
     },
 };
 
@@ -23,7 +27,7 @@ export default function Defers() {
         ...tableInitialValues,
         columns: [
             {field: 'id', headerName: 'Номер рассрочки', flex: 1},
-            {field: 'client', headerName: 'Клиент', flex: 1, renderCell: (params: any)=> params.row.client?.full_name},
+            {field: 'full_name', headerName: 'ФИО', flex: 1, renderCell: (params: any)=> params.row.client?.full_name},
             {field: 'address', headerName: 'Адрес', flex: 1, renderCell: (params: any)=> params.row.client?.address},
             {field: 'phone', headerName: 'Номер телефона', flex: 1, renderCell: (params: any)=> params.row.client?.phone},
             {field: 'note', headerName: 'Примечание', flex: 1, renderCell: (params: any)=> params.row.note},
@@ -47,7 +51,11 @@ export default function Defers() {
         ],
     });
 
-    const tableList = DeferService.GetDefersList(table.filter)
+    const tableList = DeferService.GetDefersList({
+        ...table.filter,
+        ...table.filter.date_from !== null ? {date_from: moment(table.filter.date_from.$d).format('YYYY-MM-DD')} : {},
+        ...table.filter.date_to !== null ? {date_to: moment(table.filter.date_to.$d).format('YYYY-MM-DD')} : {},
+    })
 
 
     useEffect(() => {
@@ -70,6 +78,62 @@ export default function Defers() {
         <>
             <div className='w-full flex justify-between items-center mb-[57px]'>
                 <h1 className="text-[#2A2826] text-[42px] font-[800]">Рассрочки</h1>
+            </div>
+
+            <div className='w-full flex justify-between items-center mb-[20px]'>
+                <div className='flex items-center gap-[20px]'>
+                    <CustomRoundedDatePicker
+                        label="Дата от"
+                        value={table.filter.date_from}
+                        onChange={(newValue) => {
+                            setTable({
+                                ...table,
+                                filter: {
+                                    ...table.filter,
+                                    date_from: newValue
+                                }
+                            })
+                        }}
+                        slotProps={{ textField: { size: 'small' } }}
+                        sx={{width: 170}}
+                    />
+                    <CustomRoundedDatePicker
+                        label="Дата до"
+                        value={table.filter.date_to}
+                        onChange={(newValue) => {
+                            setTable({
+                                ...table,
+                                filter: {
+                                    ...table.filter,
+                                    date_to: newValue
+                                }
+                            })
+                        }}
+                        slotProps={{ textField: { size: 'small' } }}
+                        sx={{width: 170}}
+                    />
+                </div>
+                <TextField
+                    InputProps={{
+                        sx: {
+                            minWidth: '250px',
+                            borderRadius: '100px',
+                        },
+                    }}
+                    size='small'
+                    placeholder='ФИО'
+                    required
+                    value={table.filter.search}
+                    onChange={(event) => {
+                        setTable({
+                            ...table,
+                            filter: {
+                                ...table.filter,
+                                search: event.target.value,
+                            }
+                        })
+                    }}
+                />
             </div>
 
             <div className='w-full rounded-[10px]'>
@@ -106,10 +170,10 @@ export default function Defers() {
                                         className='w-[60px] px-[10px] py-[4px] rounded-[4px] bg-transparent'
                                         style={{border: '1px solid black'}}
                                         value={table.filter.limit}
-                                        onChange={(event)=>{
+                                        onChange={(event) => {
                                             setTable({
                                                 ...table,
-                                                filter:{
+                                                filter: {
                                                     ...table.filter,
                                                     limit: event.target.value
                                                 }
@@ -119,13 +183,6 @@ export default function Defers() {
                                 </div>
                             </div>
                         )
-                    }}
-                    initialState={{
-                        columns: {
-                            columnVisibilityModel: {
-                                id: false,
-                            },
-                        },
                     }}
                 />
             </div>

@@ -10,6 +10,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import moment from "moment/moment";
 import RestoreIcon from '@mui/icons-material/Restore';
 import {CustomRoundedButton} from "../../helpers/muiCustomization";
+import ClientCard2 from "../../components/ClientCard2";
 
 const modalInitialValues = {
     open: false,
@@ -50,46 +51,8 @@ export default function DeferView() {
                     ? defer.error.message
                     :
                     <>
-                        <div
-                            className='w-full px-[30px] py-[20px] bg-white rounded-[10px] flex justify-start items-start gap-[30px] mb-[30px]'>
-                            <div className='w-[150px] h-[150px] bg-center bg-cover rounded-[10px] cursor-pointer'
-                                 style={{backgroundImage: `url(${defer.result?.data.client?.images.length > 0 ? defer.result?.data.client?.images[0].image : ''})`}}
-                                 onClick={() => {
-                                     setModal({
-                                         ...modal,
-                                         open: true,
-                                         action: 'viewSlider'
-                                     })
-                                 }}
-                            >
-                            </div>
-                            <div className='flex flex-col justify-center items-start gap-[10px] mt-[40px]'>
-                                <p className='text-[#6E6C6A] text-[12px] font-[500]'>ФИО:</p>
-                                <p className='text-[#2A2826] text-[16px] font-[900]'>{defer.result?.data.client?.full_name}</p>
-                            </div>
-                            <div className='flex flex-col justify-center items-start gap-[10px] mt-[40px]'>
-                                <p className='text-[#6E6C6A] text-[12px] font-[500]'>Платежеспособность:</p>
-                                <p className='text-[#2A2826] text-[16px] font-[400]'>{defer.result?.data.client?.solvency ? 'Да' : 'Нет'}</p>
-                            </div>
-                            <div className='flex flex-col justify-center items-start gap-[10px] mt-[40px]'>
-                                <p className='text-[#6E6C6A] text-[12px] font-[500]'>ИНН:</p>
-                                <p className='text-[#2A2826] text-[16px] font-[400]'>{defer.result?.data.client?.inn}</p>
-                            </div>
-                            <div className='flex flex-col justify-center items-start gap-[10px] mt-[40px]'>
-                                <p className='text-[#6E6C6A] text-[12px] font-[500]'>Номер телефона:</p>
-                                <p className='text-[#2A2826] text-[16px] font-[400]'>{defer.result?.data.client?.phone}</p>
-                            </div>
-                            <div className='flex flex-col justify-center items-start gap-[10px] mt-[40px]'>
-                                <p className='text-[#6E6C6A] text-[12px] font-[500]'>Адрес:</p>
-                                <p className='text-[#2A2826] text-[16px] font-[400]'>{defer.result?.data.client?.address}</p>
-                            </div>
-                        </div>
-                        <div
-                            className=" px-[30px] py-[20px] bg-white rounded-[10px] flex justify-start items-start gap-[30px] mb-[60px]">
-                            <div className='flex flex-col justify-center items-start gap-[10px]'>
-                                <p className='text-[#6E6C6A] text-[12px] font-[500]'>Примечание:</p>
-                                <p className='text-[#2A2826] text-[16px] font-[500]'>{defer.result?.data.client?.note}</p>
-                            </div>
+                        <div className="w-full mb-[60px]">
+                            <ClientCard2 clientInfo={defer.result?.data.client}/>
                         </div>
 
                         <div className='w-full flex justify-between items-center mb-[30px]'>

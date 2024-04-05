@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {FormControl, InputLabel, MenuItem, Pagination, Select, TextField} from "@mui/material";
+import {FormControl, IconButton, InputLabel, MenuItem, Pagination, Select, TextField} from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 import {DataGrid} from "@mui/x-data-grid";
 import {useNavigate} from "react-router-dom";
@@ -7,6 +7,9 @@ import {BoxOfficeService} from "../../services/BoxOfficeService";
 import moment from "moment/moment";
 import {AnalyticsService} from "../../services/AnalyticsService";
 import {CustomRoundedButton} from "../../helpers/muiCustomization";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const tableInitialValues = {
     rows: [],
@@ -14,8 +17,8 @@ const tableInitialValues = {
         page: 1,
         limit: 20,
         total_pages: 1,
-        operation_type: '',
-        operation: '',
+        operation_type__slug: '',
+        operation__slug: '',
     },
 };
 
@@ -32,13 +35,27 @@ export default function BoxOffice() {
             {field: 'total_sum', headerName: 'Сумма', flex: 1},
             {field: 'payment_type', headerName: 'Оплата', flex: 1, renderCell: (params: any)=> params.row.payment_type?.name},
             {field: 'note', headerName: 'Примечание', flex: 1},
+            {
+                field: 'actions', headerName: 'Действия', width: 120, renderCell: (params: any) => (
+                    params.row.operation?.slug === 'interchange' &&
+                    <div className='w-full flex items-center justify-center'>
+                        <IconButton color="secondary" onClick={() => {
+                            navigate({
+                                pathname: `/box_office/${params.row.operation_type?.slug}/${params.row.operation?.slug}/${params.row.id}`
+                            })
+                        }}>
+                            <VisibilityIcon style={{color: "#B9B9B9"}}/>
+                        </IconButton>
+                    </div>
+                )
+            },
         ],
     });
 
     const tableList = BoxOfficeService.GetBoxOfficeList(table.filter)
     const operationTypes = BoxOfficeService.GetBoxOfficeOperationTypes()
     const operations = BoxOfficeService.GetBoxOfficeOperations({
-        operation_type__slug: table.filter.operation_type
+        operation_type__slug: table.filter.operation_type__slug
     })
     const analyticsFinance = AnalyticsService.GetAnalyticsFinance()
 
@@ -83,7 +100,8 @@ export default function BoxOffice() {
             </div>
             {!analyticsFinance.loading && !analyticsFinance.error &&
                 <div className='flex justify-start items-center gap-[20px] mb-[50px] pb-[10px]'
-                     style={{borderBottom: '2px solid #CED0D2'}}>
+                     style={{borderBottom: '2px solid #CED0D2'}}
+                >
                     <div className='flex flex-col justify-start items-start gap-[10px]'>
                         <p className='text-[#2A2826] text-[14px] font-[500]'>Наличные</p>
                         <p className="text-[#2A2826] text-[20px] font-[600]">{analyticsFinance.result?.data.total_cash} сом</p>
@@ -104,20 +122,20 @@ export default function BoxOffice() {
                             label="Тип операции"
                             placeholder='Тип операции'
                             required
-                            value={table.filter.operation_type}
+                            value={table.filter.operation_type__slug}
                             onChange={(event) => {
                                 setTable({
                                     ...table,
                                     filter: {
                                         ...table.filter,
-                                        operation_type: event.target.value,
+                                        operation_type__slug: event.target.value,
                                     }
                                 })
                             }}
                         >
                             {!operationTypes.loading && !operationTypes.error &&
                                 operationTypes.result?.data.map((item: any, index: number) => (
-                                    <MenuItem key={index} value={item.id}>{item.name}</MenuItem>
+                                    <MenuItem key={index} value={item.slug}>{item.name}</MenuItem>
                                 ))
                             }
                         </Select>
@@ -130,20 +148,20 @@ export default function BoxOffice() {
                             label="Операции"
                             placeholder='Операции'
                             required
-                            value={table.filter.operation}
+                            value={table.filter.operation__slug}
                             onChange={(event) => {
                                 setTable({
                                     ...table,
                                     filter: {
                                         ...table.filter,
-                                        operation: event.target.value,
+                                        operation__slug: event.target.value,
                                     }
                                 })
                             }}
                         >
                             {!operations.loading && !operations.error &&
                                 operations.result?.data.map((item: any, index: number) => (
-                                    <MenuItem key={index} value={item.id}>{item.name}</MenuItem>
+                                    <MenuItem key={index} value={item.slug}>{item.name}</MenuItem>
                                 ))
                             }
                         </Select>

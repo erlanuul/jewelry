@@ -94,16 +94,6 @@ export const accessRules: any = {
             },
         },
     ],
-    "/expenses": [
-        {
-            position: "Frontend - разработчик",
-            privileges: {
-                add: true,
-                edit: true,
-                delete: true,
-            },
-        },
-    ],
     "/salaries": [
         {
             position: "Frontend - разработчик",

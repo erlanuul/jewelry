@@ -8,13 +8,25 @@ export const ClientService = {
             return await $axios.get('/clients/' + CreateSearchParams(searchParamsObj));
         }, [CreateSearchParams(searchParamsObj)])
     },
+    GetPurchasesList(id: any, searchParamsObj: any) {
+        return useAsync(async () => {
+            return await $axios.get(`/clients/purchases/${id}/` + CreateSearchParams(searchParamsObj));
+        }, [CreateSearchParams(searchParamsObj)])
+    },
+    GetDefersList(id: any, searchParamsObj: any) {
+        return useAsync(async () => {
+            return await $axios.get(`/clients/defers/${id}/` + CreateSearchParams(searchParamsObj));
+        }, [CreateSearchParams(searchParamsObj)])
+    },
     SearchClient(searchParamsObj: any) {
         return useAsync(async () => {
             return await $axios.get('/clients/search/' + CreateSearchParams(searchParamsObj));
         }, [CreateSearchParams(searchParamsObj)])
     },
-    async GetClient(client_id: string) {
-        return await $axios.get(`/clients/${client_id}/`)
+    GetClient(id: any) {
+        return useAsync(async () => {
+            return await $axios.get(`/clients/${id}/`);
+        }, [])
     },
     async DeleteClient(client_id: string) {
         return await $axios.delete(`/clients/${client_id}/`)

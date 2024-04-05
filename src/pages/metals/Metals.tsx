@@ -137,6 +137,7 @@ export default function Metals() {
                         })
                     }}
                     slotProps={{ textField: { size: 'small' } }}
+                    sx={{width: 170}}
                 />
                 <CustomRoundedDatePicker
                     label="Дата до"
@@ -151,6 +152,7 @@ export default function Metals() {
                         })
                     }}
                     slotProps={{ textField: { size: 'small' } }}
+                    sx={{width: 170}}
                 />
             </div>
 

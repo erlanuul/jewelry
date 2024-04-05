@@ -1,6 +1,6 @@
 import React, {FormEvent, useState} from 'react';
 import {AnalyticsService} from "../services/AnalyticsService";
-import {Button, Modal, Popover, Skeleton} from "@mui/material";
+import {Button, Modal, Popover, Skeleton, Tooltip} from "@mui/material";
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import CreditCardIcon from '@mui/icons-material/CreditCard';
 import {
@@ -123,6 +123,11 @@ export default function Home() {
     }
 
 
+    const largestItemInArr = (data: any) => {
+        return data.reduce((prev: any, curr: any) => {
+            return (curr.total_sales_in_som > prev.total_sales_in_som) ? curr : prev;
+        });
+    }
     return (
         <>
             <div className='w-full flex justify-between items-center mb-[57px]'>
@@ -176,7 +181,8 @@ export default function Home() {
                             </div>
                         ))}
 
-                        <div className="p-[14px] rounded-[10px] bg-white flex flex-col justify-items-start items-start shadow-md">
+                        <div
+                            className="p-[14px] rounded-[10px] bg-white flex flex-col justify-items-start items-start shadow-md">
                             <div className="w-full flex justify-start items-center gap-[20px] pb-[10px] mb-[30px]"
                                  style={{borderBottom: '1px solid #576ED0'}}
                             >
@@ -217,13 +223,14 @@ export default function Home() {
                         </div>
                     </div>
             }
-            <div className="w-full flex flex-col justify-start items-star">
+            <div className="w-full flex flex-col justify-start items-start mb-[80px]">
                 <h3 className="text-[#2A2826] text-[24px] font-[700] mb-[40px]">
                     Статистика
                 </h3>
                 <div className="w-full grid grid-cols-4 gap-[20px]">
 
-                    <div className="w-full p-[14px] rounded-[10px] bg-white flex flex-col justify-start items-center shadow-md">
+                    <div
+                        className="w-full p-[14px] rounded-[10px] bg-white flex flex-col justify-start items-center shadow-md">
                         <div className="w-full flex justify-between items-center pb-[10px] mb-[24px]"
                              style={{borderBottom: '1px solid #576ED0'}}
                         >
@@ -256,7 +263,8 @@ export default function Home() {
                             <PopupState variant="popover" popupId="demo-popup-popover">
                                 {(popupState) => (
                                     <div>
-                                        <Button size='small' endIcon={<CalendarMonthIcon/>} {...bindTrigger(popupState)}>
+                                        <Button size='small'
+                                                endIcon={<CalendarMonthIcon/>} {...bindTrigger(popupState)}>
                                             Дата
                                         </Button>
                                         <Popover
@@ -323,7 +331,8 @@ export default function Home() {
                             <PopupState variant="popover" popupId="demo-popup-popover">
                                 {(popupState) => (
                                     <div>
-                                        <Button size='small' endIcon={<ArrowDropDownIcon/>} {...bindTrigger(popupState)}>
+                                        <Button size='small'
+                                                endIcon={<ArrowDropDownIcon/>} {...bindTrigger(popupState)}>
                                             Категория
                                         </Button>
                                         <Popover
@@ -337,11 +346,12 @@ export default function Home() {
                                                 horizontal: 'left',
                                             }}
                                         >
-                                            <div className='w-full flex flex-col justify-start items-start gap-[10px] p-[20px]'>
-                                                {!categoriesList.loading && !categoriesList.error && categoriesList.result?.data.map((item: any, index: number)=> (
+                                            <div
+                                                className='w-full flex flex-col justify-start items-start gap-[10px] p-[20px]'>
+                                                {!categoriesList.loading && !categoriesList.error && categoriesList.result?.data.map((item: any, index: number) => (
                                                     <p key={index}
                                                        className={`${filter.sales.category === item.id ? 'text-[#576ED0]' : 'text-[#2A2826]'} text-[14px] font-[500] hover:text-[#576ED0] cursor-pointer`}
-                                                       onClick={()=>{
+                                                       onClick={() => {
                                                            setFilter({
                                                                ...filter,
                                                                sales: {
@@ -362,7 +372,8 @@ export default function Home() {
                             <PopupState variant="popover" popupId="demo-popup-popover">
                                 {(popupState) => (
                                     <div>
-                                        <Button size='small' endIcon={<ArrowDropDownIcon/>} {...bindTrigger(popupState)}>
+                                        <Button size='small'
+                                                endIcon={<ArrowDropDownIcon/>} {...bindTrigger(popupState)}>
                                             Проба
                                         </Button>
                                         <Popover
@@ -402,7 +413,8 @@ export default function Home() {
                         </div>
                     </div>
 
-                    <div className="w-full p-[14px] rounded-[10px] bg-white flex flex-col justify-start items-center shadow-md">
+                    <div
+                        className="w-full p-[14px] rounded-[10px] bg-white flex flex-col justify-start items-center shadow-md">
                         <div className="w-full flex justify-between items-center pb-[10px] mb-[24px]"
                              style={{borderBottom: '1px solid #576ED0'}}
                         >
@@ -424,7 +436,8 @@ export default function Home() {
                             <PopupState variant="popover" popupId="demo-popup-popover">
                                 {(popupState) => (
                                     <div>
-                                        <Button size='small' endIcon={<CalendarMonthIcon/>} {...bindTrigger(popupState)}>
+                                        <Button size='small'
+                                                endIcon={<CalendarMonthIcon/>} {...bindTrigger(popupState)}>
                                             Дата
                                         </Button>
                                         <Popover
@@ -491,7 +504,8 @@ export default function Home() {
                         </div>
                     </div>
 
-                    <div className="w-full p-[14px] rounded-[10px] bg-white flex flex-col justify-start items-center shadow-md">
+                    <div
+                        className="w-full p-[14px] rounded-[10px] bg-white flex flex-col justify-start items-center shadow-md">
                         <div className="w-full flex justify-between items-center pb-[10px] mb-[24px]"
                              style={{borderBottom: '1px solid #576ED0'}}
                         >
@@ -513,7 +527,8 @@ export default function Home() {
                             <PopupState variant="popover" popupId="demo-popup-popover">
                                 {(popupState) => (
                                     <div>
-                                        <Button size='small' endIcon={<CalendarMonthIcon/>} {...bindTrigger(popupState)}>
+                                        <Button size='small'
+                                                endIcon={<CalendarMonthIcon/>} {...bindTrigger(popupState)}>
                                             Дата
                                         </Button>
                                         <Popover
@@ -580,7 +595,8 @@ export default function Home() {
                             <PopupState variant="popover" popupId="demo-popup-popover">
                                 {(popupState) => (
                                     <div>
-                                        <Button size='small' endIcon={<ArrowDropDownIcon/>} {...bindTrigger(popupState)}>
+                                        <Button size='small'
+                                                endIcon={<ArrowDropDownIcon/>} {...bindTrigger(popupState)}>
                                             Типы
                                         </Button>
                                         <Popover
@@ -594,11 +610,12 @@ export default function Home() {
                                                 horizontal: 'left',
                                             }}
                                         >
-                                            <div className='w-full flex flex-col justify-start items-start gap-[10px] p-[20px]'>
-                                                {defersTypeList.map((item: any, index: number)=> (
+                                            <div
+                                                className='w-full flex flex-col justify-start items-start gap-[10px] p-[20px]'>
+                                                {defersTypeList.map((item: any, index: number) => (
                                                     <p key={index}
                                                        className={`${filter.defers.type === item.slug ? 'text-[#576ED0]' : 'text-[#2A2826]'} text-[14px] font-[500] hover:text-[#576ED0] cursor-pointer`}
-                                                       onClick={()=>{
+                                                       onClick={() => {
                                                            setFilter({
                                                                ...filter,
                                                                defers: {
@@ -619,7 +636,8 @@ export default function Home() {
                         </div>
                     </div>
 
-                    <div className="w-full p-[14px] rounded-[10px] bg-white flex flex-col justify-start items-center shadow-md">
+                    <div
+                        className="w-full p-[14px] rounded-[10px] bg-white flex flex-col justify-start items-center shadow-md">
                         <div className="w-full flex justify-between items-center pb-[10px] mb-[24px]"
                              style={{borderBottom: '1px solid #576ED0'}}
                         >
@@ -628,7 +646,6 @@ export default function Home() {
                         <div className="w-full flex justify-between items-start gap-[20px] mb-[40px]">
                             <div className="flex flex-col justify-start items-start gap-[4px]">
                                 <p className="text-[#3E3C3A] text-[20px] font-[600]">
-                                    {analyticsExpenses.result?.data.total}
                                     {
                                         (!analyticsExpenses.loading && !analyticsExpenses.error)
                                             ? analyticsExpenses.result?.data.total
@@ -642,7 +659,8 @@ export default function Home() {
                             <PopupState variant="popover" popupId="demo-popup-popover">
                                 {(popupState) => (
                                     <div>
-                                        <Button size='small' endIcon={<CalendarMonthIcon/>} {...bindTrigger(popupState)}>
+                                        <Button size='small'
+                                                endIcon={<CalendarMonthIcon/>} {...bindTrigger(popupState)}>
                                             Дата
                                         </Button>
                                         <Popover
@@ -707,6 +725,119 @@ export default function Home() {
                                 )}
                             </PopupState>
                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <div className="w-full flex flex-col justify-start items-start">
+                <h3 className="text-[#2A2826] text-[24px] font-[700] mb-[40px]">
+                    Рейтинг сотрудников по продажам
+                </h3>
+
+                <div className="w-full flex flex-col justify-start items-start bg-white p-[30px] rounded-[10px] shadow-md">
+                    <div className="mb-[61px]">
+                        <PopupState variant="popover" popupId="demo-popup-popover">
+                            {(popupState) => (
+                                <div>
+                                    <Button size='small'
+                                            endIcon={<CalendarMonthIcon/>} {...bindTrigger(popupState)}>
+                                        Дата
+                                    </Button>
+                                    <Popover
+                                        {...bindPopover(popupState)}
+                                        anchorOrigin={{
+                                            vertical: 'bottom',
+                                            horizontal: 'left',
+                                        }}
+                                        transformOrigin={{
+                                            vertical: 'top',
+                                            horizontal: 'left',
+                                        }}
+                                    >
+                                        <div className='flex items-center gap-[20px] p-[20px] bg-white'>
+                                            <div className='flex items-center gap-[14px]'>
+                                                <p className='text-[#2A2826] text-[14px] font-[500]'>От</p>
+                                                <CustomRoundedDatePicker
+                                                    value={filter.ratings.date_from}
+                                                    onChange={(newValue) => {
+                                                        setFilter({
+                                                            ...filter,
+                                                            ratings: {
+                                                                ...filter.ratings,
+                                                                date_from: newValue
+                                                            }
+                                                        })
+                                                    }}
+                                                    slotProps={{
+                                                        textField: {
+                                                            required: true,
+                                                            size: 'small'
+                                                        },
+                                                    }}
+                                                    sx={{width: '180px'}}
+                                                />
+                                            </div>
+                                            <div className='flex items-center gap-[14px]'>
+                                                <p className='text-[#2A2826] text-[14px] font-[500]'>до</p>
+                                                <CustomRoundedDatePicker
+                                                    value={filter.ratings.date_to}
+                                                    onChange={(newValue) => {
+                                                        setFilter({
+                                                            ...filter,
+                                                            ratings: {
+                                                                ...filter.ratings,
+                                                                date_to: newValue
+                                                            }
+                                                        })
+                                                    }}
+                                                    slotProps={{
+                                                        textField: {
+                                                            required: true,
+                                                            size: 'small'
+                                                        },
+                                                    }}
+                                                    sx={{width: '180px'}}
+                                                />
+                                            </div>
+                                        </div>
+                                    </Popover>
+                                </div>
+                            )}
+                        </PopupState>
+                    </div>
+                    <div className="w-full pt-[20px] pr-[20px] pb-[10px] pl-[20px] flex justify-start items-end gap-[20px] h-[240px] graph relative">
+                        {analyticsRatings.loading
+                            ?
+                            <>
+                                <Skeleton variant='rectangular' width='100%' height='100%'/>
+                                <Skeleton variant='rectangular' width='100%' height='90%'/>
+                                <Skeleton variant='rectangular' width='100%' height='50%'/>
+                                <Skeleton variant='rectangular' width='100%' height='70%'/>
+                                <Skeleton variant='rectangular' width='100%' height='30%'/>
+                                <Skeleton variant='rectangular' width='100%' height='10%'/>
+                                <Skeleton variant='rectangular' width='100%' height='80%'/>
+                                <Skeleton variant='rectangular' width='100%' height='40%'/>
+                            </>
+                            : analyticsRatings.error
+                                ? analyticsRatings.error.message
+                                :
+                                analyticsRatings.result?.data.map((item: any, index: number)=>(
+                                    <Tooltip key={index} title={
+                                        <div className='p-[20px] flex flex-col justify-start items-start gap-[10px]'>
+                                            <p className="">{item.full_name}</p>
+                                            <p className="">Сумма: {item.total_sales_in_som} сом</p>
+                                        </div>
+                                    } followCursor>
+                                        <div
+                                            data-tooltip={index}
+                                            className={` w-full bg-[#576ED0] rounded-t-[4px]`}
+                                            style={{height: item.total_sales_in_som / largestItemInArr(analyticsRatings.result?.data).total_sales_in_som * 90 + 10 + '%'}}
+                                        >
+                                        </div>
+                                    </Tooltip>
+
+                                ))
+                        }
                     </div>
                 </div>
             </div>
@@ -791,7 +922,7 @@ export default function Home() {
                         <CustomRoundedButton
                             fullWidth
                             variant='outlined'
-                            onClick={()=>setModal(modalInitialValues)}
+                            onClick={() => setModal(modalInitialValues)}
                         >
                             Отменить
                         </CustomRoundedButton>

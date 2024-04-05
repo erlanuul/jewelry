@@ -5,7 +5,7 @@ import {checkModalResponse} from "../../helpers/helpers";
 import {DataGrid} from "@mui/x-data-grid";
 import {InventoryService} from "../../services/InventoryService";
 import moment from "moment/moment";
-import {CustomRoundedButton, CustomRoundedLoadingButton} from "../../helpers/muiCustomization";
+import {CustomRoundedButton, CustomRoundedDatePicker, CustomRoundedLoadingButton} from "../../helpers/muiCustomization";
 
 const modalInitialValues = {
     values: {
@@ -117,6 +117,41 @@ export default function Inventory() {
                 </CustomRoundedButton>
             </div>
 
+            <div className='w-full flex justify-between items-center mb-[20px]'>
+                <div className='flex items-center gap-[20px]'>
+                    <CustomRoundedDatePicker
+                        label="Дата от"
+                        value={table.filter.date_from}
+                        onChange={(newValue) => {
+                            setTable({
+                                ...table,
+                                filter: {
+                                    ...table.filter,
+                                    date_from: newValue
+                                }
+                            })
+                        }}
+                        slotProps={{textField: {size: 'small'}}}
+                        sx={{width: 170}}
+                    />
+                    <CustomRoundedDatePicker
+                        label="Дата до"
+                        value={table.filter.date_to}
+                        onChange={(newValue) => {
+                            setTable({
+                                ...table,
+                                filter: {
+                                    ...table.filter,
+                                    date_to: newValue
+                                }
+                            })
+                        }}
+                        slotProps={{textField: {size: 'small'}}}
+                        sx={{width: 170}}
+                    />
+                </div>
+            </div>
+
             <div className='w-full rounded-[10px] shadow-md'>
                 <DataGrid
                     rows={table.rows}
@@ -151,10 +186,10 @@ export default function Inventory() {
                                         className='w-[60px] px-[10px] py-[4px] rounded-[4px] bg-transparent'
                                         style={{border: '1px solid black'}}
                                         value={table.filter.limit}
-                                        onChange={(event)=>{
+                                        onChange={(event) => {
                                             setTable({
                                                 ...table,
-                                                filter:{
+                                                filter: {
                                                     ...table.filter,
                                                     limit: event.target.value
                                                 }
@@ -179,7 +214,8 @@ export default function Inventory() {
                 setModal(modalInitialValues)
                 inventory.execute()
             }}>
-                <form onSubmit={handleFormSubmit} className='mainModal w-full' style={{maxWidth: 'calc(100% - 100px)', padding: '50px',}}>
+                <form onSubmit={handleFormSubmit} className='mainModal w-full'
+                      style={{maxWidth: 'calc(100% - 100px)', padding: '50px',}}>
                     <h1 className='text-[#2A2826] text-[24px] font-[700] mb-[50px]'>
                         Инвентаризация
                     </h1>
@@ -188,8 +224,10 @@ export default function Inventory() {
                         <div className='w-full grid grid-cols-3 pb-[10px] mb-[30px]'
                              style={{borderBottom: '1px solid #576ED0'}}>
                             <p className='text-[#2A2826] text-[14px] font-[700] text-center'>Название категории</p>
-                            <p className='text-[#2A2826] text-[14px] font-[700] text-center'>Количество товара в категории</p>
-                            <p className='text-[#2A2826] text-[14px] font-[700] text-center'>Количество товаров при инвентаризации</p>
+                            <p className='text-[#2A2826] text-[14px] font-[700] text-center'>Количество товара в
+                                категории</p>
+                            <p className='text-[#2A2826] text-[14px] font-[700] text-center'>Количество товаров при
+                                инвентаризации</p>
                         </div>
                         <div className='w-full flex flex-col gap-[24px]'>
                             {[...modal.values.info].map((item: any, index: number) => (

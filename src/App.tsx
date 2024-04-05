@@ -27,6 +27,7 @@ import Defers from "./pages/defers/Defers";
 import DeferView from "./pages/defers/DeferView";
 import Inventory from "./pages/inventory/Inventory";
 import Metals from "./pages/metals/Metals";
+import InterchangeView from "./pages/boxOffice/income/InterchangeView";
 
 function App() {
     return (
@@ -60,7 +61,10 @@ function App() {
                             <Route index element={<IncomeSale/>}/>
                             <Route path='defer' element={<IncomeDefer/>}/>
                             <Route path='payment' element={<IncomePayment/>}/>
-                            <Route path='interchange' element={<IncomeInterchange/>}/>
+                            <Route path='interchange/*'>
+                                <Route index element={<IncomeInterchange/>}/>
+                                <Route path=':id' element={<InterchangeView/>}/>
+                            </Route>
                         </Route>
                         <Route path='expense/*'>
                             <Route index element={<ExpenseRansom/>}/>

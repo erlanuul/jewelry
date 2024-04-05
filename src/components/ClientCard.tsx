@@ -1,8 +1,11 @@
 import React, {useState} from 'react';
 import Slider from "react-slick";
 import {Modal} from "@mui/material";
+import {CustomRoundedButton} from "../helpers/muiCustomization";
+import {useNavigate} from "react-router-dom";
 
 export default function ClientCard({clientInfo}: any) {
+    const navigate = useNavigate()
     const [open, setOpen] = useState(false)
     const settings = {
         dots: true,
@@ -62,6 +65,15 @@ export default function ClientCard({clientInfo}: any) {
                 <div className='flex flex-col justify-center items-start gap-[22px]'>
                     <p className='text-[#6E6C6A] text-[12px] font-[500]'>Общая сумма долга:</p>
                     <p className='text-[#2A2826] text-[14px] font-[500]'>-</p>
+                </div>
+                <div className='w-full'>
+                    <CustomRoundedButton
+                        variant='contained'
+                        size='small'
+                        onClick={()=>navigate(`/clients/${clientInfo.id}`)}
+                    >
+                        Просмотреть
+                    </CustomRoundedButton>
                 </div>
             </div>
 

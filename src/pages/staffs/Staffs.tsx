@@ -81,7 +81,7 @@ export default function Staffs() {
         ...tableInitialValues,
         columns: [
             {field: 'id', headerName: 'ID', flex: 1},
-            {field: 'full_name', headerName: 'Имя сотрудника', flex: 1},
+            {field: 'full_name', headerName: 'ФИО', flex: 1},
             {
                 field: 'position', headerName: 'Должность', flex: 1, renderCell: (params: any) =>
                     params.row.position?.name
@@ -267,7 +267,7 @@ export default function Staffs() {
                 <form onSubmit={handleFormSubmit} className='mainModal'>
                     <h1 className='text-[#2A2826] text-[24px] font-[700]'>
                         {modal.action === 'add' && 'Добавление сотрудника'}
-                        {modal.action === 'delete' && 'Удалить сотрудника?'}
+                        {modal.action === 'delete' && `Удалить сотрудника ${modal.values.full_name}?`}
                         {modal.action === 'edit' && 'Редактирование сотрудника'}
                     </h1>
                     {modal.action !== 'delete' &&
