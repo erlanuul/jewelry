@@ -133,6 +133,7 @@ export default function BoxOffice() {
                                 })
                             }}
                         >
+                            <MenuItem value={''}><em><b>none</b></em></MenuItem>
                             {!operationTypes.loading && !operationTypes.error &&
                                 operationTypes.result?.data.map((item: any, index: number) => (
                                     <MenuItem key={index} value={item.slug}>{item.name}</MenuItem>
@@ -159,6 +160,7 @@ export default function BoxOffice() {
                                 })
                             }}
                         >
+                            <MenuItem value={''}><em><b>none</b></em></MenuItem>
                             {!operations.loading && !operations.error &&
                                 operations.result?.data.map((item: any, index: number) => (
                                     <MenuItem key={index} value={item.slug}>{item.name}</MenuItem>

@@ -453,7 +453,6 @@ export default function Clients() {
                                         label='ИНН'
                                         placeholder='ИНН'
                                         type='number'
-                                        required
                                         value={modal.values.inn}
                                         error={modal.validation.error.inn}
                                         helperText={modal.validation.message.inn}
@@ -472,7 +471,6 @@ export default function Clients() {
                                         label='Примечание'
                                         placeholder='Примечание'
                                         type='text'
-                                        required
                                         value={modal.values.note}
                                         error={modal.validation.error.note}
                                         helperText={modal.validation.message.note}

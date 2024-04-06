@@ -202,7 +202,6 @@ export default function ClientAddModalButton() {
                                 label='ИНН'
                                 placeholder='ИНН'
                                 type='number'
-                                required
                                 value={clientModal.values.inn}
                                 error={clientModal.validation.error.inn}
                                 helperText={clientModal.validation.message.inn}
@@ -221,7 +220,6 @@ export default function ClientAddModalButton() {
                                 label='Примечание'
                                 placeholder='Примечание'
                                 type='text'
-                                required
                                 value={clientModal.values.note}
                                 error={clientModal.validation.error.note}
                                 helperText={clientModal.validation.message.note}

@@ -140,7 +140,7 @@ export default function IncomeDefer() {
                 <h1 className="text-[#2A2826] text-[42px] font-[800]">Добавить приход</h1>
             </div>
 
-            <div className='w-[570px] flex justify-between items-start gap-[20px]'>
+            <div className='w-full flex justify-between items-start gap-[20px]'>
                 <form onSubmit={handleFormSubmit} className='w-full flex flex-col justify-start items-center'>
                     <div className='w-full p-[20px] bg-white rounded-[10px] shadow-md flex flex-col justify-start items-start mb-[40px]'>
 
