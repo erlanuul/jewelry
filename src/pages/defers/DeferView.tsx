@@ -88,13 +88,13 @@ export default function DeferView() {
                                         field: 'created_at',
                                         headerName: 'Дата покупки',
                                         flex: 1,
-                                        renderCell: (params: any) => moment(defer.result?.data.created_at).format('DD.MM.YY')
+                                        renderCell: (params: any) => moment(defer.result?.data.created_at).format('DD/MM/YY')
                                     },
                                     {
                                         field: 'end_date',
                                         headerName: 'Дата окончания',
                                         flex: 1,
-                                        renderCell: (params: any) => moment(defer.result?.data.end_date).format('DD.MM.YY')
+                                        renderCell: (params: any) => moment(defer.result?.data.end_date).format('DD/MM/YY')
                                     },
                                     {field: 'price', headerName: 'Сумма', flex: 1},
                                     {
@@ -175,7 +175,7 @@ export default function DeferView() {
                                                     field: 'created_at',
                                                     headerName: 'Дата выплаты',
                                                     flex: 1,
-                                                    renderCell: (params: any) => moment(defer.result?.data.created_at).format('DD.MM.YY')
+                                                    renderCell: (params: any) => moment(defer.result?.data.created_at).format('DD/MM/YY')
                                                 },
                                                 {
                                                     field: 'amount',

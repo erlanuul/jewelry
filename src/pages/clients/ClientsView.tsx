@@ -29,7 +29,7 @@ export default function ClientsView() {
         columns: [
             {field: 'id', headerName: 'ID', flex: 1},
             {field: 'product', headerName: 'Наименование', flex: 1, renderCell: (params: any)=> params.row.product.title},
-            {field: 'created_at', headerName: 'Дата', flex: 1, renderCell: (params: any)=> moment(params.row.created_at).format('YYYY-MM-DD')},
+            {field: 'created_at', headerName: 'Дата', flex: 1, renderCell: (params: any)=> moment(params.row.created_at).format('DD/MM/YY')},
             {field: 'price', headerName: 'Цена', flex: 1, renderCell: (params: any)=> `${params.row.price} сом`},
         ],
         columns1: [
@@ -38,8 +38,8 @@ export default function ClientsView() {
             {field: 'category', headerName: 'Категория', flex: 1, renderCell: (params: any)=> params.row.product.category?.name},
             {field: 'sample_number', headerName: 'Проба', flex: 1, renderCell: (params: any)=> params.row.product.sample_number},
             {field: 'price', headerName: 'Цена', flex: 1, renderCell: (params: any)=> `${params.row.price} сом`},
-            {field: 'created_at', headerName: 'Дата покупки', flex: 1, renderCell: (params: any)=> moment(params.row.created_at).format('YYYY-MM-DD')},
-            {field: 'end_date', headerName: 'Дата окончания', flex: 1, renderCell: (params: any)=> moment(params.row.end_date).format('YYYY-MM-DD')},
+            {field: 'created_at', headerName: 'Дата покупки', flex: 1, renderCell: (params: any)=> moment(params.row.created_at).format('DD/MM/YY')},
+            {field: 'end_date', headerName: 'Дата окончания', flex: 1, renderCell: (params: any)=> moment(params.row.end_date).format('DD/MM/YY')},
         ],
     });
 

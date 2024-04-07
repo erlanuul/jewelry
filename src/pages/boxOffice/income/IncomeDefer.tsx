@@ -45,6 +45,8 @@ const formInitialValues = {
                 product_title: '',
                 price: '0',
                 first_payment_amount: '0',
+                error: false,
+                message: '',
             }
         ],
     },
@@ -88,6 +90,7 @@ export default function IncomeDefer() {
             ...form.values,
             end_date: moment(form.values.end_date?.$d).format('YYYY-MM-DD'),
         }).then(()=>{
+            setForm(formInitialValues)
             navigate('/box_office')
         }).catch((err)=>{
             checkModalResponse(err.response.data, setForm, form);
@@ -107,8 +110,14 @@ export default function IncomeDefer() {
         ProductService.SearchProduct({barcode: barcode}).then((res: any)=>{
             if(Object.entries(res.data).length === 0){
                 const productsArr = form.values.products
-                productsArr[index].product_title = ''
-                productsArr[index].product = ''
+                productsArr[index] = {
+                    ...productsArr[index],
+                    product: '',
+                    product_title: '',
+                    price: '0',
+                    error: true,
+                    message: 'Товар не найден...',
+                }
 
                 setForm({
                     ...form,
@@ -119,17 +128,43 @@ export default function IncomeDefer() {
                 })
             }else{
                 const productsArr = form.values.products
-                productsArr[index].barcode = barcode
-                productsArr[index].product_title = res.data.title
-                productsArr[index].product = res.data.id
-
-                setForm({
-                    ...form,
-                    values: {
-                        ...form.values,
-                        products: productsArr
+                if(!productsArr.find((item: any)=> item.product === res.data.id)){
+                    productsArr[index] = {
+                        ...productsArr[index],
+                        barcode: barcode,
+                        product: res.data.id,
+                        product_title: res.data.title,
+                        price: '0',
+                        error: false,
+                        message: '',
                     }
-                })
+
+                    setForm({
+                        ...form,
+                        values: {
+                            ...form.values,
+                            products: productsArr
+                        }
+                    })
+                }
+                else{
+                    productsArr[index] = {
+                        ...productsArr[index],
+                        product: '',
+                        product_title: '',
+                        price: '0',
+                        error: true,
+                        message: 'Товар дублируется...',
+                    }
+
+                    setForm({
+                        ...form,
+                        values: {
+                            ...form.values,
+                            products: productsArr
+                        }
+                    })
+                }
             }
         })
     }
@@ -264,14 +299,16 @@ export default function IncomeDefer() {
                                         placeholder='Код товара'
                                         required
                                         value={items.barcode}
+                                        helperText={items.message}
+                                        error={items.error}
                                         onChange={(event) => handleSearchProduct(event.target.value, index)}
                                     />
                                     <CustomTextField
                                         fullWidth
                                         label='Товар'
                                         placeholder='Товар'
+                                        aria-readonly
                                         required
-                                        disabled
                                         value={items.product_title}
                                     />
                                     <CustomTextField
@@ -293,7 +330,7 @@ export default function IncomeDefer() {
                                             })
                                         }}
                                     />
-                                    <div className='w-full flex items-end gap-[20px]'>
+                                    <div className='w-full flex items-start gap-[20px]'>
                                         <CustomTextField
                                             fullWidth
                                             label='Первоначальный взнос'
@@ -317,6 +354,7 @@ export default function IncomeDefer() {
                                         {form.values.products.length > 1 &&
                                             <IconButton
                                                 size='large'
+                                                sx={{padding: '16px', marginTop: '30px'}}
                                                 onClick={()=>{
                                                     const productsArr = form.values.products
                                                     productsArr.splice(index, 1)
@@ -385,6 +423,8 @@ export default function IncomeDefer() {
                                                 product_title: '',
                                                 price: '0',
                                                 first_payment_amount: '0',
+                                                error: false,
+                                                message: '',
                                             }]
                                         }
                                     })

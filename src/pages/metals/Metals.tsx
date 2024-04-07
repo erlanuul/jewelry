@@ -47,7 +47,7 @@ export default function Metals() {
             {field: 'id', headerName: 'ID', flex: 1},
             {
                 field: 'created_at', headerName: 'Дата', flex: 1,
-                renderCell: (params: any) => moment(params.row.cash?.created_at).format('DD.MM.YY')
+                renderCell: (params: any) => moment(params.row.cash?.created_at).format('DD/MM/YY')
             },
             {field: 'sample_number', headerName: 'Проба', flex: 1},
             {

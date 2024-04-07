@@ -43,8 +43,8 @@ export default function Salaries() {
         ...tableInitialValues,
         columns: [
             {field: 'id', headerName: 'ID', flex: 1},
-            {field: 'date_start', headerName: 'Дата от', flex: 1},
-            {field: 'date_end', headerName: 'Дата до', flex: 1},
+            {field: 'date_start', headerName: 'Дата от', flex: 1, renderCell: (params: any)=> moment(params.row.date_start).format('DD/MM/YY')},
+            {field: 'date_end', headerName: 'Дата до', flex: 1, renderCell: (params: any)=> moment(params.row.date_end).format('DD/MM/YY')},
             {
                 field: 'actions', headerName: 'Действия', width: 120, renderCell: (params: any) => (
                     <div className='w-full flex items-center justify-center'>

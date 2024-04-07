@@ -225,7 +225,14 @@ export default function Products() {
         switch (modal.action) {
             case 'add':
                 ProductService.CreateProduct(form_data).then(() => {
-                    setModal(modalInitialValues);
+                    const images = modalInitialValues.values.images
+                    setModal({
+                        ...modalInitialValues,
+                        values: {
+                            ...modalInitialValues.values,
+                            images: images
+                        }
+                    });
                     tableList.execute();
                 }).catch((err) => {
                     checkModalResponse(err.response.data, setModal, modal);
@@ -234,7 +241,14 @@ export default function Products() {
 
             case 'edit':
                 ProductService.EditProduct(modal.values.id, form_data).then(() => {
-                    setModal(modalInitialValues);
+                    const images = modalInitialValues.values.images
+                    setModal({
+                        ...modalInitialValues,
+                        values: {
+                            ...modalInitialValues.values,
+                            images: images
+                        }
+                    });
                     tableList.execute();
                 }).catch((err) => {
                     checkModalResponse(err.response.data, setModal, modal);
@@ -243,7 +257,14 @@ export default function Products() {
 
             case 'delete':
                 ProductService.DeleteProduct(modal.values.id).then(() => {
-                    setModal(modalInitialValues);
+                    const images = modalInitialValues.values.images
+                    setModal({
+                        ...modalInitialValues,
+                        values: {
+                            ...modalInitialValues.values,
+                            images: images
+                        }
+                    });
                     tableList.execute();
                 }).catch((err) => {
                     checkModalResponse(err.response.data, setModal, modal);
@@ -328,7 +349,7 @@ export default function Products() {
                                 })
                             }}
                         >
-                            <MenuItem value={''}><em><b>none</b></em></MenuItem>
+                            <MenuItem value={''}><em><b>очистить</b></em></MenuItem>
                             {!categoriesList.loading && !categoriesList.error &&
                                 categoriesList.result?.data.map((item: any, index: number) => (
                                     <MenuItem key={index} value={item.id}>{item.name}</MenuItem>
@@ -354,7 +375,7 @@ export default function Products() {
                                 })
                             }}
                         >
-                            <MenuItem value={''}><em><b>none</b></em></MenuItem>
+                            <MenuItem value={''}><em><b>очистить</b></em></MenuItem>
                             <MenuItem value={'false'}>Отсутствует</MenuItem>
                             <MenuItem value={'true'}>В наличии</MenuItem>
                         </Select>

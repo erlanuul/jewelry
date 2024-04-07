@@ -169,7 +169,7 @@ export default function InterchangeView() {
                              style={{borderTop: '4px solid #576ED0'}}>
                             <div className="flex flex-col justify-start items-start gap-[20px]">
                                 <p className='text-[#2A2826] text-[18px] font-[400]'>
-                                    <b>Дата:</b> {moment(interchange.result?.data.created_at).format('DD.MM.YY')}</p>
+                                    <b>Дата:</b> {moment(interchange.result?.data.created_at).format('DD/MM/YY')}</p>
                                 <p className='text-[#2A2826] text-[18px] font-[400]'><b>Тип
                                     оплаты:</b> {interchange.result?.data.payment_type?.name}</p>
                             </div>

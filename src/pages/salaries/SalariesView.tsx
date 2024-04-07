@@ -31,7 +31,7 @@ export default function SalariesView() {
                     <>
                         <div className='w-full flex flex-col justify-start items-center p-[30px] bg-[white] shadow-md'>
                             <p className='text-[#2A2826] text-[20px] font-[600] mb-[39px]'>
-                                C {moment(salary.result?.data.date_start).format('DD.MM.YY').toString()} по {moment(salary.result?.data.date_end).format('DD.MM.YY').toString()}
+                                C {moment(salary.result?.data.date_start).format('DD/MM/YY').toString()} по {moment(salary.result?.data.date_end).format('DD.MM.YY').toString()}
                             </p>
 
                             <div className='w-full grid grid-cols-7 pb-[10px] mb-[30px]'
@@ -63,10 +63,10 @@ export default function SalariesView() {
                                             {item.prepayment}
                                         </p>
                                         <p className='text-[#2A2826] text-[14px] font-[500] text-center'>
-
+                                            {item.total_amount}
                                         </p>
                                         <p className='text-[#2A2826] text-[14px] font-[500] text-center'>
-
+                                            {item.paid_amount}
                                         </p>
                                     </div>
                                 ))}

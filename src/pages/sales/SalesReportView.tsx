@@ -52,7 +52,7 @@ export default function SalesReportView() {
                             </div>
                             <div className='flex flex-col justify-center items-start gap-[10px] mt-[40px]'>
                                 <p className='text-[#6E6C6A] text-[12px] font-[500]'>Дата:</p>
-                                <p className='text-[#2A2826] text-[16px] font-[400]'>{moment(sales_report.result?.data.created_at).format('DD.MM.YY')}</p>
+                                <p className='text-[#2A2826] text-[16px] font-[400]'>{moment(sales_report.result?.data.created_at).format('DD/MM/YY')}</p>
                             </div>
                         </div>
 

@@ -25,6 +25,7 @@ import {
     CustomRoundedLoadingButton,
     CustomTextField
 } from "../../helpers/muiCustomization";
+import moment from "moment";
 
 const modalInitialValues = {
     values: {
@@ -88,7 +89,7 @@ export default function Staffs() {
             },
             {field: 'phone', headerName: 'Номер телефона', flex: 1},
             {field: 'address', headerName: 'Адрес', flex: 1},
-            {field: 'date_joined', headerName: 'Дата приема на работу', flex: 1},
+            {field: 'date_joined', headerName: 'Дата приема на работу', flex: 1, renderCell: (params: any)=> moment(params.row.date_joined).format('DD/MM/YY')},
             {field: 'salary', headerName: 'Оклад', flex: 1},
             {field: 'percentage_of_the_sale', headerName: 'Процент за продажу', flex: 1},
             {

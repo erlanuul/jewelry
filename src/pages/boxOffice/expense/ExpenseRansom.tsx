@@ -94,6 +94,17 @@ export default function ExpenseRansom() {
         }
 
         BoxOfficeService.CreateTransaction(form.values, form_data).then(()=>{
+            const images = formInitialValues.values.metal.images
+            setForm({
+                ...formInitialValues,
+                values: {
+                    ...formInitialValues.values,
+                    metal: {
+                        ...formInitialValues.values.metal,
+                        images: images
+                    }
+                }
+            });
             navigate('/box_office')
         }).catch((err)=>{
             checkModalResponse(err.response.data, setForm, form);

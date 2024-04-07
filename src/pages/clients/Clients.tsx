@@ -195,7 +195,14 @@ export default function Clients() {
         switch (modal.action) {
             case 'add':
                 ClientService.CreateClient(form_data).then(() => {
-                    setModal(modalInitialValues);
+                    const images = modalInitialValues.values.images
+                    setModal({
+                        ...modalInitialValues,
+                        values: {
+                            ...modalInitialValues.values,
+                            images: images
+                        }
+                    });
                     tableList.execute();
                 }).catch((err) => {
                     checkModalResponse(err.response.data, setModal, modal);
@@ -204,7 +211,14 @@ export default function Clients() {
 
             case 'edit':
                 ClientService.EditClient(modal.values.id, form_data).then(() => {
-                    setModal(modalInitialValues);
+                    const images = modalInitialValues.values.images
+                    setModal({
+                        ...modalInitialValues,
+                        values: {
+                            ...modalInitialValues.values,
+                            images: images
+                        }
+                    });
                     tableList.execute();
                 }).catch((err) => {
                     checkModalResponse(err.response.data, setModal, modal);
@@ -213,7 +227,14 @@ export default function Clients() {
 
             case 'delete':
                 ClientService.DeleteClient(modal.values.id).then(() => {
-                    setModal(modalInitialValues);
+                    const images = modalInitialValues.values.images
+                    setModal({
+                        ...modalInitialValues,
+                        values: {
+                            ...modalInitialValues.values,
+                            images: images
+                        }
+                    });
                     tableList.execute();
                 }).catch((err) => {
                     checkModalResponse(err.response.data, setModal, modal);

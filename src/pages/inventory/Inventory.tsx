@@ -38,7 +38,7 @@ export default function Inventory() {
         ...tableInitialValues,
         columns: [
             {field: 'id', headerName: 'ID', flex: 1},
-            {field: 'date', headerName: 'Дата инвентаризации', flex: 1},
+            {field: 'date', headerName: 'Дата инвентаризации', flex: 1, renderCell: (params: any)=> moment(params.row.date).format('DD/MM/YY')},
             {field: 'total_quantity', headerName: 'Количество товара', flex: 1,},
             {field: 'lost_items', headerName: 'Утерянный товар', flex: 1},
         ],
@@ -91,7 +91,8 @@ export default function Inventory() {
                     ...prevState.values,
                     info: [...inventory.result?.data].map((item: any)=>({
                         ...item,
-                        actual_quantity: item.quantity
+                        actual_quantity: item.quantity,
+                        quantity_for_check: item.quantity,
                     }))
                 }
             }))
@@ -249,8 +250,20 @@ export default function Inventory() {
                                         value={item.actual_quantity}
                                         onChange={(event) => {
                                             const info = modal.values.info
-                                            info[index].actual_quantity = event.target.value
+                                            let inputValue = event.target.value
+                                            let quantity_for_check = info[index].quantity_for_check
+                                            let currentValue
 
+                                            if(inputValue !== '' && inputValue < '0') {
+                                                inputValue = '0'
+                                            }
+                                            if(inputValue > quantity_for_check){
+                                                currentValue = quantity_for_check
+                                            }else {
+                                                currentValue = inputValue
+                                            }
+
+                                            info[index].actual_quantity = currentValue
                                             setModal({
                                                 ...modal,
                                                 values: {

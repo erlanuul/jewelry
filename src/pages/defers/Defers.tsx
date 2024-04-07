@@ -31,8 +31,8 @@ export default function Defers() {
             {field: 'address', headerName: 'Адрес', flex: 1, renderCell: (params: any)=> params.row.client?.address},
             {field: 'phone', headerName: 'Номер телефона', flex: 1, renderCell: (params: any)=> params.row.client?.phone},
             {field: 'note', headerName: 'Примечание', flex: 1, renderCell: (params: any)=> params.row.note},
-            {field: 'created_at', headerName: 'Дата получения', flex: 1, renderCell: (params: any)=> moment(params.row.created_at).format('DD.MM.YY')},
-            {field: 'end_date', headerName: 'Дата окончания', flex: 1, renderCell: (params: any)=> moment(params.row.end_date).format('DD.MM.YY')},
+            {field: 'created_at', headerName: 'Дата получения', flex: 1, renderCell: (params: any)=> moment(params.row.created_at).format('DD/MM/YY')},
+            {field: 'end_date', headerName: 'Дата окончания', flex: 1, renderCell: (params: any)=> moment(params.row.end_date).format('DD/MM/YY')},
             {field: 'total_sum', headerName: 'Общая сумма долга', flex: 1},
             {field: 'total_remains', headerName: 'Остаток', flex: 1},
             {

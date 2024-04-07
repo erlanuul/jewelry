@@ -58,6 +58,7 @@ export default function ExpenseSalary() {
         })
 
         BoxOfficeService.CreateTransaction(form.values).then(()=>{
+            setForm(formInitialValues)
             navigate('/box_office')
         }).catch((err)=>{
             checkModalResponse(err.response.data, setForm, form);

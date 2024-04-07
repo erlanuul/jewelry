@@ -30,7 +30,7 @@ export default function BoxOffice() {
         columns: [
             {field: 'id', headerName: '№ операции', flex: 1},
             {field: 'operation_type', headerName: 'Тип операции', flex: 1, renderCell: (params: any)=> params.row.operation_type?.name},
-            {field: 'created_at', headerName: 'Дата', flex: 1, renderCell: (params: any)=> moment(params.row.created_at).format('DD.MM.YY hh:mm')},
+            {field: 'created_at', headerName: 'Дата', flex: 1, renderCell: (params: any)=> moment(params.row.created_at).format('DD/MM/YY hh:mm')},
             {field: 'operation', headerName: 'Операция', flex: 1, renderCell: (params: any)=> params.row.operation?.name},
             {field: 'total_sum', headerName: 'Сумма', flex: 1},
             {field: 'payment_type', headerName: 'Оплата', flex: 1, renderCell: (params: any)=> params.row.payment_type?.name},
@@ -133,7 +133,7 @@ export default function BoxOffice() {
                                 })
                             }}
                         >
-                            <MenuItem value={''}><em><b>none</b></em></MenuItem>
+                            <MenuItem value={''}><em><b>очистить</b></em></MenuItem>
                             {!operationTypes.loading && !operationTypes.error &&
                                 operationTypes.result?.data.map((item: any, index: number) => (
                                     <MenuItem key={index} value={item.slug}>{item.name}</MenuItem>
@@ -160,7 +160,7 @@ export default function BoxOffice() {
                                 })
                             }}
                         >
-                            <MenuItem value={''}><em><b>none</b></em></MenuItem>
+                            <MenuItem value={''}><em><b>очистить</b></em></MenuItem>
                             {!operations.loading && !operations.error &&
                                 operations.result?.data.map((item: any, index: number) => (
                                     <MenuItem key={index} value={item.slug}>{item.name}</MenuItem>

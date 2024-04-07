@@ -54,6 +54,7 @@ export default function IncomePayment() {
             requested: true,
         })
         BoxOfficeService.CreateTransaction(form.values).then(()=>{
+            setForm(formInitialValues)
             navigate('/box_office')
         }).catch((err)=>{
             checkModalResponse(err.response.data, setForm, form);
@@ -68,7 +69,7 @@ export default function IncomePayment() {
                     ...form.values,
                     products: [...productsList.result?.data].map((item: any)=>({
                         ...item,
-                        amount: '0'
+                        amount: '0',
                     }))
                 }
             })
@@ -143,8 +144,6 @@ export default function IncomePayment() {
                                     )}
                                 />
                             </div>
-
-                            <ClientAddModalButton/>
                         </div>
 
                         {form.values.products.length > 0 &&
@@ -181,7 +180,20 @@ export default function IncomePayment() {
                                             value={item.amount}
                                             onChange={(event) => {
                                                 const products = form.values.products
-                                                products[index].amount = event.target.value
+                                                let inputValue = event.target.value
+                                                let quantity_for_check = products[index].remains
+                                                let currentValue
+
+                                                if(inputValue !== '' && inputValue < '0') {
+                                                    inputValue = '0'
+                                                }
+                                                if(inputValue > quantity_for_check){
+                                                    currentValue = quantity_for_check
+                                                }else {
+                                                    currentValue = inputValue
+                                                }
+
+                                                products[index].amount = currentValue
 
                                                 setForm({
                                                     ...form,

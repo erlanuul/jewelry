@@ -37,6 +37,8 @@ const formInitialValues = {
                 product: '',
                 product_title: '',
                 price: '0',
+                error: false,
+                message: '',
             }
         ],
         customer_products: [
@@ -81,6 +83,7 @@ export default function IncomeSale() {
             requested: true,
         })
         BoxOfficeService.CreateTransaction(form.values).then(()=>{
+            setForm(formInitialValues)
             navigate('/box_office')
         }).catch((err)=>{
             checkModalResponse(err.response.data, setForm, form);
@@ -100,8 +103,14 @@ export default function IncomeSale() {
         ProductService.SearchProduct({barcode: barcode}).then((res: any)=>{
             if(Object.entries(res.data).length === 0){
                 const productsArr = form.values.store_products
-                productsArr[index].product_title = ''
-                productsArr[index].product = ''
+                productsArr[index] = {
+                    ...productsArr[index],
+                    product: '',
+                    product_title: '',
+                    price: '0',
+                    error: true,
+                    message: 'Товар не найден...',
+                }
 
                 setForm({
                     ...form,
@@ -112,17 +121,43 @@ export default function IncomeSale() {
                 })
             }else{
                 const productsArr = form.values.store_products
-                productsArr[index].barcode = barcode
-                productsArr[index].product_title = res.data.title
-                productsArr[index].product = res.data.id
-
-                setForm({
-                    ...form,
-                    values: {
-                        ...form.values,
-                        store_products: productsArr
+                if(!productsArr.find((item: any)=> item.product === res.data.id)){
+                    productsArr[index] = {
+                        ...productsArr[index],
+                        barcode: barcode,
+                        product: res.data.id,
+                        product_title: res.data.title,
+                        price: '0',
+                        error: false,
+                        message: '',
                     }
-                })
+
+                    setForm({
+                        ...form,
+                        values: {
+                            ...form.values,
+                            store_products: productsArr
+                        }
+                    })
+                }
+                else{
+                    productsArr[index] = {
+                        ...productsArr[index],
+                        product: '',
+                        product_title: '',
+                        price: '0',
+                        error: true,
+                        message: 'Товар дублируется...',
+                    }
+
+                    setForm({
+                        ...form,
+                        values: {
+                            ...form.values,
+                            store_products: productsArr
+                        }
+                    })
+                }
             }
         })
     }
@@ -324,17 +359,19 @@ export default function IncomeSale() {
                                         placeholder='Код товара'
                                         required
                                         value={items.barcode}
+                                        helperText={items.message}
+                                        error={items.error}
                                         onChange={(event) => handleSearchProduct(event.target.value, index)}
                                     />
                                     <CustomTextField
                                         fullWidth
                                         label='Товар'
                                         placeholder='Товар'
+                                        aria-readonly
                                         required
-                                        disabled
                                         value={items.product_title}
                                     />
-                                    <div className='w-full flex items-end gap-[20px]'>
+                                    <div className='w-full flex items-start gap-[20px]'>
                                         <CustomTextField
                                             fullWidth
                                             label='Сумма'
@@ -357,7 +394,7 @@ export default function IncomeSale() {
                                         {form.values.store_products.length > 1 &&
                                             <IconButton
                                                 size='large'
-                                                sx={{padding: '16px'}}
+                                                sx={{padding: '16px', marginTop: '30px'}}
                                                 onClick={() => {
                                                     const productsArr = form.values.store_products
                                                     productsArr.splice(index, 1)
@@ -426,6 +463,8 @@ export default function IncomeSale() {
                                                 product: '',
                                                 product_title: '',
                                                 price: '0',
+                                                error: false,
+                                                message: '',
                                             }]
                                         }
                                     })

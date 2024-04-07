@@ -51,7 +51,7 @@ export default function SalesReport() {
                     params.row.client?.full_name
             },
             {field: 'created_at', headerName: 'Дата', flex: 1, renderCell: (params: any)=>
-                    moment(params.row.created_at).format('DD.MM.YY hh:mm')
+                    moment(params.row.created_at).format('DD/MM/YY hh:mm')
             },
             {field: 'total_sum', headerName: 'Сумма', flex: 1},
             {
@@ -259,7 +259,7 @@ export default function SalesReport() {
                     <div className='w-full flex justify-center mb-[70px]'>
                         <h1 className='text-[32px] text-[#2A2826] font-[700] text-center'>
                             Отчет за период <br/>
-                            {`c ${moment(modal.values.date_from?.$d).format('DD.MM.YY')} по ${moment(modal.values.date_to?.$d).format('DD.MM.YY')}`}
+                            {`c ${moment(modal.values.date_from?.$d).format('DD/MM/YY')} по ${moment(modal.values.date_to?.$d).format('DD.MM.YY')}`}
                         </h1>
                     </div>
 
@@ -277,16 +277,16 @@ export default function SalesReport() {
                         </div>
 
                         {[...modal.values.reports].map((item: any, index: number) =>
-                            <div key={index} className='w-full grid grid-cols-7 gap-[20px]'>
+                            <div key={index} className='w-full grid grid-cols-7 gap-[20px] py-[20px]' style={{borderBottom: '1px solid #F8F4F1'}}>
                                 <p className='text-[#2A2826] text-[16px] font-[600]'>
-                                    {moment(item.created_at).format('DD.MM.YY')}
+                                    {moment(item.created_at).format('DD/MM/YY')}
                                 </p>
                                 <p className='text-[#2A2826] text-[16px] font-[600]'>
                                     {item.id}
                                 </p>
-                                <div className='text-[#2A2826] text-[16px] font-[600] flex flex-col items-start gap-[5px]'>
+                                <div className='text-[#2A2826] text-[16px] font-[600] flex flex-col items-start gap-[20px]'>
                                     {item.products.map((product: any, index: number) =>
-                                        <p key={index} className='text-[#2A2826] text-[14px] font-[#2A2826]'>
+                                        <p key={index} className='text-[#2A2826] text-[16px] font-[#2A2826]'>
                                             {product.product.title}
                                         </p>
                                     )}
@@ -300,7 +300,7 @@ export default function SalesReport() {
                                 <p className='text-[#2A2826] text-[16px] font-[600]'>
                                     {item.total_sum}
                                 </p>
-                                <p className='text-[#2A2826] text-[16px] font-[600]'>Прибыль</p>
+                                <p className='text-[#2A2826] text-[16px] font-[600]'>{item.total_profit}</p>
                             </div>
                         )}
                     </div>

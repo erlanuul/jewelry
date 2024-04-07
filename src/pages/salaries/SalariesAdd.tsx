@@ -41,7 +41,7 @@ export default function SalariesAdd() {
             {field: 'percentage_of_the_sale', headerName: 'Проценты за продажу', flex: 1},
             {field: 'quantity_of_sales', headerName: 'Количество продаж', flex: 1},
             {field: 'prepayment', headerName: 'Аванс', flex: 1},
-            {field: 'total_amount', headerName: 'Итого', flex: 1},
+            {field: 'total_sum', headerName: 'Итого', flex: 1},
             {field: 'paid', headerName: 'Выплачено', flex: 1},
         ],
     });
@@ -73,6 +73,7 @@ export default function SalariesAdd() {
                         percent_sales: item.percentage_of_the_sale,
                         quantity_of_sales: item.quantity_of_sales,
                         prepayment: item.prepayment,
+                        total_amount: item.total_sum,
                     }))
                 },
                 requested: false
